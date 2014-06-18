@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="local">
+      <UniqueIdentifier>{bd63c08c-6db9-4aac-9b1d-753f74496316}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\server\server.h">
+      <Filter>local</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\sv_admin.h">
+      <Filter>local</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\sv_client.h">
+      <Filter>local</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\sv_entity.h">
+      <Filter>local</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\sv_game.h">
+      <Filter>local</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\sv_init.h">
+      <Filter>local</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\sv_local.h">
+      <Filter>local</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\sv_main.h">
+      <Filter>local</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\sv_send.h">
+      <Filter>local</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\sv_types.h">
+      <Filter>local</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\sv_world.h">
+      <Filter>local</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\server\sv_admin.c">
+      <Filter>local</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\sv_client.c">
+      <Filter>local</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\sv_entity.c">
+      <Filter>local</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\sv_game.c">
+      <Filter>local</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\sv_init.c">
+      <Filter>local</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\sv_main.c">
+      <Filter>local</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\sv_send.c">
+      <Filter>local</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\sv_world.c">
+      <Filter>local</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

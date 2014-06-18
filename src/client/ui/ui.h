@@ -27,7 +27,9 @@
 #elif defined(__linux__)
 #define _UNIX
 #elif defined(_WIN32)
+#ifndef _WINDOWS
 #define _WINDOWS
+#endif
 #define TW_STATIC
 #endif
 

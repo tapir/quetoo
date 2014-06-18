@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="local">
+      <UniqueIdentifier>{eae78137-c2f0-4774-b69d-b0b78a31b987}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\main\main.c">
+      <Filter>local</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

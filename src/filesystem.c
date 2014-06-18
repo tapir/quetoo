@@ -20,6 +20,21 @@
  */
 
 #include <sys/stat.h>
+
+// Windows crap
+#ifdef WIN32
+#ifndef S_ISDIR
+#ifndef S_IFDIR
+#ifndef _S_IFDIR
+#define S_IFDIR		(-1)
+#else
+#define S_IFDIR		_S_IFDIR
+#endif
+#endif
+#define S_ISDIR(m)	(((m)&S_IFDIR)==S_IFDIR)
+#endif
+#endif
+
 #include <physfs.h>
 
 #include "filesystem.h"
@@ -615,7 +630,13 @@ void Fs_Init(_Bool auto_load_archives) {
 			Fs_AddToSearchPath(path);
 		}
 #elif defined(_WIN32)
-		if ((c = strstr(path, "\\bin\\"))) {
+		if ((c = strstr(path, "\\bin\\"))){
+
+			*(c + strlen("\\bin")) = '\0';
+			strcpy((c + strlen("\\bin")), "\\"DEFAULT_GAME);
+
+			Fs_AddToSearchPath(path);
+
 			*c = '\0';
 			g_strlcpy(fs_state.base_dir, path, sizeof(fs_state.base_dir));
 

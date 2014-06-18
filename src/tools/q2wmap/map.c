@@ -56,15 +56,17 @@ static int32_t PlaneTypeForNormal(const vec3_t normal) {
 	if (normal[2] == 1.0 || normal[2] == -1.0)
 		return PLANE_Z;
 
-	const vec_t ax = fabs(normal[0]);
-	const vec_t ay = fabs(normal[1]);
-	const vec_t az = fabs(normal[2]);
+	{
+		const vec_t ax = fabs(normal[0]);
+		const vec_t ay = fabs(normal[1]);
+		const vec_t az = fabs(normal[2]);
 
-	if (ax >= ay && ax >= az)
-		return PLANE_ANY_X;
-	if (ay >= ax && ay >= az)
-		return PLANE_ANY_Y;
-	return PLANE_ANY_Z;
+		if (ax >= ay && ax >= az)
+			return PLANE_ANY_X;
+		if (ay >= ax && ay >= az)
+			return PLANE_ANY_Y;
+		return PLANE_ANY_Z;
+	}
 }
 
 #define	NORMAL_EPSILON	0.00001

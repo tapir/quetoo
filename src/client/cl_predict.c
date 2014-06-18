@@ -218,8 +218,9 @@ void Cl_CheckPredictionError(void) {
 	int16_t d[3];
 	vec3_t delta;
 
-	if (!Cl_UsePrediction())
+	if (!Cl_UsePrediction()) {
 		return;
+	}
 
 	// calculate the last user_cmd_t we sent that the server has processed
 	const uint32_t frame = (cls.net_chan.incoming_acknowledged & CMD_MASK);

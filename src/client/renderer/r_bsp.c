@@ -84,8 +84,9 @@ void R_RotateLightsForBspInlineModel(const r_entity_t *e) {
 	}
 
 	// for malformed inline models, simply return
-	if (e && e->model->bsp_inline->head_node == -1)
+	if (e && e->model->bsp_inline->head_node == -1) {
 		return;
+	}
 
 	// for well-formed models, iterate the lights, transforming them into model
 	// space and marking surfaces, or restoring them if the model is NULL

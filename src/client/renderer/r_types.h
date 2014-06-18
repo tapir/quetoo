@@ -23,7 +23,12 @@
 #define __R_TYPES_H__
 
 #include <SDL2/SDL_opengl.h>
+
+#ifdef WIN32
 #include <SDL2/SDL_video.h>
+#else
+#include <SDL2/SDL_GLContext.h>
+#endif
 
 #include "files.h"
 #include "image.h"

@@ -174,8 +174,9 @@ static void R_DrawElements_(const r_element_t *e, const size_t count) {
 void R_DrawElements(void) {
 	size_t i, j;
 
-	if (!r_element_state.count)
+	if (!r_element_state.count) {
 		return;
+	}
 
 	const r_element_t *e = r_element_state.elements;
 

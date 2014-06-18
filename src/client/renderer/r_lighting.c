@@ -85,8 +85,9 @@ static void R_AmbientIllumination(const r_lighting_t *l) {
 static void R_SunIllumination(const r_lighting_t *l) {
 	r_illumination_t il;
 
-	if (!r_bsp_light_state.sun.diffuse)
+	if (!r_bsp_light_state.sun.diffuse) {
 		return;
+	}
 
 	const vec_t *p[] = { l->origin, l->mins, l->maxs };
 

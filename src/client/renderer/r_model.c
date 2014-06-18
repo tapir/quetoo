@@ -90,8 +90,9 @@ static void R_LoadVertexBuffers(r_model_t *mod) {
 	if (!qglGenBuffers)
 		return;
 
-	if (IS_MESH_MODEL(mod) && mod->mesh->num_frames > 1) // animated models don't use VBO
+	if (IS_MESH_MODEL(mod) && mod->mesh->num_frames > 1) { // animated models don't use VBO
 		return;
+	}
 
 	const GLsizei v = mod->num_verts * 3 * sizeof(GLfloat);
 	const GLsizei st = mod->num_verts * 2 * sizeof(GLfloat);

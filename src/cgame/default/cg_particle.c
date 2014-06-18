@@ -155,8 +155,9 @@ void Cg_AddParticles(void) {
 	if (!cg_add_particles->value)
 		return;
 
-	if (last_particle_time > cgi.client->time)
+	if (last_particle_time > cgi.client->time) {
 		last_particle_time = 0;
+	}
 
 	const vec_t delta = (cgi.client->time - last_particle_time) * 0.001;
 	const vec_t delta_squared = delta * delta;

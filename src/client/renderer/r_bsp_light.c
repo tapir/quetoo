@@ -143,8 +143,9 @@ static void R_AddBspLight(r_bsp_model_t *bsp, vec3_t origin, vec3_t color, vec_t
 		return;
 	}
 
-	if (r_lighting->value) // scale by r_lighting->value, if enabled
+	if (r_lighting->value) { // scale by r_lighting->value, if enabled
 		radius *= r_lighting->value;
+	}
 
 	r_bsp_light_t *bl = NULL;
 	GList *e = r_bsp_light_state.lights;
@@ -294,8 +295,9 @@ void R_LoadBspLights(r_bsp_model_t *bsp) {
 void R_DrawBspLights(void) {
 	uint16_t i;
 
-	if (!r_draw_bsp_lights->value)
+	if (!r_draw_bsp_lights->value) {
 		return;
+	}
 
 	const r_bsp_light_t *bl = r_model_state.world->bsp->bsp_lights;
 	for (i = 0; i < r_model_state.world->bsp->num_bsp_lights; i++, bl++) {

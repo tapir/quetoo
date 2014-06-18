@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="local">
+      <UniqueIdentifier>{ea4aa549-5ab6-4451-a6b2-9c1343fa5f83}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\client\ui\ui.h">
+      <Filter>local</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\client\ui\ui_controls.h">
+      <Filter>local</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\client\ui\ui_credits.h">
+      <Filter>local</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\client\ui\ui_data.h">
+      <Filter>local</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\client\ui\ui_editor.h">
+      <Filter>local</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\client\ui\ui_local.h">
+      <Filter>local</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\client\ui\ui_main.h">
+      <Filter>local</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\client\ui\ui_misc.h">
+      <Filter>local</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\client\ui\ui_player.h">
+      <Filter>local</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\client\ui\ui_servers.h">
+      <Filter>local</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\client\ui\ui_system.h">
+      <Filter>local</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\client\ui\ui_types.h">
+      <Filter>local</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\client\ui\ui_controls.c">
+      <Filter>local</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\client\ui\ui_credits.c">
+      <Filter>local</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\client\ui\ui_data.c">
+      <Filter>local</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\client\ui\ui_editor.c">
+      <Filter>local</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\client\ui\ui_main.c">
+      <Filter>local</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\client\ui\ui_misc.c">
+      <Filter>local</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\client\ui\ui_player.c">
+      <Filter>local</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\client\ui\ui_servers.c">
+      <Filter>local</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\client\ui\ui_system.c">
+      <Filter>local</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

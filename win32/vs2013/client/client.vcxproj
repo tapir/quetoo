@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\client\client.h" />
+    <ClInclude Include="..\..\..\src\client\cl_binds.h" />
+    <ClInclude Include="..\..\..\src\client\cl_cgame.h" />
+    <ClInclude Include="..\..\..\src\client\cl_cmd.h" />
+    <ClInclude Include="..\..\..\src\client\cl_console.h" />
+    <ClInclude Include="..\..\..\src\client\cl_demo.h" />
+    <ClInclude Include="..\..\..\src\client\cl_entity.h" />
+    <ClInclude Include="..\..\..\src\client\cl_http.h" />
+    <ClInclude Include="..\..\..\src\client\cl_input.h" />
+    <ClInclude Include="..\..\..\src\client\cl_keys.h" />
+    <ClInclude Include="..\..\..\src\client\cl_local.h" />
+    <ClInclude Include="..\..\..\src\client\cl_main.h" />
+    <ClInclude Include="..\..\..\src\client\cl_media.h" />
+    <ClInclude Include="..\..\..\src\client\cl_parse.h" />
+    <ClInclude Include="..\..\..\src\client\cl_predict.h" />
+    <ClInclude Include="..\..\..\src\client\cl_screen.h" />
+    <ClInclude Include="..\..\..\src\client\cl_server.h" />
+    <ClInclude Include="..\..\..\src\client\cl_types.h" />
+    <ClInclude Include="..\..\..\src\client\cl_view.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\client\cl_cgame.c" />
+    <ClCompile Include="..\..\..\src\client\cl_cmd.c" />
+    <ClCompile Include="..\..\..\src\client\cl_console.c" />
+    <ClCompile Include="..\..\..\src\client\cl_demo.c" />
+    <ClCompile Include="..\..\..\src\client\cl_entity.c" />
+    <ClCompile Include="..\..\..\src\client\cl_http.c" />
+    <ClCompile Include="..\..\..\src\client\cl_input.c" />
+    <ClCompile Include="..\..\..\src\client\cl_keys.c" />
+    <ClCompile Include="..\..\..\src\client\cl_main.c" />
+    <ClCompile Include="..\..\..\src\client\cl_media.c" />
+    <ClCompile Include="..\..\..\src\client\cl_parse.c" />
+    <ClCompile Include="..\..\..\src\client\cl_predict.c" />
+    <ClCompile Include="..\..\..\src\client\cl_screen.c" />
+    <ClCompile Include="..\..\..\src\client\cl_server.c" />
+    <ClCompile Include="..\..\..\src\client\cl_view.c" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{67FF2CA9-4130-4710-9899-C69455FDF8D3}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>client</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(SolutionDir)lib\</OutDir>
+    <IntDir>intm\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(SolutionDir)lib\</OutDir>
+    <IntDir>intm\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../../src/;../../../src/client/;../;../lib/glib/include/glib-2.0;../lib/glib/lib/glib-2.0/include;../../../;../lib/SDL2-2.0.3;../lib/curl/include</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../../src/;../../../src/client/;../;../lib/glib/include/glib-2.0;../lib/glib/lib/glib-2.0/include;../../../;../lib/SDL2-2.0.3;../lib/curl/include</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

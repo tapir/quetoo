@@ -74,8 +74,9 @@ static _Bool Img_LoadWal(const char *path, SDL_Surface **surf) {
 
 	*surf = NULL;
 
-	if (Fs_Load(path, &buf) == -1)
+	if (Fs_Load(path, &buf) == -1) {
 		return false;
+	}
 
 	d_wal_t *wal = (d_wal_t *) buf;
 
@@ -84,8 +85,9 @@ static _Bool Img_LoadWal(const char *path, SDL_Surface **surf) {
 
 	wal->offsets[0] = LittleLong(wal->offsets[0]);
 
-	if (!img_palette_initialized) // lazy-load palette if necessary
+	if (!img_palette_initialized) { // lazy-load palette if necessary
 		Img_InitPalette();
+	}
 
 	size_t size = wal->width * wal->height;
 	uint32_t *p = (uint32_t *) malloc(size * sizeof(uint32_t));
@@ -197,8 +199,9 @@ void Img_InitPalette(void) {
  */
 void Img_ColorFromPalette(uint8_t c, vec_t *res) {
 
-	if (!img_palette_initialized) // lazy-load palette if necessary
+	if (!img_palette_initialized) { // lazy-load palette if necessary
 		Img_InitPalette();
+	}
 
 	const uint32_t color = img_palette[c];
 

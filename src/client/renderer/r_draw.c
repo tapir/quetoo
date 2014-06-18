@@ -226,8 +226,9 @@ void R_DrawChar(r_pixel_t x, r_pixel_t y, char c, int32_t color) {
 	if (x > r_context.width || y > r_context.height)
 		return;
 
-	if (c == ' ')
+	if (c == ' ') {
 		return; // small optimization for space
+	}
 
 	r_char_arrays_t *chars = &r_draw.char_arrays[r_draw.font - r_draw.fonts];
 

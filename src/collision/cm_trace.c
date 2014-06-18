@@ -65,8 +65,9 @@ static void Cm_TraceToBrush(cm_trace_data_t *data, const cm_bsp_brush_t *brush) 
 	if (!brush->num_sides)
 		return;
 
-	if (!BoxIntersect(data->box_mins, data->box_maxs, brush->mins, brush->maxs))
+	if (!BoxIntersect(data->box_mins, data->box_maxs, brush->mins, brush->maxs)) {
 		return;
+	}
 
 	vec_t enter_fraction = -1.0;
 	vec_t leave_fraction = 1.0;
@@ -140,8 +141,9 @@ static void Cm_TestBoxInBrush(cm_trace_data_t *data, const cm_bsp_brush_t *brush
 	if (!brush->num_sides)
 		return;
 
-	if (!BoxIntersect(data->box_mins, data->box_maxs, brush->mins, brush->maxs))
+	if (!BoxIntersect(data->box_mins, data->box_maxs, brush->mins, brush->maxs)) {
 		return;
+	}
 
 	const cm_bsp_brush_side_t *side = &cm_bsp.brush_sides[brush->first_brush_side];
 

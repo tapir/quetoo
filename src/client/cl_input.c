@@ -98,8 +98,9 @@ static void Cl_KeyDown(cl_button_t *b) {
 		return;
 	}
 
-	if (b->state & 1)
+	if (b->state & 1) {
 		return; // still down
+	}
 
 	// save the down time so that we can calculate fractional time later
 	const char *t = Cmd_Argv(2);
@@ -132,8 +133,9 @@ static void Cl_KeyUp(cl_button_t *b) {
 	if (b->keys[0] || b->keys[1])
 		return; // some other key is still holding it down
 
-	if (!(b->state & 1))
+	if (!(b->state & 1)) {
 		return; // still up (this should not happen)
+	}
 
 	// save timestamp
 	const char *t = Cmd_Argv(2);
@@ -245,8 +247,9 @@ static vec_t Cl_KeyState(cl_button_t *key, uint32_t cmd_msec) {
  */
 static void Cl_MouseMotionEvent(const SDL_Event *event) {
 
-	if (cls.key_state.dest != KEY_GAME)
+	if (cls.key_state.dest != KEY_GAME) {
 		return;
+	}
 
 	const int32_t mx = event->motion.x;
 	const int32_t my = event->motion.y;

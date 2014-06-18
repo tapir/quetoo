@@ -263,8 +263,9 @@ static void Cg_DrawChase(const player_state_t *ps) {
 	r_pixel_t x, y, ch;
 	char string[MAX_USER_INFO_VALUE * 2], *s;
 
-	if (!ps->stats[STAT_CHASE])
+	if (!ps->stats[STAT_CHASE]) {
 		return;
+	}
 
 	const int32_t c = ps->stats[STAT_CHASE];
 
@@ -549,8 +550,9 @@ static void Cg_DrawBlend(const player_state_t *ps) {
 	if (!cg_draw_blend->value)
 		return;
 
-	if (last_blend_time > cgi.client->time)
+	if (last_blend_time > cgi.client->time) {
 		last_blend_time = 0;
+	}
 
 	// determine if we've picked up an item
 	const int16_t p = ps->stats[STAT_PICKUP_ICON];
@@ -575,8 +577,9 @@ static void Cg_DrawBlend(const player_state_t *ps) {
 	vec_t t = (vec_t) (cgi.client->time - last_blend_time) / 500.0;
 	vec_t al = cg_draw_blend->value * (alpha - (t * alpha));
 
-	if (al < 0.0 || al > 1.0)
+	if (al < 0.0 || al > 1.0) {
 		al = 0.0;
+	}
 
 	// and finally, determine supplementary blend based on view origin conents
 	const int32_t contents = cgi.view->contents;

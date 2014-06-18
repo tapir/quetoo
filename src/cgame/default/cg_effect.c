@@ -136,8 +136,9 @@ void Cg_LoadWeather(void) {
 
 	Cg_ResolveWeather(cgi.ConfigString(CS_WEATHER));
 
-	if (!(cgi.view->weather & WEATHER_PRECIP_MASK))
+	if (!(cgi.view->weather & WEATHER_PRECIP_MASK)) {
 		return;
+	}
 
 	const r_bsp_model_t *bsp = cgi.WorldModel()->bsp;
 	const r_bsp_surface_t *s = bsp->surfaces;
@@ -228,8 +229,9 @@ static void Cg_AddWeather(void) {
 	if (!cg_add_weather->value)
 		return;
 
-	if (!(cgi.view->weather & (WEATHER_RAIN | WEATHER_SNOW)))
+	if (!(cgi.view->weather & (WEATHER_RAIN | WEATHER_SNOW))) {
 		return;
+	}
 
 	s_sample_t *s; // add an appropriate looping sound
 

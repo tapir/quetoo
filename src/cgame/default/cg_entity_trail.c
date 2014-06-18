@@ -362,8 +362,9 @@ static void Cg_EnergyTrail(cl_entity_t *ent, const vec3_t org, vec_t radius, int
 	for (i = 0; i < NUM_APPROXIMATE_NORMALS; i++) {
 		cg_particle_t *p;
 
-		if (!(p = Cg_AllocParticle(PARTICLE_NORMAL, NULL)))
+		if (!(p = Cg_AllocParticle(PARTICLE_NORMAL, NULL))) {
 			return;
+		}
 
 		vec_t angle = ltime * angles[i][0];
 		const vec_t sp = sin(angle);

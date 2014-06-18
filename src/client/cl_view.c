@@ -209,8 +209,9 @@ static void Cl_UpdateAngles(const player_state_t *from, const player_state_t *to
  */
 void Cl_UpdateView(void) {
 
-	if (!cl.frame.valid && !r_view.update)
+	if (!cl.frame.valid && !r_view.update) {
 		return; // not a valid frame, and no forced update
+	}
 
 	// find the previous frame to interpolate from
 	cl_frame_t *prev = &cl.frames[(cl.frame.frame_num - 1) & PACKET_MASK];

@@ -197,8 +197,9 @@ void Sv_BuildClientFrame(sv_client_t *client) {
 	int32_t i;
 
 	g_entity_t *cent = client->entity;
-	if (!cent->client)
+	if (!cent->client) {
 		return; // not in game yet
+	}
 
 	// this is the frame we are creating
 	sv_frame_t *frame = &client->frames[sv.frame_num & PACKET_MASK];

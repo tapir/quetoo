@@ -212,13 +212,15 @@ g_entity_t *G_TossWeapon(g_entity_t *ent) {
 
 	const g_item_t *weapon = ent->client->locals.persistent.weapon;
 
-	if (!weapon || !weapon->ammo) // don't drop if not holding
+	if (!weapon || !weapon->ammo) { // don't drop if not holding
 		return NULL;
+	}
 
 	const int16_t ammo = ent->client->locals.persistent.inventory[ent->client->locals.ammo_index];
 
-	if (!ammo) // don't drop when out of ammo
+	if (!ammo) { // don't drop when out of ammo
 		return NULL;
+	}
 
 	g_entity_t *dropped = G_DropItem(ent, ent->client->locals.persistent.weapon);
 
@@ -246,15 +248,18 @@ static _Bool G_FireWeapon(g_entity_t *ent) {
 	ent->client->locals.latched_buttons &= ~BUTTON_ATTACK;
 
 	// use small epsilon for low frame_num rates
-	if (ent->client->locals.weapon_fire_time > g_level.time + 1)
+	if (ent->client->locals.weapon_fire_time > g_level.time + 1) {
 		return false;
+	}
 
 	// determine if ammo is required, and if the quantity is sufficient
 	int16_t ammo;
-	if (ent->client->locals.ammo_index)
+	if (ent->client->locals.ammo_index) {
 		ammo = ent->client->locals.persistent.inventory[ent->client->locals.ammo_index];
-	else
+	}
+	else {
 		ammo = 0;
+	}
 
 	const uint16_t ammo_needed = ent->client->locals.persistent.weapon->quantity;
 

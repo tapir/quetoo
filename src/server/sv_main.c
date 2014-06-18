@@ -127,8 +127,9 @@ static void Sv_Ack_f(void) {
 static void Sv_Info_f(void) {
 	char string[MAX_MSG_SIZE];
 
-	if (sv_max_clients->integer == 1)
+	if (sv_max_clients->integer == 1) {
 		return; // ignore in single player
+	}
 
 	const int32_t p = atoi(Cmd_Argv(1));
 	if (p != PROTOCOL_MAJOR) {

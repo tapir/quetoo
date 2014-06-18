@@ -239,8 +239,9 @@ static void R_AddSkySurface(const r_bsp_surface_t *surf) {
 	vec3_t verts[MAX_CLIP_VERTS];
 	uint16_t i;
 
-	if (r_draw_wireframe->value)
+	if (r_draw_wireframe->value) {
 		return;
+	}
 
 	const GLuint index = surf->index * 3;
 

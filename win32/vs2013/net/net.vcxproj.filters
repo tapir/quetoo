@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="local">
+      <UniqueIdentifier>{d92023ca-f7d6-4d57-9ab3-cfdbc0284410}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\net\net.c">
+      <Filter>local</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\net\net_chan.c">
+      <Filter>local</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\net\net_message.c">
+      <Filter>local</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\net\net_tcp.c">
+      <Filter>local</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\net\net_udp.c">
+      <Filter>local</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\net\net.h">
+      <Filter>local</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\net\net_chan.h">
+      <Filter>local</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\net\net_message.h">
+      <Filter>local</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\net\net_tcp.h">
+      <Filter>local</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\net\net_types.h">
+      <Filter>local</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\net\net_udp.h">
+      <Filter>local</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

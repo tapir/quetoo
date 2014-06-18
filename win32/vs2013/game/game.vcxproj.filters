@@ -1,0 +1,156 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="local">
+      <UniqueIdentifier>{f380b394-3bb7-4985-b215-26b8c35bea6c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="shared">
+      <UniqueIdentifier>{9cd4411c-36ed-4078-9dd1-c28f2206dbff}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\game\default\g_ai.c">
+      <Filter>local</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\game\default\g_ai_goal.c">
+      <Filter>local</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\game\default\g_ballistics.c">
+      <Filter>local</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\game\default\g_client.c">
+      <Filter>local</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\game\default\g_client_chase.c">
+      <Filter>local</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\game\default\g_client_stats.c">
+      <Filter>local</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\game\default\g_client_view.c">
+      <Filter>local</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\game\default\g_cmd.c">
+      <Filter>local</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\game\default\g_combat.c">
+      <Filter>local</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\game\default\g_entity.c">
+      <Filter>local</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\game\default\g_entity_func.c">
+      <Filter>local</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\game\default\g_entity_info.c">
+      <Filter>local</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\game\default\g_entity_misc.c">
+      <Filter>local</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\game\default\g_entity_target.c">
+      <Filter>local</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\game\default\g_entity_trigger.c">
+      <Filter>local</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\game\default\g_item.c">
+      <Filter>local</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\game\default\g_main.c">
+      <Filter>local</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\game\default\g_mysql.c">
+      <Filter>local</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\game\default\g_physics.c">
+      <Filter>local</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\game\default\g_util.c">
+      <Filter>local</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\game\default\g_weapon.c">
+      <Filter>local</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\game\default\g_ai.h">
+      <Filter>local</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\game\default\g_ai_goal.h">
+      <Filter>local</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\game\default\g_ballistics.h">
+      <Filter>local</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\game\default\g_client.h">
+      <Filter>local</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\game\default\g_client_chase.h">
+      <Filter>local</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\game\default\g_client_stats.h">
+      <Filter>local</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\game\default\g_client_view.h">
+      <Filter>local</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\game\default\g_cmd.h">
+      <Filter>local</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\game\default\g_combat.h">
+      <Filter>local</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\game\default\g_entity.h">
+      <Filter>local</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\game\default\g_entity_func.h">
+      <Filter>local</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\game\default\g_entity_info.h">
+      <Filter>local</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\game\default\g_entity_misc.h">
+      <Filter>local</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\game\default\g_entity_target.h">
+      <Filter>local</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\game\default\g_entity_trigger.h">
+      <Filter>local</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\game\default\g_item.h">
+      <Filter>local</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\game\default\g_local.h">
+      <Filter>local</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\game\default\g_main.h">
+      <Filter>local</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\game\default\g_mysql.h">
+      <Filter>local</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\game\default\g_physics.h">
+      <Filter>local</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\game\default\g_types.h">
+      <Filter>local</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\game\default\g_util.h">
+      <Filter>local</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\game\default\g_weapon.h">
+      <Filter>local</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\game\default\bg_pmove.h">
+      <Filter>shared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\game\game.h">
+      <Filter>shared</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\cgame\game.def" />
+  </ItemGroup>
+</Project>

@@ -31,8 +31,9 @@ static void R_SetMeshShadowColor_default(const r_entity_t *e, const r_shadow_t *
 
 	vec_t alpha = s->intensity * r_shadows->value * MESH_SHADOW_ALPHA;
 
-	if (e->effects & EF_BLEND)
+	if (e->effects & EF_BLEND) {
 		alpha *= e->color[3];
+	}
 
 	vec4_t color = { 0.0, 0.0, 0.0, alpha };
 

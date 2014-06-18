@@ -83,7 +83,7 @@ void Sv_ClientPrint(const g_entity_t *ent, const int32_t level, const char *fmt,
 /*
  * @brief Sends text to all active clients over their unreliable channels.
  */
-void Sv_BroadcastPrint(int32_t level, const char *fmt, ...) {
+void Sv_BroadcastPrint(const int32_t level, const char *fmt, ...) {
 	char string[MAX_STRING_CHARS];
 	va_list args;
 	sv_client_t * cl;
@@ -418,8 +418,9 @@ static void Sv_DemoCompleted(void) {
 static _Bool Sv_RateDrop(sv_client_t *cl) {
 
 	// never drop over the loop device
-	if (cl->net_chan.remote_address.type == NA_LOOP)
+	if (cl->net_chan.remote_address.type == NA_LOOP) {
 		return false;
+	}
 
 	uint32_t total = 0;
 

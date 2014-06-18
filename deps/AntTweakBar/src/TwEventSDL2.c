@@ -16,6 +16,7 @@
 
 #include <SDL2/SDL.h>
 #include <AntTweakBar.h>
+#include <string.h>
 
 typedef struct {
 	int width, height;
@@ -24,18 +25,25 @@ typedef struct {
 
 static TwSDLState SDLState;
 
+#ifdef WIN32
+#define UNUSED
+#else
+#define UNUSED __attribute__((unused))
+#endif
+
 /*
  * @brief Handle libSDL2 events for AntTweakBar.
  * @param sdlEvent The SDL_Event pointer, cast to (void *).
  * @return 0 if the event was not swallowed, non-zero otherwise.
  */
-int TW_CALL TwEventSDL(const void *sdlEvent, unsigned char majorVersion __attribute__((unused)),
-		unsigned char minorVersion __attribute__((unused))) {
+int TW_CALL TwEventSDL(const void *sdlEvent, unsigned char majorVersion UNUSED,
+		unsigned char minorVersion UNUSED) {
 
 	const SDL_Event *event = (const SDL_Event *) sdlEvent;
 
-	if (event == NULL)
+	if (event == NULL) {
 		return 0;
+	}
 
 	int handled = 0;
 

@@ -62,8 +62,9 @@ const g_item_t *G_FindItemByClassName(const char *class_name) {
 const g_item_t *G_FindItem(const char *name) {
 	int32_t i;
 
-	if (!name)
+	if (!name) {
 		return NULL;
+	}
 
 	const g_item_t *it = g_items;
 	for (i = 0; i < g_num_items; i++, it++) {

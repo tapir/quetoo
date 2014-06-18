@@ -28,8 +28,9 @@ _Bool Cg_IsSelf(const cl_entity_t *ent) {
 
 	if (ent->current.model1 == MODEL_CLIENT || ent->current.effects & EF_BEAM) {
 
-		if (ent->current.client == cgi.client->client_num)
+		if (ent->current.client == cgi.client->client_num) {
 			return true;
+		}
 
 		const int16_t chase = cgi.client->frame.ps.stats[STAT_CHASE] - CS_CLIENTS;
 

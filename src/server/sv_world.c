@@ -235,8 +235,9 @@ void Sv_LinkEntity(g_entity_t *ent) {
 	if (sent->num_clusters == -1)
 		Com_Debug("%s exceeds MAX_ENT_CLUSTERS\n", etos(ent));
 
-	if (ent->solid == SOLID_NOT)
+	if (ent->solid == SOLID_NOT) {
 		return;
+	}
 
 	// find the first sector that the ent's box crosses
 	sv_sector_t *sector = sv_world.sectors;

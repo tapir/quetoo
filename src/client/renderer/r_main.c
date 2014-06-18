@@ -100,8 +100,9 @@ extern cl_static_t cls;
 void R_UpdateFrustum(void) {
 	int32_t i;
 
-	if (!r_cull->value)
+	if (!r_cull->value) {
 		return;
+	}
 
 	cm_bsp_plane_t *p = r_locals.frustum;
 

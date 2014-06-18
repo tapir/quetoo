@@ -81,8 +81,9 @@ static _Bool Sv_SetPlayer(void) {
 	sv_client_t * cl;
 	int32_t i;
 
-	if (Cmd_Argc() < 2)
+	if (Cmd_Argc() < 2) {
 		return false;
+	}
 
 	const char *s = Cmd_Argv(1);
 
@@ -285,8 +286,9 @@ static void Sv_Tell_f(void) {
 	if (Cmd_Argc() < 3)
 		return;
 
-	if (!Sv_SetPlayer())
+	if (!Sv_SetPlayer()) {
 		return;
+	}
 
 	const char *msg = Cmd_Args() + strlen(Cmd_Argv(1)) + 1;
 	StripColor(msg, text);

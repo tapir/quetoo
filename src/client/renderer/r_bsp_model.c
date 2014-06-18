@@ -312,8 +312,9 @@ static const vec_t *R_UnwindBspSurface(const r_bsp_model_t *bsp, const r_bsp_sur
 	const int32_t *se = &bsp->surface_edges[surf->first_edge];
 	const vec_t *v0 = R_BSP_VERTEX(bsp, *se)->position;
 
-	if (!last)
+	if (!last) {
 		return v0;
+	}
 
 	uint16_t i;
 

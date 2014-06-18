@@ -46,3 +46,10 @@ src/tools/q2wmap/q2wmap
 stamp-h1
 target
 test-driver
+*.obj
+*.tlog
+/win32/vs2013/bin/default
+*.user
+*.opensdf
+*.sdf
+*.suo

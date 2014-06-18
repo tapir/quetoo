@@ -1028,8 +1028,9 @@ static void G_func_door_TouchTrigger(g_entity_t *self, g_entity_t *other,
 static void G_func_door_CalculateMove(g_entity_t *self) {
 	g_entity_t *ent;
 
-	if (self->locals.flags & FL_TEAM_SLAVE)
+	if (self->locals.flags & FL_TEAM_SLAVE) {
 		return; // only the team master does this
+	}
 
 	// find the smallest distance any member of the team will be moving
 	vec_t min = fabsf(self->locals.move_info.distance);

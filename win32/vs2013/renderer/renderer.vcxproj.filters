@@ -1,0 +1,201 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="local">
+      <UniqueIdentifier>{bfac4400-9b43-497c-bcee-235924073e11}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\client\renderer\r_array.c">
+      <Filter>local</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\client\renderer\r_bsp.c">
+      <Filter>local</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\client\renderer\r_bsp_light.c">
+      <Filter>local</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\client\renderer\r_bsp_model.c">
+      <Filter>local</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\client\renderer\r_bsp_surface.c">
+      <Filter>local</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\client\renderer\r_context.c">
+      <Filter>local</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\client\renderer\r_corona.c">
+      <Filter>local</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\client\renderer\r_draw.c">
+      <Filter>local</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\client\renderer\r_element.c">
+      <Filter>local</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\client\renderer\r_entity.c">
+      <Filter>local</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\client\renderer\r_flare.c">
+      <Filter>local</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\client\renderer\r_gl.c">
+      <Filter>local</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\client\renderer\r_image.c">
+      <Filter>local</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\client\renderer\r_light.c">
+      <Filter>local</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\client\renderer\r_lighting.c">
+      <Filter>local</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\client\renderer\r_lightmap.c">
+      <Filter>local</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\client\renderer\r_main.c">
+      <Filter>local</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\client\renderer\r_material.c">
+      <Filter>local</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\client\renderer\r_media.c">
+      <Filter>local</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\client\renderer\r_mesh.c">
+      <Filter>local</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\client\renderer\r_mesh_model.c">
+      <Filter>local</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\client\renderer\r_mesh_shadow.c">
+      <Filter>local</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\client\renderer\r_model.c">
+      <Filter>local</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\client\renderer\r_particle.c">
+      <Filter>local</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\client\renderer\r_program.c">
+      <Filter>local</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\client\renderer\r_program_default.c">
+      <Filter>local</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\client\renderer\r_program_shadow.c">
+      <Filter>local</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\client\renderer\r_program_warp.c">
+      <Filter>local</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\client\renderer\r_sky.c">
+      <Filter>local</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\client\renderer\r_state.c">
+      <Filter>local</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\client\renderer\r_array.h">
+      <Filter>local</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\client\renderer\r_bsp.h">
+      <Filter>local</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\client\renderer\r_bsp_light.h">
+      <Filter>local</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\client\renderer\r_bsp_model.h">
+      <Filter>local</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\client\renderer\r_bsp_surface.h">
+      <Filter>local</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\client\renderer\r_context.h">
+      <Filter>local</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\client\renderer\r_corona.h">
+      <Filter>local</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\client\renderer\r_draw.h">
+      <Filter>local</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\client\renderer\r_element.h">
+      <Filter>local</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\client\renderer\r_entity.h">
+      <Filter>local</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\client\renderer\r_flare.h">
+      <Filter>local</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\client\renderer\r_gl.h">
+      <Filter>local</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\client\renderer\r_image.h">
+      <Filter>local</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\client\renderer\r_light.h">
+      <Filter>local</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\client\renderer\r_lighting.h">
+      <Filter>local</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\client\renderer\r_lightmap.h">
+      <Filter>local</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\client\renderer\r_local.h">
+      <Filter>local</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\client\renderer\r_main.h">
+      <Filter>local</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\client\renderer\r_material.h">
+      <Filter>local</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\client\renderer\r_media.h">
+      <Filter>local</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\client\renderer\r_mesh.h">
+      <Filter>local</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\client\renderer\r_mesh_model.h">
+      <Filter>local</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\client\renderer\r_mesh_shadow.h">
+      <Filter>local</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\client\renderer\r_model.h">
+      <Filter>local</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\client\renderer\r_particle.h">
+      <Filter>local</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\client\renderer\r_program.h">
+      <Filter>local</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\client\renderer\r_program_default.h">
+      <Filter>local</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\client\renderer\r_program_shadow.h">
+      <Filter>local</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\client\renderer\r_program_warp.h">
+      <Filter>local</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\client\renderer\r_sky.h">
+      <Filter>local</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\client\renderer\r_state.h">
+      <Filter>local</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\client\renderer\r_types.h">
+      <Filter>local</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\client\renderer\renderer.h">
+      <Filter>local</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

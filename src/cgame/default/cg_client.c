@@ -64,7 +64,8 @@ static void Cg_LoadClientSkin(r_material_t **skins, const r_md3_t *md3, char *li
 static void Cg_LoadClientSkins(const r_model_t *mod, r_material_t **skins, const char *skin) {
 	char path[MAX_QPATH], line[MAX_STRING_CHARS];
 	char *buffer;
-	int32_t i, j, len;
+	int32_t i, j;
+	int64_t len;
 
 	// load the skin definition file
 	g_snprintf(path, sizeof(path), "%s_%s.skin", mod->media.name, skin);
@@ -125,7 +126,7 @@ static _Bool Cg_ValidateClient(cl_client_info_t *ci) {
 	VectorCopy(PM_MINS, ci->lower->mins);
 	VectorCopy(PM_MAXS, ci->lower->maxs);
 
-	ci->lower->radius = (ci->lower->maxs[2] - ci->lower->mins[2]) / 2.0;
+	ci->lower->radius = (ci->lower->maxs[2] - ci->lower->mins[2]) / 2.0f;
 
 	return true;
 }

@@ -256,8 +256,9 @@ static void R_BuildLightmap(const r_bsp_model_t *bsp, const r_bsp_surface_t *sur
  */
 void R_CreateBspSurfaceLightmap(r_bsp_model_t *bsp, r_bsp_surface_t *surf, const byte *data) {
 
-	if (!(surf->flags & R_SURF_LIGHTMAP))
+	if (!(surf->flags & R_SURF_LIGHTMAP)) {
 		return;
+	}
 
 	const r_pixel_t smax = (surf->st_extents[0] / bsp->lightmaps->scale) + 1;
 	const r_pixel_t tmax = (surf->st_extents[1] / bsp->lightmaps->scale) + 1;

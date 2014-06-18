@@ -380,8 +380,9 @@ void G_TouchTriggers(g_entity_t *ent) {
  */
 void G_TouchWater(g_entity_t *ent) {
 
-	if (ent->client) // player water level is a special case
+	if (ent->client) { // player water level is a special case
 		return;
+	}
 
 	vec3_t origin, mins, maxs;
 	if (ent->solid == SOLID_BSP) {
@@ -498,7 +499,7 @@ g_gameplay_t G_GameplayByName(const char *c) {
 		gameplay = GAME_ARENA;
 	}
 
-	free(lower);
+	g_free(lower);
 	return gameplay;
 }
 
@@ -662,8 +663,9 @@ g_client_t *G_ClientByName(char *name) {
  */
 int32_t G_ColorByName(const char *s, int32_t def) {
 
-	if (!s || *s == '\0')
+	if (!s || *s == '\0') {
 		return def;
+	}
 
 	int32_t i = atoi(s);
 	if (i > 0 && i < 255)

@@ -102,8 +102,9 @@ static void Cl_CheckForResend(void) {
 		return;
 
 	// don't flood connection packets
-	if (cls.connect_time && (cls.real_time - cls.connect_time < 3000))
+	if (cls.connect_time && (cls.real_time - cls.connect_time < 3000)) {
 		return;
+	}
 
 	net_addr_t addr;
 

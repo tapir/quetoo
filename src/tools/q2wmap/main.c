@@ -544,12 +544,16 @@ int32_t main(int32_t argc, char **argv) {
 		ZIP_Main();
 
 	// emit time
-	const time_t end = time(NULL);
-	const time_t duration = end - start;
-	Com_Print("\nTotal Time: ");
-	if (duration > 59)
-		Com_Print("%d Minutes ", (int32_t) (duration / 60));
-	Com_Print("%d Seconds\n", (int32_t) (duration % 60));
+	{
+		const time_t end = time(NULL);
+		const time_t duration = end - start;
+		Com_Print("\nTotal Time: ");
+		if (duration > 59)
+			Com_Print("%d Minutes ", (int32_t) (duration / 60));
+		Com_Print("%d Seconds\n", (int32_t) (duration % 60));
 
-	Com_Shutdown(NULL);
+		Com_Shutdown(NULL);
+	}
+
+	return 0;
 }

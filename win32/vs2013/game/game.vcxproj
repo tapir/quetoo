@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A3D2C865-C45E-4A43-816D-C865EC1055E6}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>game</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(SolutionDir)bin\default\</OutDir>
+    <IntDir>intm\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(SolutionDir)bin\default\</OutDir>
+    <IntDir>intm\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;GAME_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../../src/;../;../lib/glib/include/glib-2.0;../lib/glib/lib/glib-2.0/include</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>false</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>../lib;../lib/glib/lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>shared.lib;pmove.lib;glib-2.0.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <ModuleDefinitionFile>game.def</ModuleDefinitionFile>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;GAME_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../../src/;../;../lib/glib/include/glib-2.0;../lib/glib/lib/glib-2.0/include</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>false</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>../lib;../lib/glib/lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>shared.lib;pmove.lib;glib-2.0.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <ModuleDefinitionFile>game.def</ModuleDefinitionFile>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\game\default\g_ai.c" />
+    <ClCompile Include="..\..\..\src\game\default\g_ai_goal.c" />
+    <ClCompile Include="..\..\..\src\game\default\g_ballistics.c" />
+    <ClCompile Include="..\..\..\src\game\default\g_client.c" />
+    <ClCompile Include="..\..\..\src\game\default\g_client_chase.c" />
+    <ClCompile Include="..\..\..\src\game\default\g_client_stats.c" />
+    <ClCompile Include="..\..\..\src\game\default\g_client_view.c" />
+    <ClCompile Include="..\..\..\src\game\default\g_cmd.c" />
+    <ClCompile Include="..\..\..\src\game\default\g_combat.c" />
+    <ClCompile Include="..\..\..\src\game\default\g_entity.c" />
+    <ClCompile Include="..\..\..\src\game\default\g_entity_func.c" />
+    <ClCompile Include="..\..\..\src\game\default\g_entity_info.c" />
+    <ClCompile Include="..\..\..\src\game\default\g_entity_misc.c" />
+    <ClCompile Include="..\..\..\src\game\default\g_entity_target.c" />
+    <ClCompile Include="..\..\..\src\game\default\g_entity_trigger.c" />
+    <ClCompile Include="..\..\..\src\game\default\g_item.c" />
+    <ClCompile Include="..\..\..\src\game\default\g_main.c" />
+    <ClCompile Include="..\..\..\src\game\default\g_mysql.c" />
+    <ClCompile Include="..\..\..\src\game\default\g_physics.c" />
+    <ClCompile Include="..\..\..\src\game\default\g_util.c" />
+    <ClCompile Include="..\..\..\src\game\default\g_weapon.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\game\default\bg_pmove.h" />
+    <ClInclude Include="..\..\..\src\game\default\g_ai.h" />
+    <ClInclude Include="..\..\..\src\game\default\g_ai_goal.h" />
+    <ClInclude Include="..\..\..\src\game\default\g_ballistics.h" />
+    <ClInclude Include="..\..\..\src\game\default\g_client.h" />
+    <ClInclude Include="..\..\..\src\game\default\g_client_chase.h" />
+    <ClInclude Include="..\..\..\src\game\default\g_client_stats.h" />
+    <ClInclude Include="..\..\..\src\game\default\g_client_view.h" />
+    <ClInclude Include="..\..\..\src\game\default\g_cmd.h" />
+    <ClInclude Include="..\..\..\src\game\default\g_combat.h" />
+    <ClInclude Include="..\..\..\src\game\default\g_entity.h" />
+    <ClInclude Include="..\..\..\src\game\default\g_entity_func.h" />
+    <ClInclude Include="..\..\..\src\game\default\g_entity_info.h" />
+    <ClInclude Include="..\..\..\src\game\default\g_entity_misc.h" />
+    <ClInclude Include="..\..\..\src\game\default\g_entity_target.h" />
+    <ClInclude Include="..\..\..\src\game\default\g_entity_trigger.h" />
+    <ClInclude Include="..\..\..\src\game\default\g_item.h" />
+    <ClInclude Include="..\..\..\src\game\default\g_local.h" />
+    <ClInclude Include="..\..\..\src\game\default\g_main.h" />
+    <ClInclude Include="..\..\..\src\game\default\g_mysql.h" />
+    <ClInclude Include="..\..\..\src\game\default\g_physics.h" />
+    <ClInclude Include="..\..\..\src\game\default\g_types.h" />
+    <ClInclude Include="..\..\..\src\game\default\g_util.h" />
+    <ClInclude Include="..\..\..\src\game\default\g_weapon.h" />
+    <ClInclude Include="..\..\..\src\game\game.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\cgame\game.def" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

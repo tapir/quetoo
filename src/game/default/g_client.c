@@ -442,8 +442,9 @@ static void G_Give(g_client_t *client, char *it, int16_t quantity) {
 
 	const g_item_t *item = G_FindItem(it);
 
-	if (!item)
+	if (!item) {
 		return;
+	}
 
 	const uint16_t index = ITEM_INDEX(item);
 
@@ -985,8 +986,9 @@ void G_ClientUserInfoChanged(g_entity_t *ent, const char *user_info) {
 	if (!i) // name had nothing printable
 		strcpy(name, "newbie");
 
-	if (color) // reset to white
+	if (color) { // reset to white
 		strcat(name, "^7");
+	}
 
 	g_client_t *cl = ent->client;
 	if (strncmp(cl->locals.persistent.net_name, name, sizeof(cl->locals.persistent.net_name))) {

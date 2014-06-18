@@ -396,8 +396,9 @@ static void Pm_Accelerate(vec3_t dir, vec_t speed, vec_t accel) {
 	const vec_t current_speed = DotProduct(pml.velocity, dir);
 	const vec_t add_speed = speed - current_speed;
 
-	if (add_speed <= 0.0)
+	if (add_speed <= 0.0) {
 		return;
+	}
 
 	vec_t accel_speed = accel * pml.time * speed;
 
@@ -428,6 +429,8 @@ static void Pm_Currents(vec3_t vel) {
 
 	// add water currents
 	if (pm->water_type & MASK_CURRENT) {
+		vec_t s = PM_SPEED_RUN;
+
 		VectorClear(v);
 
 		if (pm->water_type & CONTENTS_CURRENT_0)
@@ -443,7 +446,6 @@ static void Pm_Currents(vec3_t vel) {
 		if (pm->water_type & CONTENTS_CURRENT_DOWN)
 			v[2] -= 1.0;
 
-		vec_t s = PM_SPEED_RUN;
 		if ((pm->water_level == 1) && pm->ground_entity)
 			s = PM_SPEED_WATER;
 
@@ -671,8 +673,9 @@ static _Bool Pm_CheckJump(void) {
 		return false;
 
 	// didn't ask to jump
-	if (pm->cmd.up < 1)
+	if (pm->cmd.up < 1) {
 		return false;
+	}
 
 	// finally, do the jump
 	vec_t jump = PM_SPEED_JUMP;

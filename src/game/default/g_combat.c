@@ -100,8 +100,9 @@ _Bool G_CanDamage(g_entity_t *targ, g_entity_t *inflictor) {
 static void G_SpawnDamage(g_temp_entity_t type, const vec3_t pos, const vec3_t normal,
 		int16_t damage) {
 
-	if (damage < 1)
+	if (damage < 1) {
 		return;
+	}
 
 	int16_t count = Clamp(damage / 50, 1, 4);
 
@@ -123,16 +124,19 @@ static void G_SpawnDamage(g_temp_entity_t type, const vec3_t pos, const vec3_t n
 static int16_t G_CheckArmor(g_entity_t *ent, const vec3_t pos, const vec3_t normal, int16_t damage,
 		uint32_t dflags) {
 
-	if (dflags & DMG_NO_ARMOR)
+	if (dflags & DMG_NO_ARMOR) {
 		return 0;
+	}
 
-	if (!ent->client)
+	if (!ent->client) {
 		return 0;
+	}
 
 	const g_item_t *armor = G_ClientArmor(ent);
 
-	if (!armor)
+	if (!armor) {
 		return 0;
+	}
 
 	const int16_t quantity = ent->client->locals.persistent.inventory[ITEM_INDEX(armor)];
 
@@ -225,8 +229,9 @@ void G_Damage(g_entity_t *target, g_entity_t *inflictor, g_entity_t *attacker, c
 	}
 
 	// there is no self damage in instagib or arena, but there is knockback
-	if (target == attacker && g_level.gameplay != GAME_DEATHMATCH)
+	if (target == attacker && g_level.gameplay != GAME_DEATHMATCH) {
 		damage = 0;
+	}
 
 	g_client_t *client = target->client;
 

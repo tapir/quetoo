@@ -19,7 +19,9 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
+#ifndef WIN32
 #include <sys/time.h>
+#endif
 
 #include "cvar.h"
 #include "net_udp.h"
@@ -52,8 +54,9 @@ static _Bool Net_ReceiveDatagram_Loop(net_src_t source, net_addr_t *from, mem_bu
 	if (loop->send - loop->recv > MAX_NET_UDP_LOOPS)
 		loop->recv = loop->send - MAX_NET_UDP_LOOPS;
 
-	if (loop->recv >= loop->send)
+	if (loop->recv >= loop->send) {
 		return false;
+	}
 
 	const uint32_t i = loop->recv & (MAX_NET_UDP_LOOPS - 1);
 	loop->recv++;
@@ -80,8 +83,9 @@ _Bool Net_ReceiveDatagram(net_src_t source, net_addr_t *from, mem_buf_t *buf) {
 	memset(from, 0, sizeof(*from));
 	from->type = NA_DATAGRAM;
 
-	if (Net_ReceiveDatagram_Loop(source, from, buf))
+	if (Net_ReceiveDatagram_Loop(source, from, buf)) {
 		return true;
+	}
 
 	const int32_t sock = net_udp_state.sockets[source];
 

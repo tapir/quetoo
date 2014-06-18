@@ -264,8 +264,9 @@ int32_t Cm_PointLeafnum(const vec3_t p, int32_t head_node) {
  */
 int32_t Cm_PointContents(const vec3_t p, int32_t head_node) {
 
-	if (!cm_bsp.num_nodes)
+	if (!cm_bsp.num_nodes) {
 		return 0;
+	}
 
 	const int32_t leaf_num = Cm_PointLeafnum(p, head_node);
 

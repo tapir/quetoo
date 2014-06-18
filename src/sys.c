@@ -23,17 +23,51 @@
 #include "filesystem.h"
 
 #include <signal.h>
-#include <sys/time.h>
 
 #if defined(_WIN32)
+
+#define WIN32_LEAN_AND_MEAN
+#include <Windows.h>
+
 #define RTLD_NOW 0
-#define dlopen(file_name, mode) LoadLibrary(file_name)
-#define dlerror() "Windows.. go figure."
+#define dlopen(file_name, mode) LoadLibraryA(file_name)
+//#define dlerror() "Windows.. go figure."
+
+static char _win32_errorbuf[2048];
+
+// TODO: actually test.
+const char *dlerror()
+{
+	LPCSTR lpszFunction = "LoadLibrary";
+    LPCSTR lpMsgBuf;
+    DWORD dw = GetLastError(); 
+
+    FormatMessageA(
+        FORMAT_MESSAGE_ALLOCATE_BUFFER | 
+        FORMAT_MESSAGE_FROM_SYSTEM |
+        FORMAT_MESSAGE_IGNORE_INSERTS,
+        NULL,
+        dw,
+        MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
+        (LPSTR) &lpMsgBuf,
+        0, NULL );
+
+    g_snprintf(_win32_errorbuf, 
+        sizeof(_win32_errorbuf) / sizeof(CHAR),
+        "%s failed with error %d: %s", 
+        lpszFunction, dw, lpMsgBuf); 
+
+    LocalFree((HLOCAL)lpMsgBuf);
+
+	return _win32_errorbuf;
+}
+
 #define dlsym(handle, symbol) GetProcAddress(handle, symbol)
 #define dlclose(handle) FreeLibrary(handle)
 
 #else
 #include <dlfcn.h>
+#include <sys/time.h>
 #endif
 
 #if defined(__APPLE__)
@@ -81,7 +115,7 @@ const char *Sys_ExecutablePath(void) {
 
 #elif defined(_WIN32)
 
-	if (GetModuleFileName(0, path, sizeof(path))) {
+	if (GetModuleFileNameA(0, path, sizeof(path))) {
 		return path;
 	}
 

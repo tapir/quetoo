@@ -332,8 +332,9 @@ void Cg_DrawScores(const player_state_t *ps) {
 	if (!ps->stats[STAT_SCORES])
 		return;
 
-	if (!cg_score_state.num_scores)
+	if (!cg_score_state.num_scores) {
 		return;
+	}
 
 	const r_pixel_t start_y = Cg_DrawScoresHeader();
 

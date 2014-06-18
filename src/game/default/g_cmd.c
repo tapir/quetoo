@@ -200,8 +200,9 @@ static void G_Wave_f(g_entity_t *ent) {
  */
 static void G_Use_f(g_entity_t *ent) {
 
-	if (ent->locals.dead)
+	if (ent->locals.dead) {
 		return;
+	}
 
 	const char *s = gi.Args();
 	const g_item_t *it = G_FindItem(s);
@@ -234,8 +235,9 @@ static void G_Drop_f(g_entity_t *ent) {
 	if (g_level.gameplay > 1)
 		return;
 
-	if (ent->locals.dead)
+	if (ent->locals.dead) {
 		return;
+	}
 
 	const char *s = gi.Args();
 	it = NULL;
@@ -293,8 +295,9 @@ static void G_WeaponPrevious_f(g_entity_t *ent) {
 		return;
 	}
 
-	if (!cl->locals.persistent.weapon)
+	if (!cl->locals.persistent.weapon) {
 		return;
+	}
 
 	const uint16_t selected_weapon = ITEM_INDEX(cl->locals.persistent.weapon);
 
@@ -302,8 +305,9 @@ static void G_WeaponPrevious_f(g_entity_t *ent) {
 	for (i = 1; i <= MAX_ITEMS; i++) {
 		const uint16_t index = (selected_weapon + i) % MAX_ITEMS;
 
-		if (!cl->locals.persistent.inventory[index])
+		if (!cl->locals.persistent.inventory[index]) {
 			continue;
+		}
 
 		const g_item_t *it = &g_items[index];
 
@@ -336,8 +340,9 @@ static void G_WeaponNext_f(g_entity_t *ent) {
 		return;
 	}
 
-	if (!cl->locals.persistent.weapon)
+	if (!cl->locals.persistent.weapon) {
 		return;
+	}
 
 	const uint16_t selected_weapon = ITEM_INDEX(cl->locals.persistent.weapon);
 
@@ -345,8 +350,9 @@ static void G_WeaponNext_f(g_entity_t *ent) {
 	for (i = 1; i <= MAX_ITEMS; i++) {
 		const uint16_t index = (selected_weapon + MAX_ITEMS - i) % MAX_ITEMS;
 
-		if (!cl->locals.persistent.inventory[index])
+		if (!cl->locals.persistent.inventory[index]) {
 			continue;
+		}
 
 		const g_item_t *it = &g_items[index];
 
@@ -370,13 +376,15 @@ static void G_WeaponLast_f(g_entity_t *ent) {
 
 	g_client_t *cl = ent->client;
 
-	if (!cl->locals.persistent.weapon || !cl->locals.persistent.last_weapon)
+	if (!cl->locals.persistent.weapon || !cl->locals.persistent.last_weapon) {
 		return;
+	}
 
 	const uint16_t index = ITEM_INDEX(cl->locals.persistent.last_weapon);
 
-	if (!cl->locals.persistent.inventory[index])
+	if (!cl->locals.persistent.inventory[index]) {
 		return;
+	}
 
 	const g_item_t *it = &g_items[index];
 
@@ -867,8 +875,9 @@ static void G_Teamname_f(g_entity_t *ent) {
 
 	t = ent->client->locals.persistent.team;
 
-	if (g_level.time - t->name_time < TEAM_CHANGE_TIME)
+	if (g_level.time - t->name_time < TEAM_CHANGE_TIME) {
 		return; // prevent change spamming
+	}
 
 	const char *s = gi.Argv(1);
 
@@ -906,8 +915,9 @@ static void G_Teamskin_f(g_entity_t *ent) {
 
 	t = ent->client->locals.persistent.team;
 
-	if (g_level.time - t->skin_time < TEAM_CHANGE_TIME)
+	if (g_level.time - t->skin_time < TEAM_CHANGE_TIME) {
 		return; // prevent change spamming
+	}
 
 	const char *s = gi.Argv(1);
 
@@ -1094,8 +1104,9 @@ void G_Score_f(g_entity_t *ent) {
  */
 void G_ClientCommand(g_entity_t *ent) {
 
-	if (!ent->client)
+	if (!ent->client) {
 		return; // not fully in game yet
+	}
 
 	const char *cmd = gi.Argv(0);
 
