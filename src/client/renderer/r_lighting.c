@@ -185,7 +185,7 @@ static void R_DynamicIlluminations(r_lighting_t *l) {
 
 	for (uint16_t i = 0; i < r_view.num_lights; i++, dl++) {
 		if (R_PositionalIllumination(l, dl)) {
-			l->light_mask |= (uint64_t) (1 << i);
+			l->light_mask |= (uint64_t) ((uint64_t)1 << i);
 		}
 	}
 }

@@ -25,12 +25,18 @@
  * @return True if the delta is valid and interpolation should be used.
  */
 static _Bool Cl_ValidDeltaPlayerState(player_state_t *from, player_state_t *to) {
-	vec3_t new_origin, old_origin, delta;
+	vec3_t delta;
+
+#ifdef PMOVE_PRECISE
+	VectorSubtract(from->pm_state.origin, to->pm_state.origin, delta);
+#else
+	vec3_t new_origin, old_origin;
 
 	UnpackVector(from->pm_state.origin, old_origin);
 	UnpackVector(to->pm_state.origin, new_origin);
 
 	VectorSubtract(old_origin, new_origin, delta);
+#endif
 
 	if (VectorLength(delta) > 256.0)
 		return false;
@@ -284,7 +290,11 @@ void Cl_ParseFrame(void) {
 		if (cls.state != CL_ACTIVE) {
 			cls.state = CL_ACTIVE;
 
+#ifdef PMOVE_PRECISE
+			VectorCopy(cl.frame.ps.pm_state.origin, cl.predicted_state.origin);
+#else
 			UnpackVector(cl.frame.ps.pm_state.origin, cl.predicted_state.origin);
+#endif
 
 			UnpackVector(cl.frame.ps.pm_state.view_offset, cl.predicted_state.view_offset);
 			UnpackAngles(cl.frame.ps.pm_state.view_angles, cl.predicted_state.view_angles);

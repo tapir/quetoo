@@ -265,7 +265,11 @@ void Sv_Multicast(const vec3_t origin, multicast_t to) {
 			const pm_state_t *pm = &cl->entity->client->ps.pm_state;
 			vec3_t org, off;
 
+#ifdef PMOVE_PRECISE
+			VectorCopy(pm->origin, org);
+#else
 			UnpackVector(pm->origin, org);
+#endif
 			UnpackVector(pm->view_offset, off);
 			VectorAdd(org, off, org);
 

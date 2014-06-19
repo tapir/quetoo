@@ -1082,16 +1082,20 @@ static void Pm_WalkMove(void) {
  * @return True if the player is in a valid position, false otherwise.
  */
 static _Bool Pm_GoodPosition(void) {
-	vec3_t pos;
-
-	if (pm->s.type == PM_SPECTATOR)
+	if (pm->s.type == PM_SPECTATOR) {
 		return true;
-
+	}
+	
+#ifdef PMOVE_PRECISE
+	return !pm->Trace(pm->s.origin, pm->s.origin, pm->mins, pm->maxs).start_solid;
+#else
+	vec3_t pos;
 	UnpackVector(pm->s.origin, pos);
-
 	return !pm->Trace(pos, pos, pm->mins, pm->maxs).start_solid;
+#endif
 }
 
+#ifndef PMOVE_PRECISE
 /*
  * @brief On entry and exit, the origin is not necessarily quantized to the
  * 0.125 unit precision afforded by the network channel. We must test the
@@ -1130,6 +1134,7 @@ static _Bool Pm_SnapPosition(void) {
 
 	return false;
 }
+#endif
 
 /*
  * @brief
@@ -1239,8 +1244,13 @@ static void Pm_InitLocal(void) {
 	memset(&pml, 0, sizeof(pml));
 
 	// convert origin, velocity and view offset to floating point
+#ifdef PMOVE_PRECISE
+	VectorCopy(pm->s.origin, pml.origin);
+	VectorCopy(pm->s.velocity, pml.velocity);
+#else
 	UnpackVector(pm->s.origin, pml.origin);
 	UnpackVector(pm->s.velocity, pml.velocity);
+#endif
 	UnpackVector(pm->s.view_offset, pml.view_offset);
 
 	// save previous values in case move fails, and to detect landings
@@ -1262,7 +1272,9 @@ void Pm_Move(pm_move_t *pm_move) {
 
 	Pm_InitLocal();
 
+#ifndef PMOVE_PRECISE
 	Pm_SnapPosition();
+#endif
 
 	if (pm->s.type == PM_SPECTATOR) { // fly around without world interaction
 
@@ -1270,7 +1282,9 @@ void Pm_Move(pm_move_t *pm_move) {
 
 		Pm_SpectatorMove();
 
+#ifndef PMOVE_PRECISE
 		Pm_SnapPosition();
+#endif
 
 		return;
 	}
@@ -1315,14 +1329,19 @@ void Pm_Move(pm_move_t *pm_move) {
 	if (pm->s.flags & PMF_ON_GROUND) {
 		pm->s.flags &= ~PMF_PUSHED;
 	}
-
+	
+#ifdef PMOVE_PRECISE
+	VectorCopy(pml.origin, pm->s.origin);
+	VectorCopy(pml.velocity, pm->s.velocity);
+	PackVector(pml.view_offset, pm->s.view_offset);
+#else
 	if (!Pm_SnapPosition()) { // finalize the move, revert it if necessary
-
 		Pm_Debug("Failed to snap to final position: %s\n", vtos(pml.origin));
-
+		
 		PackVector(pml.previous_origin, pm->s.origin);
 
 		VectorClear(pm->s.velocity);
 	}
+#endif
 }
 

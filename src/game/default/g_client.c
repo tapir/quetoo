@@ -774,14 +774,23 @@ static void G_ClientRespawn_(g_entity_t *ent) {
 	if (!ent->client->locals.persistent.spectator) {
 		ent->locals.velocity[2] = 200.0;
 	}
+
+#ifdef PMOVE_PRECISE
+	VectorCopy(ent->locals.velocity, cl->ps.pm_state.velocity);
+#else
 	PackVector(ent->locals.velocity, cl->ps.pm_state.velocity);
+#endif
 
 	cl->locals.land_time = g_level.time;
 
 	// clear player state values
 	memset(&cl->ps, 0, sizeof(cl->ps));
 
+#ifdef PMOVE_PRECISE
+	VectorCopy(spawn_origin, cl->ps.pm_state.origin);
+#else
 	PackVector(spawn_origin, cl->ps.pm_state.origin);
+#endif
 
 	if (cl->locals.persistent.spectator) {
 		VectorClear(cl->ps.pm_state.view_offset);
@@ -1153,8 +1162,13 @@ static void G_ClientMove(g_entity_t *ent, pm_cmd_t *cmd) {
 	memset(&pm, 0, sizeof(pm));
 	pm.s = cl->ps.pm_state;
 
+#ifdef PMOVE_PRECISE
+	VectorCopy(ent->s.origin, pm.s.origin);
+	VectorCopy(ent->locals.velocity, pm.s.velocity);
+#else
 	PackVector(ent->s.origin, pm.s.origin);
 	PackVector(ent->locals.velocity, pm.s.velocity);
+#endif
 
 	pm.cmd = *cmd;
 	pm.ground_entity = ent->locals.ground_entity;
@@ -1171,9 +1185,14 @@ static void G_ClientMove(g_entity_t *ent, pm_cmd_t *cmd) {
 	cl->ps.pm_state = pm.s;
 
 	VectorCopy(ent->locals.velocity, old_velocity);
-
+	
+#ifdef PMOVE_PRECISE
+	VectorCopy(pm.s.origin, ent->s.origin);
+	VectorCopy(pm.s.velocity, ent->locals.velocity);
+#else
 	UnpackVector(pm.s.origin, ent->s.origin);
 	UnpackVector(pm.s.velocity, ent->locals.velocity);
+#endif
 
 	VectorCopy(pm.mins, ent->mins);
 	VectorCopy(pm.maxs, ent->maxs);

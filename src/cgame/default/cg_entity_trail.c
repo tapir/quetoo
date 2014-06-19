@@ -229,13 +229,13 @@ static void Cg_BlasterTrail(cl_entity_t *ent, const vec3_t start, const vec3_t e
 			p->part.color = col + (Random() & 5);
 
 			p->part.alpha = 0.8;
-			p->alpha_vel = -3.0 + Randomc() * 0.5;
+			p->alpha_vel = -5.0 + Randomc() * 0.5;
 
 			p->part.scale = 1.5;
 			p->scale_vel = 1.0 + Randomc() * 0.5;
 
 			VectorMA(start, d, delta, p->part.org);
-			VectorScale(delta, 400.0, p->vel);
+			//VectorScale(delta, 400.0, p->vel);
 
 			for (i = 0; i < 3; i++) {
 				p->part.org[i] += Randomc() * 0.5;
@@ -616,7 +616,6 @@ void Cg_EntityTrail(cl_entity_t *ent, r_entity_t *e) {
 	const entity_state_t *s = &ent->current;
 
 	vec3_t start, end;
-	VectorCopy(ent->prev.origin, start);
 
 	// beams have two origins, most entities have just one
 	if (s->effects & EF_BEAM) {
@@ -632,9 +631,13 @@ void Cg_EntityTrail(cl_entity_t *ent, r_entity_t *e) {
 
 			start[2] -= 8.0;
 		}
+		else
+			VectorCopy(ent->prev.origin, start);
 
 		VectorLerp(ent->prev.old_origin, ent->current.old_origin, cgi.client->lerp, end);
 	} else {
+
+		VectorLerp(ent->prev.old_origin, ent->current.old_origin, cgi.client->lerp, start);
 		VectorCopy(e->origin, end);
 	}
 

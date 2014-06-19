@@ -207,7 +207,11 @@ void Sv_BuildClientFrame(sv_client_t *client) {
 
 	// find the client's PVS
 	const pm_state_t *pm = &cent->client->ps.pm_state;
+#ifdef PMOVE_PRECISE
+	VectorCopy(pm->origin, org);
+#else
 	UnpackVector(pm->origin, org);
+#endif
 	UnpackVector(pm->view_offset, off);
 	VectorAdd(org, off, org);
 

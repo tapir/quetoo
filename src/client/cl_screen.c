@@ -221,8 +221,11 @@ static void Cl_DrawCounters(void) {
 	cl.frame_counter++;
 
 	if (cls.real_time - last_draw_time >= 200) {
-
+#ifdef PMOVE_PRECISE
+		VectorCopy(cl.frame.ps.pm_state.velocity, velocity);
+#else
 		UnpackVector(cl.frame.ps.pm_state.velocity, velocity);
+#endif
 		velocity[2] = 0.0;
 
 		g_snprintf(spd, sizeof(spd), "%4.0fspd", VectorLength(velocity));

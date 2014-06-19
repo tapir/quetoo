@@ -118,7 +118,11 @@ static void Cg_UpdateBob(const player_state_t *ps) {
 
 	const _Bool ducked = ps->pm_state.flags & PMF_DUCKED;
 
+#ifdef PMOVE_PRECISE
+	VectorCopy(ps->pm_state.velocity, velocity);
+#else
 	UnpackVector(ps->pm_state.velocity, velocity);
+#endif
 	velocity[2] = 0.0;
 
 	vec_t speed = VectorLength(velocity) / (ducked ? 150 : 450.0);

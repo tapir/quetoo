@@ -101,6 +101,15 @@ void Net_WritePosition(mem_buf_t *msg, const vec3_t pos) {
 /*
  * @brief
  */
+void Net_WritePositionPrecise(mem_buf_t *msg, const vec3_t pos) {
+	Net_WriteFloat(msg, pos[0]);
+	Net_WriteFloat(msg, pos[1]);
+	Net_WriteFloat(msg, pos[2]);
+}
+
+/*
+ * @brief
+ */
 void Net_WriteAngle(mem_buf_t *msg, const vec_t v) {
 	Net_WriteShort(msg, PackAngle(v));
 }
@@ -188,11 +197,19 @@ void Net_WriteDeltaPlayerState(mem_buf_t *msg, const player_state_t *from, const
 	if (to->pm_state.type != from->pm_state.type)
 		bits |= PS_PM_TYPE;
 
+#ifdef PMOVE_PRECISE
+	if (!VectorCompareEpsilon(to->pm_state.origin, from->pm_state.origin))
+		bits |= PS_PM_ORIGIN;
+
+	if (!VectorCompareEpsilon(to->pm_state.velocity, from->pm_state.velocity))
+		bits |= PS_PM_VELOCITY;
+#else
 	if (!VectorCompare(to->pm_state.origin, from->pm_state.origin))
 		bits |= PS_PM_ORIGIN;
 
 	if (!VectorCompare(to->pm_state.velocity, from->pm_state.velocity))
 		bits |= PS_PM_VELOCITY;
+#endif
 
 	if (to->pm_state.flags != from->pm_state.flags)
 		bits |= PS_PM_FLAGS;
@@ -221,15 +238,27 @@ void Net_WriteDeltaPlayerState(mem_buf_t *msg, const player_state_t *from, const
 		Net_WriteByte(msg, to->pm_state.type);
 
 	if (bits & PS_PM_ORIGIN) {
+#ifdef PMOVE_PRECISE
+		Net_WriteFloat(msg, to->pm_state.origin[0]);
+		Net_WriteFloat(msg, to->pm_state.origin[1]);
+		Net_WriteFloat(msg, to->pm_state.origin[2]);
+#else
 		Net_WriteShort(msg, to->pm_state.origin[0]);
 		Net_WriteShort(msg, to->pm_state.origin[1]);
 		Net_WriteShort(msg, to->pm_state.origin[2]);
+#endif
 	}
 
 	if (bits & PS_PM_VELOCITY) {
+#ifdef PMOVE_PRECISE
+		Net_WriteFloat(msg, to->pm_state.velocity[0]);
+		Net_WriteFloat(msg, to->pm_state.velocity[1]);
+		Net_WriteFloat(msg, to->pm_state.velocity[2]);
+#else
 		Net_WriteShort(msg, to->pm_state.velocity[0]);
 		Net_WriteShort(msg, to->pm_state.velocity[1]);
 		Net_WriteShort(msg, to->pm_state.velocity[2]);
+#endif
 	}
 
 	if (bits & PS_PM_FLAGS)
@@ -341,11 +370,19 @@ void Net_WriteDeltaEntity(mem_buf_t *msg, const entity_state_t *from, const enti
 	Net_WriteShort(msg, to->number);
 	Net_WriteShort(msg, bits);
 
+#ifdef PMOVE_PRECISE
+	if (bits & U_ORIGIN)
+		Net_WritePositionPrecise(msg, to->origin);
+
+	if (bits & U_OLD_ORIGIN)
+		Net_WritePositionPrecise(msg, to->old_origin);
+#else
 	if (bits & U_ORIGIN)
 		Net_WritePosition(msg, to->origin);
 
 	if (bits & U_OLD_ORIGIN)
 		Net_WritePosition(msg, to->old_origin);
+#endif
 
 	if (bits & U_ANGLES)
 		Net_WriteAngles(msg, to->angles);
@@ -379,6 +416,20 @@ void Net_WriteDeltaEntity(mem_buf_t *msg, const entity_state_t *from, const enti
 
 	if (bits & U_SOLID)
 		Net_WriteShort(msg, to->solid);
+}
+
+/*
+ * @brief
+ */
+void Net_WriteFloat(mem_buf_t *msg, const float c) {
+	static union
+	{
+		float f;
+		int32_t i;
+	} temp;
+
+	temp.f = c;
+	Net_WriteLong(msg, temp.i);
 }
 
 /*
@@ -521,6 +572,15 @@ void Net_ReadPosition(mem_buf_t *msg, vec3_t pos) {
 /*
  * @brief
  */
+void Net_ReadPositionPrecise(mem_buf_t *msg, vec3_t pos) {
+	pos[0] = Net_ReadFloat(msg);
+	pos[1] = Net_ReadFloat(msg);
+	pos[2] = Net_ReadFloat(msg);
+}
+
+/*
+ * @brief
+ */
 vec_t Net_ReadAngle(mem_buf_t *msg) {
 	return UnpackAngle(Net_ReadShort(msg));
 }
@@ -590,15 +650,27 @@ void Net_ReadDeltaPlayerState(mem_buf_t *msg, const player_state_t *from, player
 		to->pm_state.type = Net_ReadByte(msg);
 
 	if (bits & PS_PM_ORIGIN) {
+#ifdef PMOVE_PRECISE
+		to->pm_state.origin[0] = Net_ReadFloat(msg);
+		to->pm_state.origin[1] = Net_ReadFloat(msg);
+		to->pm_state.origin[2] = Net_ReadFloat(msg);
+#else
 		to->pm_state.origin[0] = Net_ReadShort(msg);
 		to->pm_state.origin[1] = Net_ReadShort(msg);
 		to->pm_state.origin[2] = Net_ReadShort(msg);
+#endif
 	}
 
 	if (bits & PS_PM_VELOCITY) {
+#ifdef PMOVE_PRECISE
+		to->pm_state.velocity[0] = Net_ReadFloat(msg);
+		to->pm_state.velocity[1] = Net_ReadFloat(msg);
+		to->pm_state.velocity[2] = Net_ReadFloat(msg);
+#else
 		to->pm_state.velocity[0] = Net_ReadShort(msg);
 		to->pm_state.velocity[1] = Net_ReadShort(msg);
 		to->pm_state.velocity[2] = Net_ReadShort(msg);
+#endif
 	}
 
 	if (bits & PS_PM_FLAGS)
@@ -652,11 +724,19 @@ void Net_ReadDeltaEntity(mem_buf_t *msg, const entity_state_t *from, entity_stat
 
 	to->number = number;
 
+#ifdef PMOVE_PRECISE
+	if (bits & U_ORIGIN)
+		Net_ReadPositionPrecise(msg, to->origin);
+
+	if (bits & U_OLD_ORIGIN)
+		Net_ReadPositionPrecise(msg, to->old_origin);
+#else
 	if (bits & U_ORIGIN)
 		Net_ReadPosition(msg, to->origin);
 
 	if (bits & U_OLD_ORIGIN)
 		Net_ReadPosition(msg, to->old_origin);
+#endif
 
 	if (bits & U_ANGLES)
 		Net_ReadAngles(msg, to->angles);
@@ -692,4 +772,19 @@ void Net_ReadDeltaEntity(mem_buf_t *msg, const entity_state_t *from, entity_stat
 
 	if (bits & U_SOLID)
 		to->solid = Net_ReadShort(msg);
+}
+
+/*
+ * @brief
+ */
+float Net_ReadFloat(mem_buf_t *msg) {
+	static union
+	{
+		float f;
+		int32_t i;
+	} temp;
+
+	temp.i = Net_ReadLong(msg);
+
+	return temp.f;
 }

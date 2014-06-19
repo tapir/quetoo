@@ -84,6 +84,7 @@ void Net_WriteLong(mem_buf_t *msg, const int32_t c);
 void Net_WriteString(mem_buf_t *msg, const char *s);
 void Net_WriteVector(mem_buf_t *msg, const vec_t f);
 void Net_WritePosition(mem_buf_t *msg, const vec3_t pos);
+void Net_WritePositionPrecise(mem_buf_t *msg, const vec3_t pos);
 void Net_WriteAngle(mem_buf_t *msg, const vec_t f);
 void Net_WriteAngles(mem_buf_t *msg, const vec3_t angles);
 void Net_WriteDir(mem_buf_t *msg, const vec3_t dir);
@@ -91,6 +92,7 @@ void Net_WriteDeltaMoveCmd(mem_buf_t *msg, const pm_cmd_t *from, const pm_cmd_t 
 void Net_WriteDeltaPlayerState(mem_buf_t *msg, const player_state_t *from, const player_state_t *to);
 void Net_WriteDeltaEntity(mem_buf_t *msg, const entity_state_t *from, const entity_state_t *to,
 		_Bool force, _Bool is_new);
+void Net_WriteFloat(mem_buf_t *msg, const float c);
 
 void Net_BeginReading(mem_buf_t *msg);
 void Net_ReadData(mem_buf_t *msg, void *data, size_t len);
@@ -102,6 +104,7 @@ char *Net_ReadString(mem_buf_t *msg);
 char *Net_ReadStringLine(mem_buf_t *msg);
 vec_t Net_ReadVector(mem_buf_t *msg);
 void Net_ReadPosition(mem_buf_t *msg, vec3_t pos);
+void Net_ReadPositionPrecise(mem_buf_t *msg, vec3_t pos);
 vec_t Net_ReadAngle(mem_buf_t *msg);
 void Net_ReadAngles(mem_buf_t *msg, vec3_t angles);
 void Net_ReadDir(mem_buf_t *msg, vec3_t vector);
@@ -109,5 +112,6 @@ void Net_ReadDeltaMoveCmd(mem_buf_t *msg, const pm_cmd_t *from, pm_cmd_t *to);
 void Net_ReadDeltaPlayerState(mem_buf_t *msg, const player_state_t *from, player_state_t *to);
 void Net_ReadDeltaEntity(mem_buf_t *msg, const entity_state_t *from, entity_state_t *to,
 		uint16_t bits, uint16_t number);
+float Net_ReadFloat(mem_buf_t *msg);
 
 #endif /* __NET_MESSAGE_H__ */

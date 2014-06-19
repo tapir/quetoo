@@ -54,7 +54,7 @@ static mem_block_t *Mem_CheckMagic(void *p) {
 		b = ((mem_block_t *) p) - 1;
 
 		if (b->magic != MEM_MAGIC) {
-			fprintf(stderr, "Invalid magic (%d) for %p\n", b->magic, p);
+			fprintf(stderr, "Invalid magic (%u) for %p\n", b->magic, p);
 			raise(SIGABRT);
 		}
 	}

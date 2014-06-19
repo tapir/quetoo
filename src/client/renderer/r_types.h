@@ -573,7 +573,12 @@ typedef struct {
 	vec_t radius;
 } r_light_t;
 
+#if !defined(UINT64_MAX)
+#define MAX_LIGHTS			32
+#else
 #define MAX_LIGHTS			64
+#endif
+
 #define MAX_ACTIVE_LIGHTS	8
 
 /*
@@ -729,7 +734,7 @@ typedef struct {
 	vec3_t color;
 } r_corona_t;
 
-/*
+/*t					
  * @brief Renderer element types.
  */
 typedef enum {

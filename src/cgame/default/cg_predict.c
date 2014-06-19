@@ -83,7 +83,11 @@ void Cg_PredictMovement(const GList *cmds) {
 	}
 
 	// copy results out for rendering
+#ifdef PMOVE_PRECISE
+	VectorCopy(pm.s.origin, cgi.client->predicted_state.origin);
+#else
 	UnpackVector(pm.s.origin, cgi.client->predicted_state.origin);
+#endif
 
 	UnpackVector(pm.s.view_offset, cgi.client->predicted_state.view_offset);
 	UnpackAngles(pm.cmd.angles, cgi.client->predicted_state.view_angles);

@@ -128,9 +128,14 @@ static void Cl_UpdateOrigin(const player_state_t *from, const player_state_t *to
 	} else { // just use interpolated values from frame
 		vec3_t old_origin, current_origin, origin;
 		vec3_t old_offset, current_offset, offset;
-
+		
+#ifdef PMOVE_PRECISE
+		VectorCopy(from->pm_state.origin, old_origin);
+		VectorCopy(to->pm_state.origin, current_origin);
+#else
 		UnpackVector(from->pm_state.origin, old_origin);
 		UnpackVector(to->pm_state.origin, current_origin);
+#endif
 
 		VectorLerp(old_origin, current_origin, cl.lerp, origin);
 

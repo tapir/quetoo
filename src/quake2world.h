@@ -313,14 +313,24 @@ typedef enum {
 #define PMF_NO_PREDICTION	0x1
 
 /*
+ * @brief Use precise PMove calculations.
+ */
+//#define PMOVE_PRECISE
+
+/*
  * @brief The player movement state contains quantized snapshots of player
  * position, orientation, velocity and world interaction state. This should
  * be modified only through invoking Pm_Move.
  */
 typedef struct {
 	pm_type_t type;
+#ifdef PMOVE_PRECISE
+	vec3_t origin;
+	vec3_t velocity;
+#else
 	int16_t origin[3];
 	int16_t velocity[3];
+#endif
 	uint16_t flags; // PMF_NO_PREDICTION, etc..
 	uint16_t time; // duration for temporal PMF_ flags
 	int16_t gravity;

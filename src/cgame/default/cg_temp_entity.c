@@ -51,8 +51,8 @@ static void Cg_BlasterEffect(const vec3_t org, const vec3_t dir, int32_t color) 
 			p->vel[j] += Randomc() * 50.0;
 		}
 
-		if (p->vel[2] < 100.0) // deflect up a bit
-			p->vel[2] = 100.0;
+		//if (p->vel[2] < 100.0) // deflect up a bit
+		//	p->vel[2] = 100.0;
 
 		p->accel[2] -= 2.0 * PARTICLE_GRAVITY;
 	}
@@ -140,8 +140,8 @@ static void Cg_BulletEffect(const vec3_t org, const vec3_t dir) {
 			p->vel[j] += Randomc() * 75.0;
 		}
 
-		if (p->vel[2] < 100.0) // deflect up a bit
-			p->vel[2] = 100.0;
+		//if (p->vel[2] < 100.0) // deflect up a bit
+		//	p->vel[2] = 100.0;
 
 		p->accel[2] = -3.0 * PARTICLE_GRAVITY;
 	}

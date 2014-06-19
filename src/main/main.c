@@ -82,6 +82,10 @@ static void Error(err_t err, const char *msg) {
 			}
 #endif
 
+#if defined(WIN32) && defined(_DEBUG)
+			DebugBreak();
+#endif
+
 			longjmp(environment, 0);
 			break;
 

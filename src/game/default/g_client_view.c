@@ -46,9 +46,15 @@ static void G_ClientDamage(g_entity_t *ent) {
 				l = 75;
 			else
 				l = 100;
-
+			
+#ifdef PMOVE_PRECISE
+			VectorCopy(client->ps.pm_state.view_offset, org);
+			VectorScale(org, 0.125, org);
+			VectorAdd(org, client->ps.pm_state.origin, org);
+#else
 			VectorAdd(client->ps.pm_state.origin, client->ps.pm_state.view_offset, org);
 			VectorScale(org, 0.125, org);
+#endif
 
 			gi.PositionedSound(org, ent, gi.SoundIndex(va("*pain%i_1", l)), ATTEN_NORM);
 		}
@@ -89,8 +95,14 @@ static void G_ClientWaterInteraction(g_entity_t *ent) {
 			&& (client->locals.drown_time - g_level.time) < 8000) {
 		vec3_t org;
 
+#ifdef PMOVE_PRECISE
+		VectorCopy(client->ps.pm_state.view_offset, org);
+		VectorScale(org, 0.125, org);
+		VectorAdd(org, client->ps.pm_state.origin, org);
+#else
 		VectorAdd(client->ps.pm_state.origin, client->ps.pm_state.view_offset, org);
 		VectorScale(org, 0.125, org);
+#endif
 
 		gi.PositionedSound(org, ent, gi.SoundIndex("*gasp_1"), ATTEN_NORM);
 	}
@@ -361,8 +373,13 @@ void G_ClientEndFrame(g_entity_t *ent) {
 	//
 	// If it wasn't updated here, the view position would lag a frame
 	// behind the body position when pushed -- "sinking into plats"
+#ifdef PMOVE_PRECISE
+	VectorCopy(ent->s.origin, client->ps.pm_state.origin);
+	VectorCopy(ent->locals.velocity, client->ps.pm_state.velocity);
+#else
 	PackVector(ent->s.origin, client->ps.pm_state.origin);
 	PackVector(ent->locals.velocity, client->ps.pm_state.velocity);
+#endif
 
 	// If in intermission, just set stats and scores and return
 	if (g_level.intermission_time) {
