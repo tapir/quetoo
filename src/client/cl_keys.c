@@ -31,7 +31,7 @@ static char **cl_key_names;
  * @brief Execute any system-level binds, regardless of key state. This enables e.g.
  * toggling of the console, toggling fullscreen, etc.
  */
-static _Bool Cl_KeySystem(const SDL_Event *event) {
+static bool Cl_KeySystem(const SDL_Event *event) {
 
 	if (event->type == SDL_KEYUP) { // don't care
 		return false;

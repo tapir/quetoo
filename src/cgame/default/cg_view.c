@@ -116,7 +116,7 @@ static void Cg_UpdateBob(const player_state_t *ps) {
 			return;
 	}
 
-	const _Bool ducked = ps->pm_state.flags & PMF_DUCKED;
+	const bool ducked = ps->pm_state.flags & PMF_DUCKED;
 
 #ifdef PMOVE_PRECISE
 	VectorCopy(ps->pm_state.velocity, velocity);

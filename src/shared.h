@@ -85,7 +85,7 @@ void AngleVectors(const vec3_t angles, vec3_t forward, vec3_t right, vec3_t up);
 void VectorLerp(const vec3_t from, const vec3_t to, const vec_t frac, vec3_t out);
 void AngleLerp(const vec3_t from, const vec3_t to, const vec_t frac, vec3_t out);
 
-_Bool BoxIntersect(const vec3_t mins0, const vec3_t maxs0, const vec3_t mins1, const vec3_t maxs1);
+bool BoxIntersect(const vec3_t mins0, const vec3_t maxs0, const vec3_t mins1, const vec3_t maxs1);
 void ProjectPointOnPlane(const vec3_t p, const vec3_t normal, vec3_t out);
 void PerpendicularVector(const vec3_t in, vec3_t out);
 void TangentVectors(const vec3_t normal, const vec3_t sdir, const vec3_t tdir, vec4_t tangent,
@@ -122,7 +122,7 @@ void ColorFilter(const vec3_t in, vec3_t out, vec_t brightness, vec_t saturation
 /*
  * @brief String manipulation functions.
  */
-_Bool GlobMatch(const char *pattern, const char *text);
+bool GlobMatch(const char *pattern, const char *text);
 char *CommonPrefix(GList *words);
 const char *Basename(const char *path);
 void Dirname(const char *in, char *out);
@@ -144,6 +144,6 @@ char *vtos(const vec3_t v);
 char *GetUserInfo(const char *s, const char *key);
 void DeleteUserInfo(char *s, const char *key);
 void SetUserInfo(char *s, const char *key, const char *value);
-_Bool ValidateUserInfo(const char *s);
+bool ValidateUserInfo(const char *s);
 
 #endif /* __SHARED_H__ */

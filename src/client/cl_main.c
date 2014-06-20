@@ -572,7 +572,7 @@ static void Cl_WriteConfiguration(void) {
  * @brief
  */
 void Cl_Frame(const uint32_t msec) {
-	_Bool packet_frame = true, render_frame = true;
+	bool packet_frame = true, render_frame = true;
 	uint32_t ms;
 
 	if (dedicated->value)

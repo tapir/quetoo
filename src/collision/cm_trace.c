@@ -37,7 +37,7 @@ typedef struct {
 	vec3_t box_mins, box_maxs;
 
 	int32_t contents;
-	_Bool is_point;
+	bool is_point;
 
 	cm_trace_t trace;
 
@@ -47,10 +47,10 @@ typedef struct {
 /*
  * @brief
  */
-static _Bool Cm_BrushAlreadyTested(cm_trace_data_t *data, const int32_t brush_num) {
+static bool Cm_BrushAlreadyTested(cm_trace_data_t *data, const int32_t brush_num) {
 
 	const int32_t hash = brush_num & 31;
-	const _Bool skip = (data->mailbox[hash] == brush_num);
+	const bool skip = (data->mailbox[hash] == brush_num);
 
 	data->mailbox[hash] = brush_num;
 
@@ -75,7 +75,7 @@ static void Cm_TraceToBrush(cm_trace_data_t *data, const cm_bsp_brush_t *brush) 
 	const cm_bsp_plane_t *clip_plane = NULL;
 	const cm_bsp_brush_side_t *clip_side = NULL;
 
-	_Bool end_outside = false, start_outside = false;
+	bool end_outside = false, start_outside = false;
 
 	const cm_bsp_brush_side_t *side = &cm_bsp.brush_sides[brush->first_brush_side];
 

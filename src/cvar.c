@@ -29,12 +29,12 @@ typedef struct {
 
 static cvar_state_t cvar_state;
 
-_Bool cvar_user_info_modified;
+bool cvar_user_info_modified;
 
 /*
  * @return True if the specified string appears to be a valid "info" string.
  */
-static _Bool Cvar_InfoValidate(const char *s) {
+static bool Cvar_InfoValidate(const char *s) {
 	if (!s)
 		return false;
 	if (strstr(s, "\\"))
@@ -196,7 +196,7 @@ cvar_t *Cvar_Get(const char *name, const char *value, uint32_t flags, const char
 /*
  * @brief
  */
-static cvar_t *Cvar_Set_(const char *name, const char *value, _Bool force) {
+static cvar_t *Cvar_Set_(const char *name, const char *value, bool force) {
 	cvar_t *var;
 
 	var = Cvar_Get_(name);
@@ -393,15 +393,15 @@ void Cvar_ResetLocal(void) {
 static void Cvar_PendingLatched_enumerate(cvar_t *var, void *data) {
 
 	if (var->latched_string) {
-		*((_Bool *) data) = true;
+		*((bool *) data) = true;
 	}
 }
 
 /*
  * @brief Returns true if there are any CVAR_LATCH variables pending.
  */
-_Bool Cvar_PendingLatched(void) {
-	_Bool pending = false;
+bool Cvar_PendingLatched(void) {
+	bool pending = false;
 
 	Cvar_Enumerate(Cvar_PendingLatched_enumerate, (void *) &pending);
 
@@ -431,7 +431,7 @@ void Cvar_UpdateLatched(void) {
 	Cvar_Enumerate(Cvar_UpdateLatched_enumerate, NULL);
 }
 
-static _Bool cvar_pending;
+static bool cvar_pending;
 
 /*
  * @brief Enumeration helper for Cvar_Pending.
@@ -447,7 +447,7 @@ static void Cvar_Pending_enumerate(cvar_t *var, void *data) {
 /*
  * @brief Returns true if any variables whose flags match the specified mask are pending.
  */
-_Bool Cvar_Pending(uint32_t flags) {
+bool Cvar_Pending(uint32_t flags) {
 	cvar_pending = false;
 
 	Cvar_Enumerate(Cvar_Pending_enumerate, (void *) &flags);
@@ -476,7 +476,7 @@ void Cvar_ClearAll(uint32_t flags) {
 /*
  * @brief Handles variable inspection and changing from the console
  */
-_Bool Cvar_Command(void) {
+bool Cvar_Command(void) {
 	cvar_t *var;
 
 	// check variables

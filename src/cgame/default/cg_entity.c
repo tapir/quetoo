@@ -24,7 +24,7 @@
 /*
  * @return True if the specified entity is bound to the local client.
  */
-_Bool Cg_IsSelf(const cl_entity_t *ent) {
+bool Cg_IsSelf(const cl_entity_t *ent) {
 
 	if (ent->current.model1 == MODEL_CLIENT || ent->current.effects & EF_BEAM) {
 

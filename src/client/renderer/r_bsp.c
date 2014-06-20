@@ -27,7 +27,7 @@ static vec3_t r_bsp_model_org; // relative to r_view.origin
  * @brief Returns true if the specified bounding box is completely culled by the
  * view frustum, false otherwise.
  */
-_Bool R_CullBox(const vec3_t mins, const vec3_t maxs) {
+bool R_CullBox(const vec3_t mins, const vec3_t maxs) {
 	int32_t i;
 
 	if (!r_cull->value)
@@ -45,7 +45,7 @@ _Bool R_CullBox(const vec3_t mins, const vec3_t maxs) {
  * @brief Returns true if the specified entity is completely culled by the view
  * frustum, false otherwise.
  */
-_Bool R_CullBspModel(const r_entity_t *e) {
+bool R_CullBspModel(const r_entity_t *e) {
 	vec3_t mins, maxs;
 	int32_t i;
 
@@ -424,7 +424,7 @@ const r_bsp_leaf_t *R_LeafForPoint(const vec3_t p, const r_bsp_model_t *bsp) {
 /*
  * @brief Returns true if the specified leaf is in the PVS for the current frame.
  */
-_Bool R_LeafVisible(const r_bsp_leaf_t *leaf) {
+bool R_LeafVisible(const r_bsp_leaf_t *leaf) {
 	int32_t c;
 
 	if ((c = leaf->cluster) == -1)
@@ -436,7 +436,7 @@ _Bool R_LeafVisible(const r_bsp_leaf_t *leaf) {
 /*
  * @brief Returns true if the specified leaf is in the PHS for the current frame.
  */
-_Bool R_LeafHearable(const r_bsp_leaf_t *leaf) {
+bool R_LeafHearable(const r_bsp_leaf_t *leaf) {
 	int32_t c;
 
 	if ((c = leaf->cluster) == -1)

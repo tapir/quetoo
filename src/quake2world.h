@@ -35,6 +35,7 @@
 #include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 #include <string.h>
 
 #if defined(_WIN32)
@@ -45,7 +46,8 @@
 #include <unistd.h>
 #endif
 
-#ifndef true
+#ifndef bool
+#define bool _Bool
 #define true 1
 #define false 0
 #endif
@@ -169,7 +171,7 @@ typedef struct cvar_s {
 	int32_t integer;
 	uint32_t flags;
 	const char *description;
-	_Bool modified; // set each time the cvar is changed
+	bool modified; // set each time the cvar is changed
 } cvar_t;
 
 typedef void (*CmdExecuteFunc)(void);

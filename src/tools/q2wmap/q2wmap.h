@@ -38,9 +38,9 @@ extern char map_name[MAX_OSPATH];
 extern char bsp_name[MAX_OSPATH];
 extern char outbase[MAX_OSPATH];
 
-extern _Bool verbose;
-extern _Bool debug;
-extern _Bool legacy;
+extern bool verbose;
+extern bool debug;
+extern bool legacy;
 
 // threads.c
 typedef struct semaphores_s {
@@ -62,7 +62,7 @@ typedef struct thread_work_s {
 	int32_t index; // current work cycle
 	int32_t count; // total work cycles
 	int32_t fraction; // last fraction of work completed (tenths)
-	_Bool progress; // are we reporting progress
+	bool progress; // are we reporting progress
 } thread_work_t;
 
 extern thread_work_t thread_work;
@@ -71,6 +71,6 @@ typedef void (*ThreadWorkFunc)(int32_t);
 
 void ThreadLock(void);
 void ThreadUnlock(void);
-void RunThreadsOn(int32_t workcount, _Bool progress, ThreadWorkFunc func);
+void RunThreadsOn(int32_t workcount, bool progress, ThreadWorkFunc func);
 
 #endif /*__Q2WMAP_H__*/

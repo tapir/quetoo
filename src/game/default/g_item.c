@@ -150,7 +150,7 @@ void G_SetItemRespawn(g_entity_t *ent, uint32_t delay) {
 /*
  * @brief
  */
-static _Bool G_PickupAdrenaline(g_entity_t *ent, g_entity_t *other) {
+static bool G_PickupAdrenaline(g_entity_t *ent, g_entity_t *other) {
 
 	if (other->locals.health < other->locals.max_health)
 		other->locals.health = other->locals.max_health;
@@ -164,7 +164,7 @@ static _Bool G_PickupAdrenaline(g_entity_t *ent, g_entity_t *other) {
 /*
  * @brief
  */
-static _Bool G_PickupQuadDamage(g_entity_t *ent, g_entity_t *other) {
+static bool G_PickupQuadDamage(g_entity_t *ent, g_entity_t *other) {
 
 	if (other->client->locals.persistent.inventory[g_media.items.quad_damage])
 		return false; // already have it
@@ -205,7 +205,7 @@ g_entity_t *G_TossQuadDamage(g_entity_t *ent) {
 /*
  * @brief
  */
-_Bool G_AddAmmo(g_entity_t *ent, const g_item_t *item, int16_t count) {
+bool G_AddAmmo(g_entity_t *ent, const g_item_t *item, int16_t count) {
 	uint16_t index;
 	int16_t max;
 
@@ -243,7 +243,7 @@ _Bool G_AddAmmo(g_entity_t *ent, const g_item_t *item, int16_t count) {
 /*
  * @brief
  */
-_Bool G_SetAmmo(g_entity_t *ent, const g_item_t *item, int16_t count) {
+bool G_SetAmmo(g_entity_t *ent, const g_item_t *item, int16_t count) {
 	uint16_t index;
 	int16_t max;
 
@@ -281,7 +281,7 @@ _Bool G_SetAmmo(g_entity_t *ent, const g_item_t *item, int16_t count) {
 /*
  * @brief
  */
-static _Bool G_PickupAmmo(g_entity_t *ent, g_entity_t *other) {
+static bool G_PickupAmmo(g_entity_t *ent, g_entity_t *other) {
 	int32_t count;
 
 	if (ent->locals.count)
@@ -301,13 +301,13 @@ static _Bool G_PickupAmmo(g_entity_t *ent, g_entity_t *other) {
 /*
  * @brief
  */
-static _Bool G_PickupHealth(g_entity_t *ent, g_entity_t *other) {
+static bool G_PickupHealth(g_entity_t *ent, g_entity_t *other) {
 	int32_t h, max;
 
 	const uint16_t tag = ent->locals.item->tag;
 
-	const _Bool always_add = tag == HEALTH_SMALL;
-	const _Bool always_pickup = tag == HEALTH_SMALL || tag == HEALTH_MEGA;
+	const bool always_add = tag == HEALTH_SMALL;
+	const bool always_pickup = tag == HEALTH_SMALL || tag == HEALTH_MEGA;
 
 	if (other->locals.health < other->locals.max_health || always_add || always_pickup) {
 
@@ -341,12 +341,12 @@ static _Bool G_PickupHealth(g_entity_t *ent, g_entity_t *other) {
 /*
  * @brief
  */
-static _Bool G_PickupArmor(g_entity_t *ent, g_entity_t *other) {
+static bool G_PickupArmor(g_entity_t *ent, g_entity_t *other) {
 	const g_item_t *armor = ent->locals.item;
 
 	g_client_persistent_t *persistent = &other->client->locals.persistent;
 
-	_Bool taken = false;
+	bool taken = false;
 	if (armor->tag == ARMOR_SHARD) { // take it, ignoring cap
 		const g_item_t *old_armor = G_ClientArmor(other);
 		if (old_armor) {
@@ -410,7 +410,7 @@ void G_ResetFlag(g_entity_t *ent) {
  * @brief Return own flag, or capture on it if enemy's flag is in inventory.
  * Take the enemy's flag.
  */
-static _Bool G_PickupFlag(g_entity_t *ent, g_entity_t *other) {
+static bool G_PickupFlag(g_entity_t *ent, g_entity_t *other) {
 	g_team_t *t, *ot;
 	g_entity_t *f, *of;
 	int32_t index;
@@ -531,7 +531,7 @@ static g_entity_t *G_DropFlag(g_entity_t *ent, const g_item_t *item __attribute_
  * @brief
  */
 void G_TouchItem(g_entity_t *ent, g_entity_t *other, cm_bsp_plane_t *plane __attribute__((unused)), cm_bsp_surface_t *surf __attribute__((unused))) {
-	_Bool taken;
+	bool taken;
 
 	if (!other->client)
 		return;

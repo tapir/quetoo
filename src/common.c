@@ -98,7 +98,7 @@ void Com_Debug_(const char *func, const char *fmt, ...) {
  */
 void Com_Error_(const char *func, err_t err, const char *fmt, ...) {
 	char msg[MAX_PRINT_MSG];
-	static _Bool recursive;
+	static bool recursive;
 
 	if (err == ERR_FATAL) {
 		if (recursive) {

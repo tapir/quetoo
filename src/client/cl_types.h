@@ -41,7 +41,7 @@ typedef struct {
 	player_state_t ps;
 	uint16_t num_entities;
 	uint32_t entity_state; // non-masked index into cl.entity_states array
-	_Bool valid; // false if delta parsing failed
+	bool valid; // false if delta parsing failed
 } cl_frame_t;
 
 typedef struct {
@@ -173,8 +173,8 @@ typedef struct {
 	uint32_t server_count; // server identification for precache
 	uint16_t server_hz; // server frame rate (packets per second)
 
-	_Bool demo_server; // we're viewing a demo
-	_Bool third_person; // we're using a 3rd person camera
+	bool demo_server; // we're viewing a demo
+	bool third_person; // we're using a 3rd person camera
 
 	char config_strings[MAX_CONFIG_STRINGS][MAX_STRING_CHARS];
 	uint16_t precache_check;
@@ -238,30 +238,30 @@ typedef struct {
 	char lines[KEY_HISTORY_SIZE][KEY_LINE_SIZE];
 	uint16_t pos;
 
-	_Bool insert;
-	_Bool repeat;
+	bool insert;
+	bool repeat;
 
 	uint32_t edit_line;
 	uint32_t history_line;
 
 	char *binds[SDL_NUM_SCANCODES];
-	_Bool down[SDL_NUM_SCANCODES];
+	bool down[SDL_NUM_SCANCODES];
 } cl_key_state_t;
 
 typedef struct {
 	vec_t x, y;
 	vec_t old_x, old_y;
-	_Bool grabbed;
+	bool grabbed;
 } cl_mouse_state_t;
 
 typedef struct {
 	char buffer[KEY_LINE_SIZE];
 	size_t len;
-	_Bool team;
+	bool team;
 } cl_chat_state_t;
 
 typedef struct {
-	_Bool http;
+	bool http;
 	file_t *file;
 	char tempname[MAX_OSPATH];
 	char name[MAX_OSPATH];

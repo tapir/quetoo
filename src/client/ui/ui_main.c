@@ -29,7 +29,7 @@ extern cl_static_t cls;
 /*
  * @brief Activates the menu system when ESC is pressed.
  */
-static _Bool Ui_HandleKeyEvent(const SDL_Event *event) {
+static bool Ui_HandleKeyEvent(const SDL_Event *event) {
 
 	switch (event->key.keysym.sym) {
 
@@ -57,7 +57,7 @@ static _Bool Ui_HandleKeyEvent(const SDL_Event *event) {
 /*
  * @brief Informs AntTweakBar of window events.
  */
-static _Bool Ui_HandleWindowEvent(const SDL_Event *event) {
+static bool Ui_HandleWindowEvent(const SDL_Event *event) {
 
 	switch (event->window.event) {
 
@@ -82,7 +82,7 @@ static _Bool Ui_HandleWindowEvent(const SDL_Event *event) {
  * event was swallowed. While in focus, AntTweakBar receives all events. While
  * not in focus, we still pass SDL_WINDOWEVENTs to it.
  */
-_Bool Ui_HandleEvent(const SDL_Event *event) {
+bool Ui_HandleEvent(const SDL_Event *event) {
 
 	if (cls.key_state.dest == KEY_UI || event->type == SDL_WINDOWEVENT) {
 

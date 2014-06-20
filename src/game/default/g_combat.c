@@ -25,7 +25,7 @@
 /*
  * @brief Returns true if ent1 and ent2 are on the same team.
  */
-_Bool G_OnSameTeam(const g_entity_t *ent1, const g_entity_t *ent2) {
+bool G_OnSameTeam(const g_entity_t *ent1, const g_entity_t *ent2) {
 
 	if (!ent1->client || !ent2->client)
 		return false;
@@ -43,7 +43,7 @@ _Bool G_OnSameTeam(const g_entity_t *ent1, const g_entity_t *ent2) {
  * @brief Returns true if the inflictor can directly damage the target. Used for
  * explosions and melee attacks.
  */
-_Bool G_CanDamage(g_entity_t *targ, g_entity_t *inflictor) {
+bool G_CanDamage(g_entity_t *targ, g_entity_t *inflictor) {
 	vec3_t dest;
 	cm_trace_t tr;
 

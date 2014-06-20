@@ -855,7 +855,7 @@ static void R_LoadObjModelLine(const r_model_t *mod, r_obj_t *obj, const char *l
 static void R_LoadObjModel_(r_model_t *mod, r_obj_t *obj, const void *buffer) {
 	char line[MAX_STRING_CHARS];
 	const char *c;
-	_Bool comment;
+	bool comment;
 	int32_t i;
 
 	c = buffer;

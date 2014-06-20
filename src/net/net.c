@@ -71,14 +71,14 @@ void Net_NetAddrToSockaddr(const net_addr_t *a, struct sockaddr_in *s) {
 /*
  * @return True if the addresses share the same base and port.
  */
-_Bool Net_CompareNetaddr(const net_addr_t *a, const net_addr_t *b) {
+bool Net_CompareNetaddr(const net_addr_t *a, const net_addr_t *b) {
 	return a->addr == b->addr && a->port == b->port;
 }
 
 /*
  * @return True if the addresses share the same type and base.
  */
-_Bool Net_CompareClientNetaddr(const net_addr_t *a, const net_addr_t *b) {
+bool Net_CompareClientNetaddr(const net_addr_t *a, const net_addr_t *b) {
 	return a->type == b->type && a->addr == b->addr;
 }
 
@@ -102,7 +102,7 @@ const char *Net_NetaddrToString(const net_addr_t *a) {
  * 192.246.40.70
  * 192.246.40.70:28000
  */
-_Bool Net_StringToSockaddr(const char *s, struct sockaddr_in *saddr) {
+bool Net_StringToSockaddr(const char *s, struct sockaddr_in *saddr) {
 	char *colon;
 	char copy[128];
 
@@ -134,7 +134,7 @@ _Bool Net_StringToSockaddr(const char *s, struct sockaddr_in *saddr) {
 /*
  * @brief Parses the hostname and port into the specified net_addr_t.
  */
-_Bool Net_StringToNetaddr(const char *s, net_addr_t *a) {
+bool Net_StringToNetaddr(const char *s, net_addr_t *a) {
 	struct sockaddr_in saddr;
 
 	if (!Net_StringToSockaddr(s, &saddr))

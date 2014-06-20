@@ -97,7 +97,7 @@ static void G_ClipVelocity(const vec3_t in, const vec3_t normal, vec3_t out, vec
 /*
  * @see Pm_GoodPosition.
  */
-static _Bool G_GoodPosition(const g_entity_t *ent) {
+static bool G_GoodPosition(const g_entity_t *ent) {
 
 	const int32_t mask = ent->locals.clip_mask ? ent->locals.clip_mask : MASK_SOLID;
 
@@ -107,7 +107,7 @@ static _Bool G_GoodPosition(const g_entity_t *ent) {
 /*
  * @see Pm_SnapPosition.
  */
-static _Bool G_SnapPosition(g_entity_t *ent) {
+static bool G_SnapPosition(g_entity_t *ent) {
 	const int16_t jitter_bits[8] = { 0, 4, 1, 2, 3, 5, 6, 7 };
 	int16_t i, sign[3], org[3];
 	vec3_t old_origin;

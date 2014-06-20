@@ -40,7 +40,7 @@ static void G_PlayerProjectile(g_entity_t *ent, const vec_t scale) {
  * @brief Returns true if the entity is facing a wall at too close proximity
  * for the specified projectile.
  */
-static _Bool G_ImmediateWall(g_entity_t *ent, g_entity_t *projectile) {
+static bool G_ImmediateWall(g_entity_t *ent, g_entity_t *projectile) {
 
 	const cm_trace_t tr = gi.Trace(ent->s.origin, projectile->s.origin, projectile->mins,
 			projectile->maxs, ent, MASK_SOLID);
@@ -51,7 +51,7 @@ static _Bool G_ImmediateWall(g_entity_t *ent, g_entity_t *projectile) {
 /*
  * @brief Returns true if the specified entity takes damage.
  */
-static _Bool G_TakesDamage(g_entity_t *ent) {
+static bool G_TakesDamage(g_entity_t *ent) {
 	return (ent && ent->locals.take_damage);
 }
 
@@ -585,7 +585,7 @@ static void G_LightningProjectile_Discharge(g_entity_t *self) {
 /*
  * @brief
  */
-static _Bool G_LightningProjectile_Expire(g_entity_t *self) {
+static bool G_LightningProjectile_Expire(g_entity_t *self) {
 
 	if (self->locals.timestamp < g_level.time - 101)
 		return true;
@@ -722,7 +722,7 @@ void G_RailgunProjectile(g_entity_t *ent, const vec3_t start, const vec3_t dir, 
 	}
 
 	int32_t content_mask = MASK_SHOT | MASK_WATER;
-	_Bool water = false;
+	bool water = false;
 
 	// are we starting in water?
 	if (gi.PointContents(pos) & MASK_WATER) {

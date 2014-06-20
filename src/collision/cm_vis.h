@@ -28,11 +28,11 @@
 byte *Cm_ClusterPVS(const int32_t cluster);
 byte *Cm_ClusterPHS(const int32_t cluster);
 
-void Cm_SetAreaPortalState(const int32_t portal_num, const _Bool open);
-_Bool Cm_AreasConnected(const int32_t area1, const int32_t area2);
+void Cm_SetAreaPortalState(const int32_t portal_num, const bool open);
+bool Cm_AreasConnected(const int32_t area1, const int32_t area2);
 
 int32_t Cm_WriteAreaBits(const int32_t area, byte *out);
-_Bool Cm_HeadnodeVisible(const int32_t head_node, const byte *vis);
+bool Cm_HeadnodeVisible(const int32_t head_node, const byte *vis);
 
 #ifdef __CM_LOCAL_H__
 void Cm_FloodAreas(void);

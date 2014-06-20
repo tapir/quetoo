@@ -48,7 +48,7 @@ typedef struct fs_state_s {
 	 * automatically loaded. Set this to false for tools that require the write
 	 * directory, but not read access to the Quake file system (e.g q2wmaster).
 	 */
-	_Bool auto_load_archives;
+	bool auto_load_archives;
 
 	/*
 	 * @brief The base directory of the install, if running from a bundled
@@ -78,28 +78,28 @@ static fs_state_t fs_state;
  *
  * @return True on successful flush and close, false otherwise.
  */
-_Bool Fs_Close(file_t *file) {
+bool Fs_Close(file_t *file) {
 	return PHYSFS_close((PHYSFS_File *) file) ? true : false;
 }
 
 /*
  * @return True if the end of the file has been reached, false otherwise.
  */
-_Bool Fs_Eof(file_t *file) {
+bool Fs_Eof(file_t *file) {
 	return PHYSFS_eof((PHYSFS_File *) file) ? true : false;
 }
 
 /*
  * @return True if the specified filename exists on the search path.
  */
-_Bool Fs_Exists(const char *filename) {
+bool Fs_Exists(const char *filename) {
 	return PHYSFS_exists(filename) ? true : false;
 }
 
 /*
  * @return True if the file flushed successfully, false otherwise.
  */
-_Bool Fs_Flush(file_t *file) {
+bool Fs_Flush(file_t *file) {
 	return PHYSFS_flush((PHYSFS_File *) file) ? true : false;
 }
 
@@ -113,7 +113,7 @@ const char *Fs_LastError(void) {
 /*
  * @brief Creates the specified directory (and any ancestors) in Fs_WriteDir.
  */
-_Bool Fs_Mkdir(const char *dir) {
+bool Fs_Mkdir(const char *dir) {
 	return PHYSFS_mkdir(dir) ? true : false;
 }
 
@@ -201,7 +201,7 @@ int64_t Fs_Read(file_t *file, void *buffer, size_t size, size_t count) {
  *
  * @return True on success, false on failures.
  */
-_Bool Fs_ReadLine(file_t *file, char *buffer, size_t len) {
+bool Fs_ReadLine(file_t *file, char *buffer, size_t len) {
 	size_t i;
 	char *c;
 
@@ -224,7 +224,7 @@ _Bool Fs_ReadLine(file_t *file, char *buffer, size_t len) {
 /*
  * @brief Seeks to the specified offset.
  */
-_Bool Fs_Seek(file_t *file, size_t offset) {
+bool Fs_Seek(file_t *file, size_t offset) {
 	return PHYSFS_seek((PHYSFS_File *) file, offset) ? true : false;
 }
 
@@ -332,7 +332,7 @@ void Fs_Free(void *buffer) {
 /*
  * @brief Renames the specified source to the given destination.
  */
-_Bool Fs_Rename(const char *source, const char *dest) {
+bool Fs_Rename(const char *source, const char *dest) {
 	const char *dir = Fs_WriteDir();
 
 	const char *src = va("%s"G_DIR_SEPARATOR_S"%s", dir, source);
@@ -344,7 +344,7 @@ _Bool Fs_Rename(const char *source, const char *dest) {
 /*
  * @brief Unlinks (deletes) the specified file.
  */
-_Bool Fs_Unlink(const char *filename) {
+bool Fs_Unlink(const char *filename) {
 
 	if (!g_strcmp0(Fs_WriteDir(), Fs_RealDir(filename))) {
 		return unlink(filename) == 0;
@@ -433,7 +433,7 @@ void Fs_AddToSearchPath(const char *dir) {
 	if (stat(dir, &s) == 0) {
 		Com_Print("Adding path %s..\n", dir);
 
-		const _Bool is_dir = S_ISDIR(s.st_mode);
+		const bool is_dir = S_ISDIR(s.st_mode);
 
 		if (PHYSFS_mount(dir, NULL, !is_dir) == 0) {
 			Com_Warn("%s: %s\n", dir, PHYSFS_getLastError());
@@ -589,7 +589,7 @@ const char *Fs_RealPath(const char *path) {
 /*
  * @brief Initializes the file subsystem.
  */
-void Fs_Init(_Bool auto_load_archives) {
+void Fs_Init(bool auto_load_archives) {
 
 	memset(&fs_state, 0, sizeof(fs_state_t));
 

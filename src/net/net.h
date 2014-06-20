@@ -29,13 +29,13 @@ extern in_addr_t net_lo;
 int32_t Net_GetError(void);
 const char *Net_GetErrorString(void);
 
-_Bool Net_CompareNetaddr(const net_addr_t *a, const net_addr_t *b);
-_Bool Net_CompareClientNetaddr(const net_addr_t *a, const net_addr_t *b);
+bool Net_CompareNetaddr(const net_addr_t *a, const net_addr_t *b);
+bool Net_CompareClientNetaddr(const net_addr_t *a, const net_addr_t *b);
 
 void Net_NetAddrToSockaddr(const net_addr_t *a, struct sockaddr_in *s);
 const char *Net_NetaddrToString(const net_addr_t *a);
-_Bool Net_StringToSockaddr(const char *s, struct sockaddr_in *saddr);
-_Bool Net_StringToNetaddr(const char *s, net_addr_t *a);
+bool Net_StringToSockaddr(const char *s, struct sockaddr_in *saddr);
+bool Net_StringToNetaddr(const char *s, net_addr_t *a);
 
 int32_t Net_Socket(net_addr_type_t type, const char *iface, in_port_t port);
 void Net_CloseSocket(int32_t sock);

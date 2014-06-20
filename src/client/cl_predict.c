@@ -25,7 +25,7 @@
  * @brief Returns true if client side prediction should be used. The actual
  * movement is handled by the client game.
  */
-_Bool Cl_UsePrediction(void) {
+bool Cl_UsePrediction(void) {
 
 	if (!cl_predict->value)
 		return false;

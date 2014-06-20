@@ -157,7 +157,7 @@ static void RunThreads(void) {
 /*
  * @brief Entry point for all thread work requests.
  */
-void RunThreadsOn(int32_t work_count, _Bool progress, ThreadWorkFunc func) {
+void RunThreadsOn(int32_t work_count, bool progress, ThreadWorkFunc func) {
 	time_t start, end;
 
 	thread_work.index = 0;

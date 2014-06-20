@@ -35,7 +35,7 @@ static qzip_t qzip;
  * @brief Adds the specified asset, assuming the given name is a valid
  * filename.
  */
-static void AddAsset(const char *name, _Bool required) {
+static void AddAsset(const char *name, bool required) {
 	if (Fs_Exists(name)) {
 		char *key = Mem_CopyString(name);
 		g_hash_table_replace(qzip.assets, (gpointer) key, Mem_CopyString(name));
@@ -53,7 +53,7 @@ static void AddAsset(const char *name, _Bool required) {
  *
  * @return True if the asset was found, false otherwise.
  */
-static _Bool ResolveAsset(const char *name, const char **extensions) {
+static bool ResolveAsset(const char *name, const char **extensions) {
 	char base[MAX_QPATH];
 
 	StripExtension(name, base);
@@ -93,7 +93,7 @@ static void AddSound(const char *sound) {
  * @brief Attempts to add the specified image in any available format. If required,
  * a warning will be issued should we fail to resolve the specified image.
  */
-static void AddImage(const char *image, _Bool required) {
+static void AddImage(const char *image, bool required) {
 	const char *image_formats[] = { "tga", "png", "jpg", "pcx", "wal", NULL };
 
 	if (!ResolveAsset(image, image_formats)) {
@@ -328,7 +328,7 @@ static char *GetZipFilename(void) {
 /*
  * @brief Adds the specified resource to the .pk3 archive.
  */
-static _Bool DeflateAsset(zipFile zip_file, const char *filename) {
+static bool DeflateAsset(zipFile zip_file, const char *filename) {
 	static zip_fileinfo zip_info;
 	file_t *file;
 
@@ -344,7 +344,7 @@ static _Bool DeflateAsset(zipFile zip_file, const char *filename) {
 	}
 
 	void *buffer = Mem_Malloc(ZIP_BUFFER_SIZE);
-	_Bool success = true;
+	bool success = true;
 
 	while (!Fs_Eof(file)) {
 		int64_t len = Fs_Read(file, buffer, 1, ZIP_BUFFER_SIZE);

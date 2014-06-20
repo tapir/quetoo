@@ -29,8 +29,8 @@ typedef struct {
 	g_score_t scores[MAX_CLIENTS + 2];
 	uint16_t num_scores;
 
-	_Bool teams;
-	_Bool ctf;
+	bool teams;
+	bool ctf;
 } cg_score_state_t;
 
 static cg_score_state_t cg_score_state;
@@ -162,7 +162,7 @@ static r_pixel_t Cg_DrawScoresHeader(void) {
 /*
  * @brief
  */
-static _Bool Cg_DrawScore(r_pixel_t x, r_pixel_t y, const g_score_t *s) {
+static bool Cg_DrawScore(r_pixel_t x, r_pixel_t y, const g_score_t *s) {
 	r_pixel_t cw, ch;
 
 	const cl_client_info_t *info = &cgi.client->client_info[s->client];

@@ -120,7 +120,7 @@ static void R_SunIllumination(const r_lighting_t *l) {
  * @brief Adds an illumination for the positional light source, if the given
  * point is within range and not occluded.
  */
-static _Bool R_PositionalIllumination(const r_lighting_t *l, const r_light_t *light) {
+static bool R_PositionalIllumination(const r_lighting_t *l, const r_light_t *light) {
 	r_illumination_t il;
 
 	const vec_t *p[] = { l->origin, l->mins, l->maxs };

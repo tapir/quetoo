@@ -23,12 +23,12 @@
 #define __R_BSP_H__
 
 const r_bsp_leaf_t *R_LeafForPoint(const vec3_t p, const r_bsp_model_t *bsp);
-_Bool R_LeafVisible(const r_bsp_leaf_t *leaf);
-_Bool R_LeafHearable(const r_bsp_leaf_t *leaf);
+bool R_LeafVisible(const r_bsp_leaf_t *leaf);
+bool R_LeafHearable(const r_bsp_leaf_t *leaf);
 
 #ifdef __R_LOCAL_H__
-_Bool R_CullBox(const vec3_t mins, const vec3_t maxs);
-_Bool R_CullBspModel(const r_entity_t *e);
+bool R_CullBox(const vec3_t mins, const vec3_t maxs);
+bool R_CullBspModel(const r_entity_t *e);
 void R_DrawBspInlineModel(const r_entity_t *e);
 void R_DrawBspLeafs(void);
 void R_DrawBspNormals(void);

@@ -249,7 +249,7 @@ void G_UseTargets(g_entity_t *ent, g_entity_t *activator) {
 	}
 
 	// doors fire area portals in a specific way
-	const _Bool is_door = g_str_has_prefix(ent->class_name, "func_door");
+	const bool is_door = g_str_has_prefix(ent->class_name, "func_door");
 
 	// fire targets
 	if (ent->locals.target) {
@@ -415,7 +415,7 @@ void G_TouchWater(g_entity_t *ent) {
  * @brief Kills all entities that would touch the proposed new positioning
  * of the entity. The entity should be unlinked before calling this!
  */
-_Bool G_KillBox(g_entity_t *ent) {
+bool G_KillBox(g_entity_t *ent) {
 
 	// kill all solids that take damage, including corpses for bonus giblets
 	const int32_t mask = MASK_PLAYER_SOLID | CONTENTS_DEAD_MONSTER;
@@ -694,7 +694,7 @@ int32_t G_ColorByName(const char *s, int32_t def) {
 /*
  * @return True if the specified entity should bleed when damaged.
  */
-_Bool G_IsMeat(const g_entity_t *ent) {
+bool G_IsMeat(const g_entity_t *ent) {
 
 	if (!ent || !ent->in_use)
 		return false;
@@ -711,7 +711,7 @@ _Bool G_IsMeat(const g_entity_t *ent) {
 /*
  * @return True if the specified entity is likely stationary.
  */
-_Bool G_IsStationary(const g_entity_t *ent) {
+bool G_IsStationary(const g_entity_t *ent) {
 
 	if (!ent || !ent->in_use)
 		return false;
@@ -731,7 +731,7 @@ _Bool G_IsStationary(const g_entity_t *ent) {
 /*
  * @return True if the specified entity and surface appear structural.
  */
-_Bool G_IsStructural(const g_entity_t *ent, const cm_bsp_surface_t *surf) {
+bool G_IsStructural(const g_entity_t *ent, const cm_bsp_surface_t *surf) {
 
 	if (ent->solid == SOLID_BSP) {
 
@@ -748,7 +748,7 @@ _Bool G_IsStructural(const g_entity_t *ent, const cm_bsp_surface_t *surf) {
  * @brief Writes the specified animation byte, toggling the high bit to restart the
  * sequence if desired and necessary.
  */
-static void G_SetAnimation_(byte *dest, entity_animation_t anim, _Bool restart) {
+static void G_SetAnimation_(byte *dest, entity_animation_t anim, bool restart) {
 
 	if (restart) {
 		if (*dest == anim) {
@@ -763,7 +763,7 @@ static void G_SetAnimation_(byte *dest, entity_animation_t anim, _Bool restart) 
  * @brief Assigns the specified animation to the correct member(s) on the specified
  * entity. If requested, the current animation will be restarted.
  */
-void G_SetAnimation(g_entity_t *ent, entity_animation_t anim, _Bool restart) {
+void G_SetAnimation(g_entity_t *ent, entity_animation_t anim, bool restart) {
 
 	// certain sequences go to both torso and leg animations
 
@@ -791,7 +791,7 @@ void G_SetAnimation(g_entity_t *ent, entity_animation_t anim, _Bool restart) {
 /*
  * @brief Returns true if the entity is currently using the specified animation.
  */
-_Bool G_IsAnimation(g_entity_t *ent, entity_animation_t anim) {
+bool G_IsAnimation(g_entity_t *ent, entity_animation_t anim) {
 	byte a;
 
 	if (anim < ANIM_LEGS_WALK)

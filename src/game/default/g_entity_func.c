@@ -863,7 +863,7 @@ void G_func_button(g_entity_t *ent) {
 /*
  * @brief
  */
-static void G_func_door_UseAreaPortals(g_entity_t *self, _Bool open) {
+static void G_func_door_UseAreaPortals(g_entity_t *self, bool open) {
 	g_entity_t *t = NULL;
 
 	if (!self->locals.target)
@@ -1541,7 +1541,7 @@ static void G_func_train_Wait(g_entity_t *self) {
 static void G_func_train_Next(g_entity_t *self) {
 	g_entity_t *ent;
 	vec3_t dest;
-	_Bool first;
+	bool first;
 
 	first = true;
 	again: if (!self->locals.target)

@@ -25,7 +25,7 @@
 #include "cg_types.h"
 
 #ifdef __CG_LOCAL_H__
-_Bool Cg_IsSelf(const cl_entity_t *ent);
+bool Cg_IsSelf(const cl_entity_t *ent);
 void Cg_AddEntities(const cl_frame_t *frame);
 #endif /* __CG_ENTITY_H__ */
 

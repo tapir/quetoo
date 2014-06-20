@@ -57,7 +57,7 @@ extern vec_t entity_scale;
 
 extern vec3_t ambient;
 
-extern _Bool extra_samples;
+extern bool extra_samples;
 
 // lightmap.c
 void BuildLights(void);
@@ -72,7 +72,7 @@ void SubdividePatches(void);
 void FreePatches(void);
 
 // qlight.c
-_Bool Light_PointPVS(const vec3_t org, byte *pvs);
+bool Light_PointPVS(const vec3_t org, byte *pvs);
 int32_t Light_PointLeafnum(const vec3_t point);
 void Light_Trace(cm_trace_t *trace, const vec3_t start, const vec3_t end, int32_t mask);
 

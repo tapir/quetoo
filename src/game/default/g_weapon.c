@@ -24,7 +24,7 @@
 /*
  * @brief
  */
-_Bool G_PickupWeapon(g_entity_t *ent, g_entity_t *other) {
+bool G_PickupWeapon(g_entity_t *ent, g_entity_t *other) {
 
 	// add the weapon to inventory
 	const uint16_t index = ITEM_INDEX(ent->locals.item);
@@ -238,7 +238,7 @@ typedef void (*G_FireWeaponFunc)(g_entity_t *ent);
  * @brief Returns true if the specified client can fire their weapon, false
  * otherwise.
  */
-static _Bool G_FireWeapon(g_entity_t *ent) {
+static bool G_FireWeapon(g_entity_t *ent) {
 
 	uint32_t buttons = (ent->client->locals.latched_buttons | ent->client->locals.buttons);
 

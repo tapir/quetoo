@@ -144,7 +144,7 @@ static void Pm_TouchEnt(struct g_entity_s *ent) {
  * @brief Calculates a new origin, velocity, and contact entities based on the
  * movement command and world state. Returns true if not blocked.
  */
-static _Bool Pm_SlideMove(void) {
+static bool Pm_SlideMove(void) {
 
 	vec3_t vel0;
 	VectorCopy(pml.velocity, vel0);
@@ -199,7 +199,7 @@ static _Bool Pm_SlideMove(void) {
  *
  * @return True if the step was successful, false otherwise.
  */
-static _Bool Pm_StepMove(_Bool up) {
+static bool Pm_StepMove(bool up) {
 	vec3_t org, vel, pos;
 	cm_trace_t trace;
 
@@ -477,7 +477,7 @@ static void Pm_Currents(vec3_t vel) {
  * @return True if the player will be eligible for trick jumping should they
  * impact the ground on this frame, false otherwise.
  */
-static _Bool Pm_CheckTrickJump(void) {
+static bool Pm_CheckTrickJump(void) {
 
 	if (pm->ground_entity)
 		return false;
@@ -505,7 +505,7 @@ static void Pm_CategorizePosition(void) {
 	vec3_t pos;
 
 	// seek ground eagerly if the player wishes to trick jump
-	const _Bool trick_jump = Pm_CheckTrickJump();
+	const bool trick_jump = Pm_CheckTrickJump();
 
 	if (trick_jump) {
 		VectorMA(pml.origin, pml.time, pml.velocity, pos);
@@ -658,7 +658,7 @@ static void Pm_CheckDuck(void) {
  *
  * @return True if a jump occurs, false otherwise.
  */
-static _Bool Pm_CheckJump(void) {
+static bool Pm_CheckJump(void) {
 
 	// not on ground yet
 	if (!(pm->s.flags & PMF_ON_GROUND))
@@ -720,7 +720,7 @@ static _Bool Pm_CheckJump(void) {
  *
  * @return True if the player was pushed by an entity, false otherwise.
  */
-static _Bool Pm_CheckPush(void) {
+static bool Pm_CheckPush(void) {
 
 	if (!(pm->s.flags & PMF_PUSHED))
 		return false;
@@ -737,7 +737,7 @@ static _Bool Pm_CheckPush(void) {
  *
  * @return True if the player is on a ladder, false otherwise.
  */
-static _Bool Pm_CheckLadder(void) {
+static bool Pm_CheckLadder(void) {
 	vec3_t forward, pos;
 
 	if (pm->s.flags & PMF_TIME_MASK)
@@ -768,7 +768,7 @@ static _Bool Pm_CheckLadder(void) {
  *
  * @return True if a water jump has occurred, false otherwise.
  */
-static _Bool Pm_CheckWaterJump(void) {
+static bool Pm_CheckWaterJump(void) {
 	vec3_t pos;
 
 	if (pm->s.flags & PMF_TIME_WATER_JUMP)
@@ -1081,7 +1081,7 @@ static void Pm_WalkMove(void) {
 /*
  * @return True if the player is in a valid position, false otherwise.
  */
-static _Bool Pm_GoodPosition(void) {
+static bool Pm_GoodPosition(void) {
 	if (pm->s.type == PM_SPECTATOR) {
 		return true;
 	}
@@ -1101,7 +1101,7 @@ static _Bool Pm_GoodPosition(void) {
  * 0.125 unit precision afforded by the network channel. We must test the
  * position, trying a series of small offsets to resolve a valid position.
  */
-static _Bool Pm_SnapPosition(void) {
+static bool Pm_SnapPosition(void) {
 	const int16_t jitter_bits[8] = { 0, 4, 1, 2, 3, 5, 6, 7 };
 	int16_t i, sign[3];
 	size_t j;

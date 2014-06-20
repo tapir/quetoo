@@ -32,7 +32,7 @@ int32_t num_patches;
 
 vec3_t face_offset[MAX_BSP_FACES]; // for rotating bmodels
 
-_Bool extra_samples = false;
+bool extra_samples = false;
 
 vec3_t ambient;
 
@@ -66,7 +66,7 @@ int32_t Light_PointLeafnum(const vec3_t point) {
 /*
  * @brief
  */
-_Bool Light_PointPVS(const vec3_t org, byte *pvs) {
+bool Light_PointPVS(const vec3_t org, byte *pvs) {
 	d_bsp_leaf_t *leaf;
 
 	if (!d_bsp.vis_data_size) {

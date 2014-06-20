@@ -75,7 +75,7 @@ static int32_t PlaneTypeForNormal(const vec3_t normal) {
 /*
  * @brief
  */
-static _Bool PlaneEqual(const map_plane_t * p, const vec3_t normal, const dvec_t dist) {
+static bool PlaneEqual(const map_plane_t * p, const vec3_t normal, const dvec_t dist) {
 
 	const vec_t ne = NORMAL_EPSILON;
 	const dvec_t de = DIST_EPSILON;
@@ -148,7 +148,7 @@ static int32_t CreateNewFloatPlane(vec3_t normal, vec_t dist) {
 static void SnapNormal(vec3_t normal) {
 	int32_t i;
 
-	_Bool snap = false;
+	bool snap = false;
 
 	for (i = 0; i < 3; i++) {
 		if (normal[i] != 0.0 && -NORMAL_EPSILON < normal[i] && normal[i] < NORMAL_EPSILON) {
@@ -397,7 +397,7 @@ static void AddBrushBevels(map_brush_t * b) {
 /*
  * @brief Makes basewindigs for sides and mins / maxs for the brush
  */
-static _Bool MakeBrushWindings(map_brush_t * ob) {
+static bool MakeBrushWindings(map_brush_t * ob) {
 	int32_t i, j;
 	side_t *side;
 
@@ -724,7 +724,7 @@ static void MoveBrushesToWorld(entity_t *ent) {
 /*
  * @brief
  */
-static _Bool ParseMapEntity(void) {
+static bool ParseMapEntity(void) {
 	entity_t *mapent;
 	epair_t *e;
 	side_t *s;

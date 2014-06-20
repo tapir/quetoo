@@ -201,7 +201,7 @@ static void R_SetMatrixForEntity(r_entity_t *e) {
  *
  * @return True if the entity is culled (fails frustum test), false otherwise.
  */
-static _Bool R_CullEntity(r_entity_t *e) {
+static bool R_CullEntity(r_entity_t *e) {
 
 	if (!e->model) {
 		e->culled = false;

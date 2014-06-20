@@ -23,7 +23,7 @@
 #include "thread.h"
 
 typedef struct {
-	_Bool ready;
+	bool ready;
 } critical_section_t;
 
 static critical_section_t cs;

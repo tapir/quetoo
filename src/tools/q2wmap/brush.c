@@ -291,7 +291,7 @@ static int32_t Map_BoxOnPlaneSide(vec3_t mins, vec3_t maxs, map_plane_t * plane)
  * @brief
  */
 static int32_t TestBrushToPlanenum(bsp_brush_t * brush, int32_t plane_num, int32_t *numsplits,
-		_Bool * hintsplit, int32_t *epsilonbrush) {
+		bool * hintsplit, int32_t *epsilonbrush) {
 	int32_t i, j, num;
 	map_plane_t *plane;
 	int32_t s;
@@ -365,7 +365,7 @@ static int32_t TestBrushToPlanenum(bsp_brush_t * brush, int32_t plane_num, int32
  * existance by the vertex snapping.
  */
 #define	EDGE_LENGTH	0.2
-_Bool WindingIsTiny(const winding_t * w) {
+bool WindingIsTiny(const winding_t * w) {
 	int32_t i, j;
 	vec_t len;
 	vec3_t delta;
@@ -388,7 +388,7 @@ _Bool WindingIsTiny(const winding_t * w) {
  * @brief Returns true if the winding still has one of the points
  * from basewinding for plane
  */
-static _Bool WindingIsHuge(winding_t * w) {
+static bool WindingIsHuge(winding_t * w) {
 	int32_t i, j;
 
 	for (i = 0; i < w->num_points; i++) {
@@ -436,9 +436,9 @@ static void CheckPlaneAgainstParents(int32_t pnum, node_t * node) {
 	}
 }
 
-static _Bool CheckPlaneAgainstVolume(int32_t pnum, node_t * node) {
+static bool CheckPlaneAgainstVolume(int32_t pnum, node_t * node) {
 	bsp_brush_t *front, *back;
-	_Bool good;
+	bool good;
 
 	SplitBrush(node->volume, pnum, &front, &back);
 
@@ -467,7 +467,7 @@ static side_t *SelectSplitSide(bsp_brush_t * brushes, node_t * node) {
 	int32_t front, back, both, facing, splits;
 	int32_t bsplits;
 	int32_t epsilonbrush;
-	_Bool hintsplit;
+	bool hintsplit;
 
 	bestside = NULL;
 	bestvalue = -99999;

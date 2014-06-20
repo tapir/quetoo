@@ -317,7 +317,7 @@ static void G_ClientAnimation(g_entity_t *ent) {
 			}
 		}
 
-		_Bool jumping = G_IsAnimation(ent, ANIM_LEGS_JUMP1);
+		bool jumping = G_IsAnimation(ent, ANIM_LEGS_JUMP1);
 		jumping |= G_IsAnimation(ent, ANIM_LEGS_JUMP2);
 
 		if (!jumping)

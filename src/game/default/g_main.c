@@ -156,7 +156,7 @@ static void G_ResetItems(void) {
  * For match games, this means cancel the match and force everyone
  * to ready again. Teams are only reset when teamz is true.
  */
-static void G_RestartGame(_Bool teamz) {
+static void G_RestartGame(bool teamz) {
 	int32_t i;
 	g_entity_t *ent;
 	g_client_t *cl;
@@ -224,7 +224,7 @@ static void G_RestartGame(_Bool teamz) {
 /*
  * @brief
  */
-static void G_MuteClient(char *name, _Bool mute) {
+static void G_MuteClient(char *name, bool mute) {
 	g_client_t *cl;
 
 	if (!(cl = G_ClientByName(name)))
@@ -889,7 +889,7 @@ static void G_ParseMapList(const char *file_name) {
 	const char *buffer;
 	uint32_t i, j, k, l;
 	const char *c;
-	_Bool map;
+	bool map;
 	g_map_list_elt_t *elt;
 
 	G_InitMapList();

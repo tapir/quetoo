@@ -39,7 +39,7 @@ extern const uint16_t g_num_items;
 extern const vec3_t ITEM_MINS;
 extern const vec3_t ITEM_MAXS;
 
-_Bool G_AddAmmo(g_entity_t *ent, const g_item_t *item, int16_t count);
+bool G_AddAmmo(g_entity_t *ent, const g_item_t *item, int16_t count);
 g_entity_t *G_DropItem(g_entity_t *ent, const g_item_t *item);
 const g_item_t *G_FindItem(const char *name);
 const g_item_t *G_FindItemByClassName(const char *class_name);
@@ -49,7 +49,7 @@ void G_PrecacheItem(const g_item_t *it);
 void G_ResetFlag(g_entity_t *ent);
 void G_SetItemRespawn(g_entity_t *ent, uint32_t delay);
 void G_SpawnItem(g_entity_t *ent, const g_item_t *item);
-_Bool G_SetAmmo(g_entity_t *ent, const g_item_t *item, int16_t count);
+bool G_SetAmmo(g_entity_t *ent, const g_item_t *item, int16_t count);
 g_entity_t *G_TossFlag(g_entity_t *self);
 g_entity_t *G_TossQuadDamage(g_entity_t *self);
 void G_TouchItem(g_entity_t *ent, g_entity_t *other, cm_bsp_plane_t *plane, cm_bsp_surface_t *surf);

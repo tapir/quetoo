@@ -37,7 +37,7 @@ static script_t *script;
 static int32_t scriptline;
 
 char token[MAXTOKEN];
-static _Bool endofscript;
+static bool endofscript;
 
 /*
  * @brief
@@ -95,7 +95,7 @@ void ParseFromMemory(char *buffer, int32_t size) {
 /*
  * @brief
  */
-static _Bool EndOfScript(_Bool crossline) {
+static bool EndOfScript(bool crossline) {
 	if (!crossline)
 		Com_Error(ERR_FATAL, "Line %i is incomplete\n", scriptline);
 
@@ -118,7 +118,7 @@ static _Bool EndOfScript(_Bool crossline) {
 /*
  * @brief
  */
-_Bool GetToken(_Bool crossline) {
+bool GetToken(bool crossline) {
 	char *token_p;
 
 	if (script->script_p >= script->end_p)
@@ -200,7 +200,7 @@ _Bool GetToken(_Bool crossline) {
 /*
  * @brief
  */
-_Bool TokenAvailable(void) {
+bool TokenAvailable(void) {
 	char *search_p;
 
 	search_p = script->script_p;

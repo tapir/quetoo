@@ -48,7 +48,7 @@ static net_udp_state_t net_udp_state;
 /*
  * @brief
  */
-static _Bool Net_ReceiveDatagram_Loop(net_src_t source, net_addr_t *from, mem_buf_t *buf) {
+static bool Net_ReceiveDatagram_Loop(net_src_t source, net_addr_t *from, mem_buf_t *buf) {
 	net_udp_loop_t *loop = &net_udp_state.loops[source];
 
 	if (loop->send - loop->recv > MAX_NET_UDP_LOOPS)
@@ -76,7 +76,7 @@ static _Bool Net_ReceiveDatagram_Loop(net_src_t source, net_addr_t *from, mem_bu
  * @brief Receive a datagram on the specified socket, populating the from
  * address with the sender.
  */
-_Bool Net_ReceiveDatagram(net_src_t source, net_addr_t *from, mem_buf_t *buf) {
+bool Net_ReceiveDatagram(net_src_t source, net_addr_t *from, mem_buf_t *buf) {
 
 	buf->read = buf->size = 0;
 
@@ -127,7 +127,7 @@ _Bool Net_ReceiveDatagram(net_src_t source, net_addr_t *from, mem_buf_t *buf) {
 /*
  * @brief
  */
-static _Bool Net_SendDatagram_Loop(net_src_t source, const void *data, size_t len) {
+static bool Net_SendDatagram_Loop(net_src_t source, const void *data, size_t len) {
 	net_udp_loop_t *loop = &net_udp_state.loops[source ^ 1];
 
 	const uint32_t i = loop->send & (MAX_NET_UDP_LOOPS - 1);
@@ -142,7 +142,7 @@ static _Bool Net_SendDatagram_Loop(net_src_t source, const void *data, size_t le
 /*
  * @brief Send a datagram to the specified address.
  */
-_Bool Net_SendDatagram(net_src_t source, const net_addr_t *to, const void *data, size_t len) {
+bool Net_SendDatagram(net_src_t source, const net_addr_t *to, const void *data, size_t len) {
 
 	if (to->type == NA_LOOP) {
 		return Net_SendDatagram_Loop(source, data, len);
@@ -196,7 +196,7 @@ void Net_Sleep(uint32_t msec) {
  * interface and port are resolved from immutable console variables, optionally
  * set at the command line.
  */
-void Net_Config(net_src_t source, _Bool up) {
+void Net_Config(net_src_t source, bool up) {
 	int32_t *sock = &net_udp_state.sockets[source];
 
 	if (up) {

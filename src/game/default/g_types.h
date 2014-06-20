@@ -356,7 +356,7 @@ typedef enum {
 typedef struct g_item_s {
 	const char *class_name; // spawning name
 
-	_Bool (*Pickup)(g_entity_t *ent, g_entity_t *other);
+	bool (*Pickup)(g_entity_t *ent, g_entity_t *other);
 	void (*Use)(g_entity_t *ent, const struct g_item_s *item);
 	g_entity_t *(*Drop)(g_entity_t *ent, const struct g_item_s *item);
 	void (*Think)(g_entity_t *ent);
@@ -519,10 +519,10 @@ typedef struct {
 	char name[MAX_QPATH]; // the server name (fractures, etc)
 	int16_t gravity; // defaults to 800
 	g_gameplay_t gameplay; // DEATHMATCH, INSTAGIB, ARENA
-	_Bool teams;
-	_Bool ctf;
-	_Bool match;
-	_Bool rounds;
+	bool teams;
+	bool ctf;
+	bool match;
+	bool rounds;
 	int32_t frag_limit;
 	int32_t round_limit;
 	int32_t capture_limit;
@@ -538,13 +538,13 @@ typedef struct {
 	vec3_t intermission_angle;
 	const char *changemap;
 
-	_Bool warmup; // shared by match and round
+	bool warmup; // shared by match and round
 
-	_Bool start_match;
+	bool start_match;
 	uint32_t match_time; // time match started
 	uint32_t match_num;
 
-	_Bool start_round;
+	bool start_round;
 	uint32_t round_time; // time round started
 	uint32_t round_num;
 
@@ -668,8 +668,8 @@ typedef struct {
 	const g_item_t *weapon;
 	const g_item_t *last_weapon;
 
-	_Bool spectator; // client is a spectator
-	_Bool ready; // ready
+	bool spectator; // client is a spectator
+	bool ready; // ready
 
 	g_team_t *team; // current team (good/evil)
 	g_vote_t vote; // current vote (yes/no)
@@ -689,7 +689,7 @@ typedef struct {
 
 	g_client_persistent_t persistent;
 
-	_Bool show_scores; // sets layout bit mask in player state
+	bool show_scores; // sets layout bit mask in player state
 	uint32_t scores_time; // eligible for scores when time > this
 
 	uint16_t ammo_index;
@@ -726,7 +726,7 @@ typedef struct {
 	uint32_t pickup_msg_time; // display message until time > this
 
 	uint32_t chat_time; // can chat when time > this
-	_Bool muted;
+	bool muted;
 
 	uint32_t quad_damage_time; // has quad when time < this
 	uint32_t quad_attack_time; // play attack sound when time > this
@@ -785,9 +785,9 @@ typedef struct {
 
 	int16_t health;
 	int16_t max_health;
-	_Bool dead;
+	bool dead;
 
-	_Bool take_damage;
+	bool take_damage;
 	int16_t damage;
 	int16_t knockback;
 	vec_t damage_radius;

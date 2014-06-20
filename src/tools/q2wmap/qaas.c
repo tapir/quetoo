@@ -53,7 +53,7 @@ static void CreateAASNodes(void) {
  * @brief Returns true if the specified leaf is navigable (has an upward-facing
  * solid plane), false otherwise.
  */
-static _Bool PruneAASNodes_isNavigable(const d_bsp_leaf_t *leaf) {
+static bool PruneAASNodes_isNavigable(const d_bsp_leaf_t *leaf) {
 	uint16_t i;
 
 	if ((leaf->contents & MASK_PLAYER_SOLID) == 0) {

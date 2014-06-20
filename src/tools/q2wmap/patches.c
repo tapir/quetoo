@@ -83,7 +83,7 @@ void CalcTextureReflectivity(void) {
 /*
  * @brief
  */
-static inline _Bool HasLight(const d_bsp_face_t *f) {
+static inline bool HasLight(const d_bsp_face_t *f) {
 	const d_bsp_texinfo_t *tex;
 
 	tex = &d_bsp.texinfo[f->texinfo];
@@ -93,7 +93,7 @@ static inline _Bool HasLight(const d_bsp_face_t *f) {
 /*
  * @brief
  */
-static inline _Bool IsSky(const d_bsp_face_t * f) {
+static inline bool IsSky(const d_bsp_face_t * f) {
 	const d_bsp_texinfo_t *tex;
 
 	tex = &d_bsp.texinfo[f->texinfo];

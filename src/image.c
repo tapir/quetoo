@@ -54,7 +54,7 @@ typedef byte boolean;
 #define IMG_PALETTE "pics/colormap"
 
 img_palette_t img_palette;
-static _Bool img_palette_initialized;
+static bool img_palette_initialized;
 
 // RGBA color masks
 #define RMASK 0x000000ff
@@ -69,7 +69,7 @@ static const char *img_formats[] = { "tga", "png", "jpg", "wal", "pcx", NULL };
  * @brief A helper which mangles a .wal file into an SDL_Surface suitable for
  * OpenGL uploads and other basic manipulations.
  */
-static _Bool Img_LoadWal(const char *path, SDL_Surface **surf) {
+static bool Img_LoadWal(const char *path, SDL_Surface **surf) {
 	void *buf;
 
 	*surf = NULL;
@@ -117,7 +117,7 @@ static _Bool Img_LoadWal(const char *path, SDL_Surface **surf) {
  * @brief Loads the specified image from the game filesystem and populates
  * the provided SDL_Surface.
  */
-static _Bool Img_LoadTypedImage(const char *name, const char *type, SDL_Surface **surf) {
+static bool Img_LoadTypedImage(const char *name, const char *type, SDL_Surface **surf) {
 	char path[MAX_QPATH];
 	void *buf;
 	int64_t len;
@@ -158,7 +158,7 @@ static _Bool Img_LoadTypedImage(const char *name, const char *type, SDL_Surface 
  * the provided SDL_Surface. Image formats are tried in the order they appear
  * in TYPES.
  */
-_Bool Img_LoadImage(const char *name, SDL_Surface **surf) {
+bool Img_LoadImage(const char *name, SDL_Surface **surf) {
 
 	int32_t i = 0;
 	while (img_formats[i]) {
@@ -213,7 +213,7 @@ void Img_ColorFromPalette(uint8_t c, vec_t *res) {
 /*
  * @brief Write pixel data to a JPEG file.
  */
-_Bool Img_WriteJPEG(const char *path, byte *data, uint32_t width, uint32_t height, int32_t quality) {
+bool Img_WriteJPEG(const char *path, byte *data, uint32_t width, uint32_t height, int32_t quality) {
 	struct jpeg_compress_struct cinfo;
 	struct jpeg_error_mgr jerr;
 	JSAMPROW row_pointer[1]; /* pointer to JSAMPLE row[s] */

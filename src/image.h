@@ -39,7 +39,7 @@ extern img_palette_t img_palette;
 /*
  * @brief Loads an image by the specified Quake path to the given surface.
  */
-_Bool Img_LoadImage(const char *name, SDL_Surface **surf);
+bool Img_LoadImage(const char *name, SDL_Surface **surf);
 
 /*
  * @brief Initializes the 8-bit lookup palette.
@@ -54,7 +54,7 @@ void Img_ColorFromPalette(uint8_t c, vec_t *res);
 /*
  * @brief Writes a JPEG-encoded image to the specified path.
  */
-_Bool Img_WriteJPEG(const char *path, byte *data, uint32_t width, uint32_t height, int32_t quality);
+bool Img_WriteJPEG(const char *path, byte *data, uint32_t width, uint32_t height, int32_t quality);
 
 #endif /* BUILD_CLIENT */
 #endif /*__IMAGE_H__*/

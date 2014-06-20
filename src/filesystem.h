@@ -32,25 +32,25 @@ typedef struct {
 
 typedef void (*Fs_EnumerateFunc)(const char *path, void *data);
 
-_Bool Fs_Close(file_t *file);
-_Bool Fs_Eof(file_t *file);
-_Bool Fs_Exists(const char *filename);
-_Bool Fs_Flush(file_t *file);
+bool Fs_Close(file_t *file);
+bool Fs_Eof(file_t *file);
+bool Fs_Exists(const char *filename);
+bool Fs_Flush(file_t *file);
 const char *Fs_LastError(void);
-_Bool Fs_Mkdir(const char *dir);
+bool Fs_Mkdir(const char *dir);
 file_t *Fs_OpenAppend(const char *filename);
 file_t *Fs_OpenRead(const char *filename);
 file_t *Fs_OpenWrite(const char *filename);
 int64_t Fs_Print(file_t *file, const char *fmt, ...) __attribute__((format(printf, 2, 3)));
 int64_t Fs_Read(file_t *file, void *buffer, size_t size, size_t count);
-_Bool Fs_ReadLine(file_t *file, char *buffer, size_t len);
-_Bool Fs_Seek(file_t *file, size_t offset);
+bool Fs_ReadLine(file_t *file, char *buffer, size_t len);
+bool Fs_Seek(file_t *file, size_t offset);
 int64_t Fs_Tell(file_t *file);
 int64_t Fs_Write(file_t *file, const void *buffer, size_t size, size_t count);
 int64_t Fs_Load(const char *filename, void **buffer);
 void Fs_Free(void *buffer);
-_Bool Fs_Rename(const char *source, const char *dest);
-_Bool Fs_Unlink(const char *filename);
+bool Fs_Rename(const char *source, const char *dest);
+bool Fs_Unlink(const char *filename);
 void Fs_Enumerate(const char *pattern, Fs_EnumerateFunc, void *data);
 void Fs_CompleteFile(const char *pattern, GList **matches);
 void Fs_AddToSearchPath(const char *dir);
@@ -59,7 +59,7 @@ void Fs_SetWriteDir(const char *dir);
 const char *Fs_WriteDir(void);
 const char *Fs_RealDir(const char *filename);
 const char *Fs_RealPath(const char *path);
-void Fs_Init(_Bool auto_load_archives);
+void Fs_Init(bool auto_load_archives);
 void Fs_Shutdown(void);
 
 #endif /* __FILESYSTEM_H__ */

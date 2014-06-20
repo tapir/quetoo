@@ -121,7 +121,7 @@ static void R_StageVertex(const r_bsp_surface_t *surf, const r_stage_t *stage, c
  * scrolls, and stretches (rotate, translate, scale).
  */
 static void R_StageTextureMatrix(const r_bsp_surface_t *surf, const r_stage_t *stage) {
-	static _Bool identity = true;
+	static bool identity = true;
 	vec_t s, t;
 
 	if (!(stage->flags & STAGE_TEXTURE_MATRIX)) {
@@ -426,7 +426,7 @@ void R_DrawMaterialBspSurfaces(const r_bsp_surfaces_t *surfs) {
  * setting GL state for the stage.
  */
 void R_DrawMeshMaterial(r_material_t *m, const GLuint offset, const GLuint count) {
-	const _Bool blend = r_state.blend_enabled;
+	const bool blend = r_state.blend_enabled;
 
 	if (!r_materials->value || r_draw_wireframe->value)
 		return;
@@ -959,7 +959,7 @@ void R_LoadMaterials(const r_model_t *mod) {
 
 	const char *buffer = (char *) buf;
 
-	_Bool in_material = false;
+	bool in_material = false;
 	r_material_t *m = NULL;
 
 	while (true) {

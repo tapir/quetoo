@@ -338,7 +338,7 @@ static void Sv_Connect_f(void) {
 /*
  * @brief
  */
-static _Bool Sv_RconAuthenticate(void) {
+static bool Sv_RconAuthenticate(void) {
 
 	// a password must be set for rcon to be available
 	if (*sv_rcon_password->string == '\0')
@@ -356,7 +356,7 @@ static _Bool Sv_RconAuthenticate(void) {
  * redirect all output to the invoking client.
  */
 static void Sv_Rcon_f(void) {
-	const _Bool auth = Sv_RconAuthenticate();
+	const bool auth = Sv_RconAuthenticate();
 	const char *addr = Net_NetaddrToString(&net_from);
 
 	// first print to the server console

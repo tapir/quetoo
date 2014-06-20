@@ -25,7 +25,7 @@
 #include "cl_types.h"
 
 #ifdef __CL_LOCAL_H__
-_Bool Cl_CheckOrDownloadFile(const char *file_name);
+bool Cl_CheckOrDownloadFile(const char *file_name);
 void Cl_ParseConfigString(void);
 void Cl_ParseServerMessage(void);
 void Cl_Download_f(void);

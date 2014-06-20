@@ -362,7 +362,7 @@ void Con_Print(const char *text) {
  * append it. If multiple matches are found, append the longest possible
  * common prefix they all share.
  */
-_Bool Con_CompleteCommand(char *input, uint16_t *pos, uint16_t len) {
+bool Con_CompleteCommand(char *input, uint16_t *pos, uint16_t len) {
 	const char *pattern, *match;
 	GList *matches = NULL;
 

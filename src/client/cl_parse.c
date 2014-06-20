@@ -38,7 +38,7 @@ static char *sv_cmd_names[256] = {
  * @brief Returns true if the file exists, otherwise it attempts to start a download
  * from the server.
  */
-_Bool Cl_CheckOrDownloadFile(const char *filename) {
+bool Cl_CheckOrDownloadFile(const char *filename) {
 	char cmd[MAX_STRING_CHARS];
 
 	if (cls.state == CL_DISCONNECTED) {
@@ -334,7 +334,7 @@ static void Cl_ParseSound(void) {
 /*
  * @brief
  */
-static _Bool Cl_IgnoreChatMessage(const char *msg) {
+static bool Cl_IgnoreChatMessage(const char *msg) {
 
 	const char *s = strtok(cl_ignore->string, " ");
 

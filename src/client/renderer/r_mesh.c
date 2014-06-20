@@ -133,7 +133,7 @@ void R_ApplyMeshModelTag(r_entity_t *e) {
 /*
  * @return True if the specified entity was frustum-culled and can be skipped.
  */
-_Bool R_CullMeshModel(const r_entity_t *e) {
+bool R_CullMeshModel(const r_entity_t *e) {
 	vec3_t mins, maxs;
 
 	if (e->effects & EF_WEAPON) // never cull the weapon

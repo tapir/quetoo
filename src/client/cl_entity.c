@@ -24,7 +24,7 @@
 /*
  * @return True if the delta is valid and interpolation should be used.
  */
-static _Bool Cl_ValidDeltaPlayerState(player_state_t *from, player_state_t *to) {
+static bool Cl_ValidDeltaPlayerState(player_state_t *from, player_state_t *to) {
 	vec3_t delta;
 
 #ifdef PMOVE_PRECISE
@@ -68,7 +68,7 @@ static void Cl_ParsePlayerState(cl_frame_t *delta_frame, cl_frame_t *frame) {
 /*
  * @return True if the delta is valid and interpolation should be used.
  */
-static _Bool Cl_ValidDeltaEntity(entity_state_t *from, entity_state_t *to) {
+static bool Cl_ValidDeltaEntity(entity_state_t *from, entity_state_t *to) {
 	vec3_t delta;
 
 	if (from->model1 != to->model1)

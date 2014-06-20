@@ -27,7 +27,7 @@
  */
 static void G_ClientObituary(g_entity_t *self, g_entity_t *attacker, uint32_t mod) {
 
-	const _Bool friendy_fire = (mod & MOD_FRIENDLY_FIRE) == MOD_FRIENDLY_FIRE;
+	const bool friendy_fire = (mod & MOD_FRIENDLY_FIRE) == MOD_FRIENDLY_FIRE;
 	mod &= ~MOD_FRIENDLY_FIRE;
 
 	if (!g_level.warmup) { // insert to db
@@ -473,7 +473,7 @@ static void G_Give(g_client_t *client, char *it, int16_t quantity) {
 /**
  * G_GiveLevelLocals
  */
-static _Bool G_GiveLevelLocals(g_client_t *client) {
+static bool G_GiveLevelLocals(g_client_t *client) {
 	char buf[512], *it, *q;
 	int32_t quantity;
 
@@ -864,7 +864,7 @@ static void G_ClientRespawn_(g_entity_t *ent) {
  * @brief In this case, voluntary means that the client has explicitly requested
  * a respawn by changing their spectator status.
  */
-void G_ClientRespawn(g_entity_t *ent, _Bool voluntary) {
+void G_ClientRespawn(g_entity_t *ent, bool voluntary) {
 
 	G_ClientRespawn_(ent);
 
@@ -971,7 +971,7 @@ void G_ClientUserInfoChanged(g_entity_t *ent, const char *user_info) {
 
 	g_strlcpy(name, s, sizeof(name));
 
-	_Bool color = false;
+	bool color = false;
 	char *c = name;
 	int32_t i = 0;
 
@@ -1050,7 +1050,7 @@ void G_ClientUserInfoChanged(g_entity_t *ent, const char *user_info) {
  * and eventually get to G_Begin()
  * Changing levels will NOT cause this to be called again.
  */
-_Bool G_ClientConnect(g_entity_t *ent, char *user_info) {
+bool G_ClientConnect(g_entity_t *ent, char *user_info) {
 
 	// check password
 	if (strlen(g_password->string) && !ent->ai) {

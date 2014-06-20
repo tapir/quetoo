@@ -316,7 +316,7 @@ void Net_WriteDeltaPlayerState(mem_buf_t *msg, const player_state_t *from, const
  * either a baseline or a previous packet_entity
  */
 void Net_WriteDeltaEntity(mem_buf_t *msg, const entity_state_t *from, const entity_state_t *to,
-		_Bool force, _Bool is_new) {
+		bool force, bool is_new) {
 
 	uint16_t bits = 0;
 

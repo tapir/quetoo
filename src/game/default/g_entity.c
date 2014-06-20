@@ -276,7 +276,7 @@ static void G_ParseField(const char *key, const char *value, g_entity_t *ent) {
  * in said string. The entity should be a properly initialized free entity.
  */
 static const char *G_ParseEntity(const char *data, g_entity_t *ent) {
-	_Bool init;
+	bool init;
 	char key[MAX_QPATH];
 	const char *tok;
 

@@ -82,7 +82,7 @@ typedef struct {
 	int32_t num_area_portals;
 	d_bsp_area_portal_t area_portals[MAX_BSP_AREA_PORTALS];
 
-	_Bool portal_open[MAX_BSP_AREA_PORTALS];
+	bool portal_open[MAX_BSP_AREA_PORTALS];
 	int32_t flood_valid;
 } cm_bsp_t;
 

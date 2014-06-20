@@ -40,7 +40,7 @@ typedef struct r_media_s {
 	char name[MAX_QPATH];
 	GList *dependencies;
 	void (*Register)(struct r_media_s *self);
-	_Bool (*Retain)(struct r_media_s *self);
+	bool (*Retain)(struct r_media_s *self);
 	void (*Free)(struct r_media_s *self);
 	int32_t seed;
 } r_media_t;
@@ -668,7 +668,7 @@ typedef struct r_entity_s {
 	matrix4x4_t matrix;
 	matrix4x4_t inverse_matrix;
 
-	_Bool culled;
+	bool culled;
 
 	const r_model_t *model;
 
@@ -834,7 +834,7 @@ typedef struct {
 	uint32_t num_mesh_models;
 	uint32_t num_mesh_tris;
 
-	_Bool update; // inform the client of state changes
+	bool update; // inform the client of state changes
 } r_view_t;
 
 /*
@@ -857,7 +857,7 @@ typedef struct {
 	/*
 	 * @brief True if fullscreen, false if windowed.
 	 */
-	_Bool fullscreen;
+	bool fullscreen;
 } r_context_t;
 
 #endif /* __R_TYPES_H__ */

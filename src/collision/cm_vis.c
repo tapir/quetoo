@@ -24,7 +24,7 @@
 /*
  * @brief If true, BSP area culling is skipped.
  */
-_Bool cm_no_areas;
+bool cm_no_areas;
 
 /*
  * @brief
@@ -138,7 +138,7 @@ void Cm_FloodAreas(void) {
  * connections, updating their flood counts such that Cm_WriteAreaBits
  * will return the correct information.
  */
-void Cm_SetAreaPortalState(const int32_t portal_num, const _Bool open) {
+void Cm_SetAreaPortalState(const int32_t portal_num, const bool open) {
 
 	if (portal_num > cm_bsp.num_area_portals) {
 		Com_Error(ERR_DROP, "Portal %d > num_area_portals", portal_num);
@@ -151,7 +151,7 @@ void Cm_SetAreaPortalState(const int32_t portal_num, const _Bool open) {
 /*
  * @brief Returns true if the specified areas are connected.
  */
-_Bool Cm_AreasConnected(const int32_t area1, const int32_t area2) {
+bool Cm_AreasConnected(const int32_t area1, const int32_t area2) {
 
 	if (cm_no_areas)
 		return true;
@@ -196,7 +196,7 @@ int32_t Cm_WriteAreaBits(const int32_t area, byte *out) {
  * @brief Returns true if any leaf under head_node has a cluster that
  * is potentially visible.
  */
-_Bool Cm_HeadnodeVisible(const int32_t node_num, const byte *vis) {
+bool Cm_HeadnodeVisible(const int32_t node_num, const byte *vis) {
 	const cm_bsp_node_t *node;
 
 	if (node_num < 0) { // at a leaf, check it

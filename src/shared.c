@@ -41,7 +41,7 @@ vec3_t vec3_forward = { 0.0, 1.0, 0.0 };
 int32_t Random(void) {
 
 	static uint32_t state = 0;
-	static _Bool uninitalized = true;
+	static bool uninitalized = true;
 
 	if (uninitalized) {
 		state = (uint32_t) time(NULL);
@@ -246,7 +246,7 @@ void AngleLerp(const vec3_t from, const vec3_t to, const vec_t frac, vec3_t out)
 /*
  * @return True if the specified boxes intersect (overlap), false otherwise.
  */
-_Bool BoxIntersect(const vec3_t mins0, const vec3_t maxs0, const vec3_t mins1, const vec3_t maxs1) {
+bool BoxIntersect(const vec3_t mins0, const vec3_t maxs0, const vec3_t mins1, const vec3_t maxs1) {
 
 	if (mins0[0] >= maxs1[0] || mins0[1] >= maxs1[1] || mins0[2] >= maxs1[2])
 		return false;
@@ -529,7 +529,7 @@ char *CommonPrefix(GList *words) {
 /*
  * @brief Handles wildcard suffixes for GlobMatch.
  */
-static _Bool GlobMatchStar(const char *pattern, const char *text) {
+static bool GlobMatchStar(const char *pattern, const char *text) {
 	const char *p = pattern, *t = text;
 	register char c, c1;
 
@@ -573,7 +573,7 @@ static _Bool GlobMatchStar(const char *pattern, const char *text) {
  * To suppress the special syntactic significance of any of `[]*?!-\',
  * and match the character exactly, precede it with a `\'.
  */
-_Bool GlobMatch(const char *pattern, const char *text) {
+bool GlobMatch(const char *pattern, const char *text) {
 	const char *p = pattern, *t = text;
 	register char c;
 
@@ -939,7 +939,7 @@ void DeleteUserInfo(char *s, const char *key) {
  * @brief Returns true if the specified user-info string appears valid, false
  * otherwise.
  */
-_Bool ValidateUserInfo(const char *s) {
+bool ValidateUserInfo(const char *s) {
 	if (!s || !*s)
 		return false;
 	if (strstr(s, "\""))

@@ -28,7 +28,7 @@ static void G_Give_f(g_entity_t *ent) {
 	const g_item_t *it;
 	int32_t index, quantity;
 	uint32_t i;
-	_Bool give_all;
+	bool give_all;
 	g_entity_t *it_ent;
 
 	if (sv_max_clients->integer > 1 && !g_cheats->value) {
@@ -488,8 +488,8 @@ static void G_Say_f(g_entity_t *ent) {
 
 	text[0] = '\0';
 
-	_Bool team = false; // whether or not we're dealing with team chat
-	_Bool arg0 = true; // whether or not we need to print arg0
+	bool team = false; // whether or not we're dealing with team chat
+	bool arg0 = true; // whether or not we need to print arg0
 
 	if (!g_strcmp0(gi.Argv(0), "say") || !g_strcmp0(gi.Argv(0), "say_team")) {
 		arg0 = false;
@@ -613,7 +613,7 @@ static const char *vote_cmds[] = {
  * true if the command received help and may therefore be ignored, false
  * otherwise.
  */
-static _Bool Vote_Help(g_entity_t *ent) {
+static bool Vote_Help(g_entity_t *ent) {
 	size_t i, j, len;
 	char msg[1024];
 
@@ -774,7 +774,7 @@ static void G_Vote_f(g_entity_t *ent) {
 /*
  * @brief Returns true if the client's team was changed, false otherwise.
  */
-_Bool G_AddClientToTeam(g_entity_t *ent, const char *team_name) {
+bool G_AddClientToTeam(g_entity_t *ent, const char *team_name) {
 	g_team_t *team;
 
 	if (g_level.match_time && g_level.match_time <= g_level.time) {
@@ -1053,7 +1053,7 @@ static void G_Unready_f(g_entity_t *ent) {
  * @brief
  */
 static void G_Spectate_f(g_entity_t *ent) {
-	_Bool spectator;
+	bool spectator;
 
 	// prevent spectator spamming
 	if (g_level.time - ent->client->locals.respawn_time < 3000)

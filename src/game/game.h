@@ -96,12 +96,12 @@ struct g_entity_s {
 	/*
 	 * @brief True if the entity is currently allocated and active.
 	 */
-	_Bool in_use;
+	bool in_use;
 
 	/*
 	 * @brief True if the entity represents an AI-controlled client.
 	 */
-	_Bool ai;
+	bool ai;
 
 	/*
 	 * @brief Server-specific flags bitmask (e.g. SVF_NO_CLIENT).
@@ -269,15 +269,15 @@ typedef struct {
 	 * @brief PVS and PHS query facilities, returning true if the two points
 	 * can see or hear each other.
 	 */
-	_Bool (*inPVS)(const vec3_t p1, const vec3_t p2);
-	_Bool (*inPHS)(const vec3_t p1, const vec3_t p2);
+	bool (*inPVS)(const vec3_t p1, const vec3_t p2);
+	bool (*inPHS)(const vec3_t p1, const vec3_t p2);
 
 	/*
 	 * @brief Area portal management, for doors and other entities that
 	 * manipulate BSP visibility.
 	 */
-	void (*SetAreaPortalState)(int32_t portal_num, _Bool open);
-	_Bool (*AreasConnected)(int32_t area1, int32_t area2);
+	void (*SetAreaPortalState)(int32_t portal_num, bool open);
+	bool (*AreasConnected)(int32_t area1, int32_t area2);
 
 	/*
 	 * @brief All solid and trigger entities must be linked when they are
@@ -310,7 +310,7 @@ typedef struct {
 	 * @brief Network messaging facilities.
 	 */
 	void (*Multicast)(const vec3_t origin, multicast_t to);
-	void (*Unicast)(const g_entity_t *ent, const _Bool reliable);
+	void (*Unicast)(const g_entity_t *ent, const bool reliable);
 	void (*WriteData)(const void *data, size_t len);
 	void (*WriteChar)(const int32_t c);
 	void (*WriteByte)(const int32_t c);
@@ -366,7 +366,7 @@ typedef struct {
 	/*
 	 * @brief Called when a client connects with valid user information.
 	 */
-	_Bool (*ClientConnect)(g_entity_t *ent, char *user_info);
+	bool (*ClientConnect)(g_entity_t *ent, char *user_info);
 
 	/*
 	 * @brief Called when a client has fully spawned and should begin thinking.
