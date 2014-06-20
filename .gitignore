@@ -53,3 +53,15 @@ test-driver
 *.opensdf
 *.sdf
 *.suo
+*.log
+*.pdb*.idb
+.gitignore
+.gitattributes
+
+*.pdb
+*.vsp
+*.idb
+*.ipch
+*.res
+*.pch
+*.lastcodeanalysissucceeded
