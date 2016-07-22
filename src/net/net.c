@@ -52,34 +52,45 @@ const char *Net_GetErrorString(void) {
 }
 
 /*
- * @brief Initializes the specified sockaddr_in according to the net_addr_t.
+ * @brief Initializes the specified sockaddr according to the net_addr_t.
  */
-void Net_NetAddrToSockaddr(const net_addr_t *a, struct sockaddr_in *s) {
+void Net_NetAddrToSockaddr(const net_addr_t *a, struct sockaddr *s) {
 
 	memset(s, 0, sizeof(*s));
-	s->sin_family = AF_INET;
 
 	if (a->type == NA_BROADCAST) {
-		*(uint32_t *) &s->sin_addr = -1;
-	} else if (a->type == NA_DATAGRAM) {
-		*(in_addr_t *) &s->sin_addr = a->addr;
-	}
-
-	s->sin_port = a->port;
+		((struct sockaddr_in *)s)->sin_family = AF_INET;
+		((struct sockaddr_in *)s)->sin_port = a->port;
+                ((struct sockaddr_in *)s)->sin_addr.s_addr = INADDR_BROADCAST;
+        }
+        else if( a->type == NA_IP ) {
+                ((struct sockaddr_in *)s)->sin_family = AF_INET;
+                ((struct sockaddr_in *)s)->sin_addr.s_addr = *(int *)&a->ip4;
+                ((struct sockaddr_in *)s)->sin_port = a->port;
+        }
+        else if( a->type == NA_IP6 ) {
+                ((struct sockaddr_in6 *)s)->sin6_family = AF_INET6;
+                ((struct sockaddr_in6 *)s)->sin6_addr = * ((struct in6_addr *) &a->ip6);
+                ((struct sockaddr_in6 *)s)->sin6_port = a->port;
+                ((struct sockaddr_in6 *)s)->sin6_scope_id = a->scope_id;
+        }		
 }
 
 /*
  * @return True if the addresses share the same base and port.
  */
 _Bool Net_CompareNetaddr(const net_addr_t *a, const net_addr_t *b) {
-	return a->addr == b->addr && a->port == b->port;
+	if (a->type == b->type) {
+		return a->ip4 == b->ip4 && a->ip6 == b->ip6 && a->port == b->port;
+	}
+	return false;
 }
 
 /*
  * @return True if the addresses share the same type and base.
  */
 _Bool Net_CompareClientNetaddr(const net_addr_t *a, const net_addr_t *b) {
-	return a->type == b->type && a->addr == b->addr;
+	return a->type == b->type && a->ip4 == b->ip4 && a->ip6 == b->ip6;
 }
 
 /*
@@ -93,6 +104,18 @@ const char *Net_NetaddrToString(const net_addr_t *a) {
 	return s;
 }
 
+// look for a specific address type (v6 or v4)
+static struct addrinfo *Net_SearchAddrInfo(struct addrinfo *hints, sa_family_t family) {
+	while (hints) {
+		if (hints->ai_family == family)
+			return hints;
+
+		hints = hints->ai_next;
+	}
+
+        return NULL;
+}
+
 /*
  * @brief Resolve internet hostnames to sockaddr. Examples:
  *
@@ -102,9 +125,9 @@ const char *Net_NetaddrToString(const net_addr_t *a) {
  * 192.246.40.70
  * 192.246.40.70:28000
  */
-_Bool Net_StringToSockaddr(const char *s, struct sockaddr_in *saddr) {
+_Bool Net_StringToSockaddr(const char *s, struct sockaddr *sa, size_t sa_len, sa_family_t family) {
 
-	memset(saddr, 0, sizeof(*saddr));
+	memset(saddr, 0, sizeof(*sa));
 
 	char *node = g_strdup(s);
 
@@ -114,38 +137,86 @@ _Bool Net_StringToSockaddr(const char *s, struct sockaddr_in *saddr) {
 	}
 
 	const struct addrinfo hints = {
-		.ai_family = AF_INET,
+		.ai_family = family,
 		.ai_socktype = SOCK_DGRAM,
 	};
 
 	struct addrinfo *info;
 	if (getaddrinfo(node, service, &hints, &info) == 0) {
-		*saddr = *(struct sockaddr_in *) info->ai_addr;
+
+		struct addrinfo *search = NULL;
+
+		if (family == AF_UNSPEC) {
+
+			// prioritize IPv6
+			search = Net_SearchAddrInfo(res, AF_INET6);
+			if (!search) {
+				search = Net_SearchAddrInfo(res, AF_INET);
+			}
+		} else {
+			search = Net_SearchAddrInfo(res, family);
+		}
+
+		if (search) {
+			if (search->ai_addrlen > sa_len)
+				search->ai_addrlen = sa_len;
+			
+			memcpy(sa, search->ai_addr, search->ai_addrlen);
+			freeaddrinfo(res);
+
+			return true;
+		} else {
+			Com_Printf("Net_StringToSockaddr: Error resolving %s: No address of required type found.\n", s);
+		}	
+	} else {
+		Com_Printf("Net_StringToSockaddr: Error resolving '%s'\n", s);	
 	}
 
 	g_free(node);
 
-	return saddr->sin_addr.s_addr != 0;
+	return true;
+}
+
+// fill up the network address from the socket
+static void Net_SockaddrToNetAddr(struct sockaddr *s, net_addr_t *a) {
+
+	if (s->sa_family == AF_INET) {
+                a->type = NA_IPV4;
+                *(int *)&a->ip = ((struct sockaddr_in *)s)->sin_addr.s_addr;
+                a->port = ((struct sockaddr_in *)s)->sin_port;
+        }
+        else if(s->sa_family == AF_INET6)
+        {
+                a->type = NA_IPV6;
+                memcpy(a->ip6, &((struct sockaddr_in6 *)s)->sin6_addr, sizeof(a->ip6));
+                a->port = ((struct sockaddr_in6 *)s)->sin6_port;
+                a->scope_id = ((struct sockaddr_in6 *)s)->sin6_scope_id;
+        }
 }
 
 /*
  * @brief Parses the hostname and port into the specified net_addr_t.
  */
-_Bool Net_StringToNetaddr(const char *s, net_addr_t *a) {
-	struct sockaddr_in saddr;
+_Bool Net_StringToNetaddr(const char *s, net_addr_t *a, net_addr_type_t type) {
+	//struct sockaddr_in saddr;
+	struct sockaddr_storage saddr;
+	sa_family_t family;
 
-	if (!Net_StringToSockaddr(s, &saddr))
+	switch (type) {
+		case NA_IPV4:
+			family = AF_INET;
+			break;
+		case NA_IPV6:
+			family = AF_INET6;
+			break;
+		default:
+			family = AF_UNSPEC;
+	}
+
+	if (!Net_StringToSockaddr(s, (struct sockaddr *)&saddr), sizeof(saddr), family)
 		return false;
 
-	a->addr = saddr.sin_addr.s_addr;
-
-	if (g_strcmp0(s, "localhost") == 0) {
-		a->port = 0;
-		a->type = NA_LOOP;
-	} else {
-		a->port = saddr.sin_port;
-		a->type = NA_DATAGRAM;
-	}
+	Net_SockaddrToNetAddr((struct sockaddr *)&saddr, a);
 
 	return true;
 }
