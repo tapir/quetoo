@@ -52,12 +52,17 @@ const char *Net_GetErrorString(void) {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
  * @brief Initializes the specified sockaddr_in according to the net_addr_t.
 =======
 /*
  * @brief Initializes the specified sockaddr according to the net_addr_t.
 >>>>>>> finally starting...
+=======
+/*
+ * @brief Initializes the specified sockaddr according to the net_addr_t.
+>>>>>>> f50121febf52faf4d8d69661b9deb7eee07d077a
  */
 void Net_NetAddrToSockaddr(const net_addr_t *a, struct sockaddr *s) {
 
@@ -78,7 +83,11 @@ void Net_NetAddrToSockaddr(const net_addr_t *a, struct sockaddr *s) {
                 ((struct sockaddr_in6 *)s)->sin6_addr = * ((struct in6_addr *) &a->ip6);
                 ((struct sockaddr_in6 *)s)->sin6_port = a->port;
                 ((struct sockaddr_in6 *)s)->sin6_scope_id = a->scope_id;
+<<<<<<< HEAD
         }	
+=======
+        }		
+>>>>>>> f50121febf52faf4d8d69661b9deb7eee07d077a
 }
 
 /**
@@ -110,8 +119,11 @@ const char *Net_NetaddrToString(const net_addr_t *a) {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
 =======
+=======
+>>>>>>> f50121febf52faf4d8d69661b9deb7eee07d077a
 // look for a specific address type (v6 or v4)
 static struct addrinfo *Net_SearchAddrInfo(struct addrinfo *hints, sa_family_t family) {
 	while (hints) {
@@ -169,21 +181,51 @@ _Bool Net_StringToSockaddr(const char *s, struct sockaddr *sa, size_t sa_len, sa
 		if (search) {
 			if (search->ai_addrlen > sa_len)
 				search->ai_addrlen = sa_len;
+<<<<<<< HEAD
 
+=======
+			
+>>>>>>> f50121febf52faf4d8d69661b9deb7eee07d077a
 			memcpy(sa, search->ai_addr, search->ai_addrlen);
 			freeaddrinfo(res);
 
 			return true;
 		} else {
 			Com_Printf("Net_StringToSockaddr: Error resolving %s: No address of required type found.\n", s);
+<<<<<<< HEAD
 		}
 	} else {
 		Com_Printf("Net_StringToSockaddr: Error resolving '%s'\n", s);
+=======
+		}	
+	} else {
+		Com_Printf("Net_StringToSockaddr: Error resolving '%s'\n", s);	
+>>>>>>> f50121febf52faf4d8d69661b9deb7eee07d077a
 	}
 
 	g_free(node);
 
 	return true;
+<<<<<<< HEAD
+=======
+}
+
+// fill up the network address from the socket
+static void Net_SockaddrToNetAddr(struct sockaddr *s, net_addr_t *a) {
+
+	if (s->sa_family == AF_INET) {
+                a->type = NA_IPV4;
+                *(int *)&a->ip = ((struct sockaddr_in *)s)->sin_addr.s_addr;
+                a->port = ((struct sockaddr_in *)s)->sin_port;
+        }
+        else if(s->sa_family == AF_INET6)
+        {
+                a->type = NA_IPV6;
+                memcpy(a->ip6, &((struct sockaddr_in6 *)s)->sin6_addr, sizeof(a->ip6));
+                a->port = ((struct sockaddr_in6 *)s)->sin6_port;
+                a->scope_id = ((struct sockaddr_in6 *)s)->sin6_scope_id;
+        }
+>>>>>>> f50121febf52faf4d8d69661b9deb7eee07d077a
 }
 
 // fill up the network address from the socket
