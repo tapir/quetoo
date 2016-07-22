@@ -28,7 +28,8 @@
 #include <ws2tcpip.h>
 
 #include <inttypes.h>
-typedef uint32_t in_addr_t;
+// typedef uint32_t in_addr_t;
+typedef byte in_addr_t;
 typedef uint16_t in_port_t;
 
 #undef  EWOULDBLOCK
@@ -57,14 +58,24 @@ typedef uint16_t in_port_t;
 typedef enum {
 	NA_LOOP,
 	NA_BROADCAST,
-	NA_DATAGRAM,
-	NA_STREAM
+	NA_IPV4,
+	NA_IPV6,
+	NA_MULTICAST6,
+	NA_UNSPEC
 } net_addr_type_t;
+
+typedef enum {
+	NP_UDP,
+	NP_TCP
+} net_proto_type_t;
 
 typedef struct {
 	net_addr_type_t type;
-	in_addr_t addr;
+	net_proto_type_t protocol;
+	in_addr_t ip4[4];
+	in_addr_t ip6[16];
 	in_port_t port;
+	uint32_t scope;	// v6 link-local stuff
 } net_addr_t;
 
 typedef enum {
