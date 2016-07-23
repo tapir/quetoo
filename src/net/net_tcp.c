@@ -31,12 +31,19 @@
  *
  * @param host The host to connect to. See Net_StringToNetaddr.
  */
-int32_t Net_Connect(const char *host, struct timeval *timeout) {
+int32_t Net_Connect(const char *host, struct timeval *timeout, sa_family_t family) {
 
-	int32_t sock = Net_Socket(NA_STREAM, NULL, 0);
+	int32_t sock = Net_Socket(NA_TCP, NULL, 0);
 
-	struct sockaddr_in to;
-	Net_StringToSockaddr(host, &to);
+	struct sockaddr to;
+    size_t sa_len;
+    
+    if (family == AF_INET6)
+        sa_len = sizeof(struct sockaddr_in6);
+    else
+        sa_len = sizeof(struct sockaddr_in);
+    
+	Net_StringToSockaddr(host, &to, sa_len, family);
 
 	if (connect(sock, (const struct sockaddr *) &to, sizeof(to)) == -1) {
 
