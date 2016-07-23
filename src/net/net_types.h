@@ -61,17 +61,21 @@ typedef enum {
 	NA_IPV4,
 	NA_IPV6,
 	NA_MULTICAST6,
-	NA_UNSPEC
+	NA_UNSPEC,
+	NA_UDP,
+	NA_TCP
 } net_addr_type_t;
 
+/*
 typedef enum {
 	NP_UDP,
 	NP_TCP
 } net_proto_type_t;
+*/
 
 typedef struct {
 	net_addr_type_t type;
-	net_proto_type_t protocol;
+	net_addr_type_t protocol;
 	in_addr_t ip4[4];
 	in_addr_t ip6[16];
 	in_port_t port;

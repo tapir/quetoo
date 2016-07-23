@@ -51,18 +51,8 @@ const char *Net_GetErrorString(void) {
 	return strerror(Net_GetError());
 }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 /**
- * @brief Initializes the specified sockaddr_in according to the net_addr_t.
-=======
-/*
  * @brief Initializes the specified sockaddr according to the net_addr_t.
->>>>>>> finally starting...
-=======
-/*
- * @brief Initializes the specified sockaddr according to the net_addr_t.
->>>>>>> f50121febf52faf4d8d69661b9deb7eee07d077a
  */
 void Net_NetAddrToSockaddr(const net_addr_t *a, struct sockaddr *s) {
 
@@ -71,23 +61,20 @@ void Net_NetAddrToSockaddr(const net_addr_t *a, struct sockaddr *s) {
 	if (a->type == NA_BROADCAST) {
 		((struct sockaddr_in *)s)->sin_family = AF_INET;
 		((struct sockaddr_in *)s)->sin_port = a->port;
-                ((struct sockaddr_in *)s)->sin_addr.s_addr = INADDR_BROADCAST;
-        }
-        else if( a->type == NA_IP ) {
-                ((struct sockaddr_in *)s)->sin_family = AF_INET;
-                ((struct sockaddr_in *)s)->sin_addr.s_addr = *(int *)&a->ip4;
-                ((struct sockaddr_in *)s)->sin_port = a->port;
-        }
-        else if( a->type == NA_IP6 ) {
-                ((struct sockaddr_in6 *)s)->sin6_family = AF_INET6;
-                ((struct sockaddr_in6 *)s)->sin6_addr = * ((struct in6_addr *) &a->ip6);
-                ((struct sockaddr_in6 *)s)->sin6_port = a->port;
-                ((struct sockaddr_in6 *)s)->sin6_scope_id = a->scope_id;
-<<<<<<< HEAD
-        }	
-=======
-        }		
->>>>>>> f50121febf52faf4d8d69661b9deb7eee07d077a
+        ((struct sockaddr_in *)s)->sin_addr.s_addr = INADDR_BROADCAST;
+    }
+    else if( a->type == NA_IPV4 ) {
+        ((struct sockaddr_in *)s)->sin_family = AF_INET;
+        ((struct sockaddr_in *)s)->sin_addr.s_addr = *(int *)&a->ip4;
+        ((struct sockaddr_in *)s)->sin_port = a->port;
+    }
+    else if( a->type == NA_IPV6 ) {
+        ((struct sockaddr_in6 *)s)->sin6_family = AF_INET6;
+        ((struct sockaddr_in6 *)s)->sin6_addr = * ((struct in6_addr *) &a->ip6);
+        ((struct sockaddr_in6 *)s)->sin6_port = a->port;
+        ((struct sockaddr_in6 *)s)->sin6_scope_id = a->scope;
+    }
+
 }
 
 /**
@@ -107,25 +94,66 @@ _Bool Net_CompareClientNetaddr(const net_addr_t *a, const net_addr_t *b) {
 	return a->type == b->type && a->ip4 == b->ip4 && a->ip6 == b->ip6;
 }
 
+static void Net_SockaddrToString(char *dest, size_t len, struct sockaddr *sa) {
+    
+    size_t sa_len;
+    
+    if (sa->sa_family == AF_INET6)
+        sa_len = sizeof(struct sockaddr_in6);
+    else
+        sa_len = sizeof(struct sockaddr_in);
+    
+    if (getnameinfo(sa, sa_len, dest, len, NULL, 0, NI_NUMERICHOST) && len > 0) {
+        *dest = '\0';
+    }
+}
+
 /**
  * @brief
  */
 const char *Net_NetaddrToString(const net_addr_t *a) {
-	static char s[64];
-
-	g_snprintf(s, sizeof(s), "%s:%i", inet_ntoa(*(struct in_addr *) &a->addr), ntohs(a->port));
-
+	
+    static char s[64];
+    
+    if (a->type == NA_LOOP) {
+        g_snprintf(s, sizeof(s), "::0");
+    } else {
+        struct sockaddr_storage sa;
+        memset(&sa, 0, sizeof(sa));
+        Net_NetAddrToSockaddr(a, (struct sockaddr *) &sa);
+        Net_SockaddrToString(s, sizeof(s), (struct sockaddr *) &sa);
+    }
+	//g_snprintf(s, sizeof(s), "%s:%i", inet_ntoa(*(struct in_addr *) &a->addr), ntohs(a->port));
+    
 	return s;
 }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 /**
-=======
-=======
->>>>>>> f50121febf52faf4d8d69661b9deb7eee07d077a
+ * @brief Compare network addresses up to netmask length
+ */
+_Bool Net_CompareBaseAddrMask(const net_addr_t a, const net_addr_t b, size_t netmask) {
+    
+    //byte comparemask, *addra, *addrb;
+    //uint32_t currentbyte;
+    
+    if (a.type != b.type)
+        return false;
+    
+    if (a.type == NA_LOOP)
+        return true;
+    
+    if (a.type == NA_IPV4) {
+        
+    } else  if (a.type == NA_IPV6) {
+        
+    }
+    
+    return false;
+}
+
 // look for a specific address type (v6 or v4)
 static struct addrinfo *Net_SearchAddrInfo(struct addrinfo *hints, sa_family_t family) {
+    
 	while (hints) {
 		if (hints->ai_family == family)
 			return hints;
@@ -133,11 +161,10 @@ static struct addrinfo *Net_SearchAddrInfo(struct addrinfo *hints, sa_family_t f
 		hints = hints->ai_next;
 	}
 
-        return NULL;
+    return NULL;
 }
 
 /*
->>>>>>> finally starting...
  * @brief Resolve internet hostnames to sockaddr. Examples:
  *
  * localhost
@@ -148,7 +175,7 @@ static struct addrinfo *Net_SearchAddrInfo(struct addrinfo *hints, sa_family_t f
  */
 _Bool Net_StringToSockaddr(const char *s, struct sockaddr *sa, size_t sa_len, sa_family_t family) {
 
-	memset(saddr, 0, sizeof(*sa));
+	memset(sa, 0, sizeof(*sa));
 
 	char *node = g_strdup(s);
 
@@ -165,7 +192,7 @@ _Bool Net_StringToSockaddr(const char *s, struct sockaddr *sa, size_t sa_len, sa
 	struct addrinfo *info;
 	if (getaddrinfo(node, service, &hints, &info) == 0) {
 
-		struct addrinfo *search = NULL;
+		struct addrinfo *search, *res = NULL;
 
 		if (family == AF_UNSPEC) {
 
@@ -181,41 +208,30 @@ _Bool Net_StringToSockaddr(const char *s, struct sockaddr *sa, size_t sa_len, sa
 		if (search) {
 			if (search->ai_addrlen > sa_len)
 				search->ai_addrlen = sa_len;
-<<<<<<< HEAD
 
-=======
-			
->>>>>>> f50121febf52faf4d8d69661b9deb7eee07d077a
 			memcpy(sa, search->ai_addr, search->ai_addrlen);
 			freeaddrinfo(res);
 
 			return true;
 		} else {
 			Com_Printf("Net_StringToSockaddr: Error resolving %s: No address of required type found.\n", s);
-<<<<<<< HEAD
 		}
 	} else {
-		Com_Printf("Net_StringToSockaddr: Error resolving '%s'\n", s);
-=======
-		}	
-	} else {
 		Com_Printf("Net_StringToSockaddr: Error resolving '%s'\n", s);	
->>>>>>> f50121febf52faf4d8d69661b9deb7eee07d077a
 	}
 
 	g_free(node);
 
 	return true;
-<<<<<<< HEAD
-=======
 }
+
 
 // fill up the network address from the socket
 static void Net_SockaddrToNetAddr(struct sockaddr *s, net_addr_t *a) {
 
 	if (s->sa_family == AF_INET) {
                 a->type = NA_IPV4;
-                *(int *)&a->ip = ((struct sockaddr_in *)s)->sin_addr.s_addr;
+                *(int *)&a->ip4 = ((struct sockaddr_in *)s)->sin_addr.s_addr;
                 a->port = ((struct sockaddr_in *)s)->sin_port;
         }
         else if(s->sa_family == AF_INET6)
@@ -223,25 +239,7 @@ static void Net_SockaddrToNetAddr(struct sockaddr *s, net_addr_t *a) {
                 a->type = NA_IPV6;
                 memcpy(a->ip6, &((struct sockaddr_in6 *)s)->sin6_addr, sizeof(a->ip6));
                 a->port = ((struct sockaddr_in6 *)s)->sin6_port;
-                a->scope_id = ((struct sockaddr_in6 *)s)->sin6_scope_id;
-        }
->>>>>>> f50121febf52faf4d8d69661b9deb7eee07d077a
-}
-
-// fill up the network address from the socket
-static void Net_SockaddrToNetAddr(struct sockaddr *s, net_addr_t *a) {
-
-	if (s->sa_family == AF_INET) {
-                a->type = NA_IPV4;
-                *(int *)&a->ip = ((struct sockaddr_in *)s)->sin_addr.s_addr;
-                a->port = ((struct sockaddr_in *)s)->sin_port;
-        }
-        else if(s->sa_family == AF_INET6)
-        {
-                a->type = NA_IPV6;
-                memcpy(a->ip6, &((struct sockaddr_in6 *)s)->sin6_addr, sizeof(a->ip6));
-                a->port = ((struct sockaddr_in6 *)s)->sin6_port;
-                a->scope_id = ((struct sockaddr_in6 *)s)->sin6_scope_id;
+                a->scope = ((struct sockaddr_in6 *)s)->sin6_scope_id;
         }
 }
 
@@ -249,7 +247,7 @@ static void Net_SockaddrToNetAddr(struct sockaddr *s, net_addr_t *a) {
  * @brief Parses the hostname and port into the specified net_addr_t.
  */
 _Bool Net_StringToNetaddr(const char *s, net_addr_t *a, net_addr_type_t type) {
-	//struct sockaddr_in saddr;
+
 	struct sockaddr_storage saddr;
 	sa_family_t family;
 
@@ -264,7 +262,7 @@ _Bool Net_StringToNetaddr(const char *s, net_addr_t *a, net_addr_type_t type) {
 			family = AF_UNSPEC;
 	}
 
-	if (!Net_StringToSockaddr(s, (struct sockaddr *)&saddr), sizeof(saddr), family)
+	if (!Net_StringToSockaddr(s, (struct sockaddr *) &saddr, sizeof(saddr), family))
 		return false;
 
 	Net_SockaddrToNetAddr((struct sockaddr *)&saddr, a);
@@ -280,7 +278,7 @@ int32_t Net_Socket(net_addr_type_t type, const char *iface, in_port_t port) {
 
 	switch (type) {
 		case NA_BROADCAST:
-		case NA_DATAGRAM:
+		case NA_UDP:
 			if ((sock = socket(PF_INET, SOCK_DGRAM, IPPROTO_UDP)) == -1) {
 				Com_Error(ERR_DROP, "socket: %s\n", Net_GetErrorString());
 			}
@@ -290,7 +288,7 @@ int32_t Net_Socket(net_addr_type_t type, const char *iface, in_port_t port) {
 			}
 			break;
 
-		case NA_STREAM:
+		case NA_TCP:
 			if ((sock = socket(PF_INET, SOCK_STREAM, 0)) == -1) {
 				Com_Error(ERR_DROP, "socket: %s\n", Net_GetErrorString());
 			}
@@ -309,17 +307,17 @@ int32_t Net_Socket(net_addr_type_t type, const char *iface, in_port_t port) {
 		Com_Error(ERR_DROP, "ioctl: %s\n", Net_GetErrorString());
 	}
 
-	struct sockaddr_in addr;
+	struct sockaddr *addr;
 	memset(&addr, 0, sizeof(addr));
 
 	if (iface) {
-		Net_StringToSockaddr(iface, &addr);
+		Net_StringToSockaddr(iface, addr, sizeof(struct sockaddr_in), AF_INET);
 	} else {
-		addr.sin_family = AF_INET;
-		addr.sin_addr.s_addr = INADDR_ANY;
+		((struct sockaddr_in *) addr)->sin_family = AF_INET;
+		((struct sockaddr_in *) addr)->sin_addr.s_addr = INADDR_ANY;
 	}
 
-	addr.sin_port = htons(port);
+	((struct sockaddr_in *) addr)->sin_port = htons(port);
 
 	if (bind(sock, (void *) &addr, sizeof(addr)) == -1) {
 		Com_Error(ERR_DROP, "bind: %s\n", Net_GetErrorString());
