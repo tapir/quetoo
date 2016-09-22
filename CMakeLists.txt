@@ -10,18 +10,21 @@ target_architecture (ARCH)
 
 set (CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/")
 set (CMAKE_MODULE_LINKER_FLAGS "${CMAKE_MODULE_LINKER_FLAGS} -fPIC")
-set (COMMON_C_FLAGS "-pipe -fwrapv -fno-strict-aliasing -fomit-frame-pointer -Wall -Wextra -Wno-unknown-pragmas -Wno-unused-parameter -Wno-undef -Wno-unused-variable -Wno-unused-but-set-variable")
+set (COMMON_C_FLAGS "-std=c99 -pipe -fwrapv -fno-strict-aliasing -fomit-frame-pointer -Wall -Wextra -Wno-unknown-pragmas -Wno-unused-parameter -Wno-undef -Wno-unused-variable -Wno-unused-but-set-variable")
 set (OBJ_SRC_DIR "deps/Objectively/Sources")
 set (OBJMVC_SRC_DIR "deps/ObjectivelyMVC/Sources")
 
-# opengl library
+# libraries
 
 if (WIN32 OR CYGWIN)
 	set (OPENGL_LIBRARIES "opengl32")
+	set (SOCKET_LIB "ws2_32")
 elseif (APPLE)
 	set (OPENGL_LIBRARIES "-framework OpenGL")
+	set (SOCKET_LIB "")
 else ()
 	set (OPENGL_LIBRARIES "GL")
+	set (SOCKET_LIB "")
 endif ()
 
 # default values
@@ -53,7 +56,9 @@ else ()
 	set (RSYNC_PLATFORM_NAME "linux")
 endif ()
 
-set (RSYNC_REPOSITORY "http://quetoo.org/quetoo-${RSYNC_PLATFORM_NAME}/${ARCH}")
+if (CYGWIN)
+	set (RSYNC_REPOSITORY "http://quetoo.org/quetoo-${RSYNC_PLATFORM_NAME}/${ARCH}")
+endif ()
 
 if (WIN32)
 	if (MINGW)
@@ -333,7 +338,7 @@ target_include_directories (game PUBLIC
 )
 
 target_link_libraries (game
-	ws2_32
+	${SOCKET_LIB}
 	${GLIB2_LIBRARY}
 )
 
@@ -476,7 +481,7 @@ if (MINGW)
 endif()
 
 target_link_libraries (quetoo
-	ws2_32
+	${SOCKET_LIB}
 	${SDL2_SDLMAIN_LIBRARY}
 	${SDL2_LIBRARY}
 	${SDLMIXER_LIBRARY}
@@ -545,7 +550,7 @@ if (MINGW)
 endif()
 
 target_link_libraries (quetoo-dedicated
-	ws2_32
+	${SOCKET_LIB}
 	${SDL2_SDLMAIN_LIBRARY}
 	${SDL2_LIBRARY}
 	${GLIB2_LIBRARY}
@@ -621,7 +626,7 @@ if (MINGW)
 endif()
 
 target_link_libraries (quemap
-	ws2_32
+	${SOCKET_LIB}
 	${SDL2_SDLMAIN_LIBRARY}
 	${SDL2_LIBRARY}
 	${SDL2_IMAGE_LIBRARY}
