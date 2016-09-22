@@ -36,7 +36,6 @@ extern s_sample_t *cg_sample_rocketlauncher_fire;
 extern s_sample_t *cg_sample_hyperblaster_fire;
 extern s_sample_t *cg_sample_hyperblaster_hit;
 extern s_sample_t *cg_sample_lightning_fire;
-extern s_sample_t *cg_sample_lightning_fly;
 extern s_sample_t *cg_sample_lightning_discharge;
 extern s_sample_t *cg_sample_railgun_fire;
 extern s_sample_t *cg_sample_bfg_fire;
@@ -49,6 +48,7 @@ extern s_sample_t *cg_sample_sparks;
 extern s_sample_t *cg_sample_footsteps[4];
 extern s_sample_t *cg_sample_rain;
 extern s_sample_t *cg_sample_snow;
+extern s_sample_t *cg_sample_underwater;
 extern s_sample_t *cg_sample_hits[2];
 extern s_sample_t *cg_sample_gib;
 
