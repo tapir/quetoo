@@ -1,7 +1,7 @@
 cmake_minimum_required (VERSION 3.0)
 project (Quetoo)
 
-# find arch and rsync platform
+# find arch
 
 include (cmake/TargetArch.cmake)
 target_architecture (ARCH)
@@ -10,7 +10,7 @@ target_architecture (ARCH)
 
 set (CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/")
 set (CMAKE_MODULE_LINKER_FLAGS "${CMAKE_MODULE_LINKER_FLAGS} -fPIC")
-set (COMMON_C_FLAGS "-std=c99 -pipe -fwrapv -fno-strict-aliasing -fomit-frame-pointer -Wall -Wextra -Wno-unknown-pragmas -Wno-unused-parameter -Wno-undef -Wno-unused-variable -Wno-unused-but-set-variable")
+set (COMMON_C_FLAGS "-pipe -fwrapv -fno-strict-aliasing -fomit-frame-pointer -Wall -Wextra -Wno-unknown-pragmas -Wno-unused-parameter -Wno-undef -Wno-unused-variable -Wno-unused-but-set-variable")
 set (OBJ_SRC_DIR "deps/Objectively/Sources")
 set (OBJMVC_SRC_DIR "deps/ObjectivelyMVC/Sources")
 
@@ -48,18 +48,6 @@ endif ()
 
 # strings
 
-if (WIN32 OR CYGWIN)
-	set (RSYNC_PLATFORM_NAME "mingw")
-elseif (APPLE)
-	set (RSYNC_PLATFORM_NAME "apple")
-else ()
-	set (RSYNC_PLATFORM_NAME "linux")
-endif ()
-
-if (CYGWIN)
-	set (RSYNC_REPOSITORY "http://quetoo.org/quetoo-${RSYNC_PLATFORM_NAME}/${ARCH}")
-endif ()
-
 if (WIN32)
 	if (MINGW)
 		set (BUILD_HOST "Windows.MINGW.${ARCH}")
@@ -90,7 +78,6 @@ add_definitions (
 	-DBINDIR="${QUETOO_BINDIR}"
 	-DPKGLIBDIR="${QUETOO_LIBDIR}"
 	-DPKGDATADIR="${QUETOO_DATADIR}"
-	-DRSYNC_REPOSITORY="$RSYNC_REPOSITORY"
 )
 
 # needed packages
@@ -120,7 +107,6 @@ message (STATUS "Install Dir .......... ${CMAKE_INSTALL_PREFIX}")
 message (STATUS "Binary Dir ........... ${QUETOO_BINDIR}")
 message (STATUS "Game Module Dir ...... ${QUETOO_LIBDIR}")
 message (STATUS "Game Data Dir ........ ${QUETOO_DATADIR}")
-message (STATUS "Rsync repo ........... ${RSYNC_REPOSITORY}")
 message (STATUS "Build Type ........... ${CMAKE_BUILD_TYPE}")
 message (STATUS "CFLAGS ............... ${FINAL_C_FLAGS}")
 message (STATUS "--------------------------------------------------------------")
