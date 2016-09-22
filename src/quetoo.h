@@ -22,7 +22,9 @@
 #ifndef __QUETOO_H__
 #define __QUETOO_H__
 
+#ifndef CMAKE_BUILD
 #include "config.h"
+#endif
 
 #include <assert.h>
 #include <glib.h>

@@ -22,7 +22,9 @@
 #include <setjmp.h>
 #include <signal.h>
 
+#ifndef CMAKE_BUILD
 #include "config.h"
+#endif
 #include "client/client.h"
 #include "server/server.h"
 
