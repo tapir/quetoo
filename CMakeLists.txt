@@ -10,7 +10,7 @@ target_architecture (ARCH)
 
 set (CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/")
 set (CMAKE_MODULE_LINKER_FLAGS "${CMAKE_MODULE_LINKER_FLAGS} -fPIC")
-set (COMMON_C_FLAGS "-pipe -fwrapv -fno-strict-aliasing -fomit-frame-pointer -Wall -Wextra -Wno-unknown-pragmas -Wno-unused-parameter -Wno-undef -Wno-unused-variable -Wno-unused-but-set-variable")
+set (COMMON_C_FLAGS "-std=c99 -pipe -fwrapv -fno-strict-aliasing -fomit-frame-pointer -Wall -Wextra -Wno-unknown-pragmas -Wno-unused-parameter -Wno-undef -Wno-unused-variable -Wno-unused-but-set-variable")
 set (OBJ_SRC_DIR "deps/Objectively/Sources")
 set (OBJMVC_SRC_DIR "deps/ObjectivelyMVC/Sources")
 
@@ -116,7 +116,7 @@ message (STATUS "")
 ## minizip ##
 #############
 
-add_library (minizip STATIC
+add_library (minizip
 	deps/minizip/zip.c
 	deps/minizip/ioapi.c
 )
@@ -181,7 +181,7 @@ target_include_directories (objectively PUBLIC
 )
 
 if (NOT CYGWIN)
-	target_link_libraries (objectively msvcr110 regex)
+	target_link_libraries (objectively regex)
 endif ()
 
 target_link_libraries (objectively
@@ -189,6 +189,10 @@ target_link_libraries (objectively
 	${CURL_LIBRARIES}
 	${ICONV_LIBRARIES}
 )
+
+if (CYGWIN OR UNIX)
+	target_compile_definitions (objectively PRIVATE _GNU_SOURCE)
+endif ()
 
 ####################
 ## ObjectivelyMVC ##
@@ -239,7 +243,7 @@ if (MINGW)
 endif()
 
 target_link_libraries (objectivelymvc
-	objectively
+	objectively.dll
 	${SDL2_SDLMAIN_LIBRARY}
 	${SDL2_LIBRARY}
 	${SDL2_IMAGE_LIBRARY}
@@ -247,6 +251,10 @@ target_link_libraries (objectivelymvc
 	${OPENGL_LIBRARIES}
 	${FONTCONFIG_LIBRARIES}
 )
+
+if (CYGWIN OR UNIX)
+	target_compile_definitions (objectivelymvc PRIVATE _GNU_SOURCE)
+endif ()
 
 ###########
 ## cgame ##
