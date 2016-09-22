@@ -1,0 +1,6 @@
+[submodule "deps/Objectively"]
+	path = deps/Objectively
+	url = https://github.com/jdolan/Objectively.git
+[submodule "deps/ObjectivelyMVC"]
+	path = deps/ObjectivelyMVC
+	url = https://github.com/jdolan/ObjectivelyMVC.git
