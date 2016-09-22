@@ -108,9 +108,9 @@ find_package (Check)
 # summary
 
 message (STATUS "")
-message (STATUS "------------------------------------")
+message (STATUS "--------------------------------------------------------------")
 message (STATUS "${QUETOO_STRING} ${QUETOO_VERSION} ${BUILD_HOST}")
-message (STATUS "------------------------------------")
+message (STATUS "--------------------------------------------------------------")
 message (STATUS "Install Dir .......... ${CMAKE_INSTALL_PREFIX}")
 message (STATUS "Binary Dir ........... ${QUETOO_BINDIR}")
 message (STATUS "Game Module Dir ...... ${QUETOO_LIBDIR}")
@@ -118,7 +118,7 @@ message (STATUS "Game Data Dir ........ ${QUETOO_DATADIR}")
 message (STATUS "Rsync repo ........... ${RSYNC_REPOSITORY}")
 message (STATUS "Build Type ........... ${CMAKE_BUILD_TYPE}")
 message (STATUS "CFLAGS ............... ${FINAL_C_FLAGS}")
-message (STATUS "------------------------------------")
+message (STATUS "--------------------------------------------------------------")
 message (STATUS "")
 
 #############
