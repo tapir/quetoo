@@ -180,7 +180,12 @@ target_include_directories (objectively PUBLIC
 	${OBJ_SRC_DIR}
 )
 
+if (NOT CYGWIN)
+	target_link_libraries (objectively msvcr110 regex)
+endif ()
+
 target_link_libraries (objectively
+	pthread
 	${CURL_LIBRARIES}
 	${ICONV_LIBRARIES}
 )
