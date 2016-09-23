@@ -26,7 +26,7 @@ Preview releases of _Quetoo_ for all platforms are available for download on the
 
 Compilation of _Quetoo_ is only recommended for users running GNU/Linux or Mac OS X. Windows users should consider using our cross-compiled snapshots. For more information, see [Installation and Maintenance](http://quetoo.org/books/documentation/installation-and-maintenance).
 
-### Autotools
+### Build with autotools
 
 To build it, run the following:
 
@@ -34,21 +34,30 @@ To build it, run the following:
     ./configure [--with-tests --with-master]
     make && sudo make install
 
-### Cmake
+### Build with Cmake
+
+Options:
+	
+	-DCMAKE_BUILD_TYPE=[Release|Debug|RelWithDebInfo] (Default: RelWithDebInfo)
+	-DCMAKE_INSTALL_PREFIX=[INSTALL_PATH]
+	-DBUILD_TESTS=[On|Off] (Defeault: Off)
 
 To build it with MSYS:
 
-    cmake -G "MSYS Makefiles" [-DCMAKE_INSTALL_PREFIX=...] [-DBUILD_TESTS=1] .
+	mkdir build && cd build
+    cmake -G "MSYS Makefiles" [OPTIONS] ..
     make && make install
 
 To build it with MINGW:
 
-    cmake -G "MinGW Makefiles" [-DCMAKE_INSTALL_PREFIX=...] [-DBUILD_TESTS=1] .
+	mkdir build && cd build
+    cmake -G "MinGW Makefiles" [OPTIONS] ..
     make && make install
 
 To build it with Cygwin and Linux:
 
-    cmake -G [-DCMAKE_INSTALL_PREFIX=...] [-DBUILD_TESTS=1] .
+	mkdir build && cd build
+    cmake -G [OPTIONS] ..
     make && make install
 
 ## Installing
