@@ -10,20 +10,23 @@ target_architecture (ARCH)
 
 set (CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/")
 set (CMAKE_MODULE_LINKER_FLAGS "${CMAKE_MODULE_LINKER_FLAGS} -fPIC")
-set (COMMON_C_FLAGS "-std=c99 -pipe -fwrapv -fno-strict-aliasing -fomit-frame-pointer -Wall -Wextra -Wno-unknown-pragmas -Wno-unused-parameter -Wno-undef -Wno-unused-variable -Wno-unused-but-set-variable")
+set (CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wl,-no-undefined,-allow-multiple-definition ")
+set (COMMON_C_FLAGS "-std=c11 -pipe -fwrapv -fno-strict-aliasing -fomit-frame-pointer -Wall -Wno-unknown-pragmas -Wno-unused-parameter -Wno-unused-variable -Wno-unused-but-set-variable")
 set (OBJ_SRC_DIR "deps/Objectively/Sources")
 set (OBJMVC_SRC_DIR "deps/ObjectivelyMVC/Sources")
 
 # libraries
 
 if (WIN32 OR CYGWIN)
-	set (OPENGL_LIBRARIES "opengl32")
+	set (OPENGL_LIB "opengl32")
+	set (GLU_LIB "glu32")
 	set (SOCKET_LIB "ws2_32")
 elseif (APPLE)
-	set (OPENGL_LIBRARIES "-framework OpenGL")
+	set (OPENGL_LIB "-framework OpenGL")
 	set (SOCKET_LIB "")
 else ()
-	set (OPENGL_LIBRARIES "GL")
+	set (OPENGL_LIB "GL")
+	set (GLU_LIB "GLU")
 	set (SOCKET_LIB "")
 endif ()
 
@@ -121,7 +124,7 @@ add_library (minizip
 	deps/minizip/ioapi.c
 )
 
-target_include_directories (minizip PUBLIC deps/minizip)
+target_include_directories (minizip PRIVATE deps/minizip)
 
 target_link_libraries (minizip z)
 
@@ -176,21 +179,20 @@ add_library (objectively
 	${OBJ_SRC_DIR}/Objectively/Value.c
 )
 
-target_include_directories (objectively PUBLIC
+target_include_directories (objectively PRIVATE
 	${OBJ_SRC_DIR}
 )
 
-if (NOT CYGWIN)
-	target_link_libraries (objectively regex)
+if (MINGW)
+	target_link_libraries (objectively regex msvcr110)
 endif ()
 
 target_link_libraries (objectively
-	pthread
 	${CURL_LIBRARIES}
 	${ICONV_LIBRARIES}
 )
 
-if (CYGWIN OR UNIX)
+if (UNIX OR MINGW)
 	target_compile_definitions (objectively PRIVATE _GNU_SOURCE)
 endif ()
 
@@ -233,7 +235,7 @@ add_library (objectivelymvc
 	${OBJMVC_SRC_DIR}/ObjectivelyMVC/WindowController.c
 )
 
-target_include_directories (objectivelymvc PUBLIC
+target_include_directories (objectivelymvc PRIVATE
 	${OBJ_SRC_DIR}
 	${OBJMVC_SRC_DIR}
 )
@@ -243,16 +245,17 @@ if (MINGW)
 endif()
 
 target_link_libraries (objectivelymvc
-	objectively.dll
+	objectively
 	${SDL2_SDLMAIN_LIBRARY}
 	${SDL2_LIBRARY}
 	${SDL2_IMAGE_LIBRARY}
 	${SDL2_TTF_LIBRARIES}
-	${OPENGL_LIBRARIES}
+	${OPENGL_LIB}
+	${GLU_LIB}
 	${FONTCONFIG_LIBRARIES}
 )
 
-if (CYGWIN OR UNIX)
+if (UNIX OR MINGW)
 	target_compile_definitions (objectivelymvc PRIVATE _GNU_SOURCE)
 endif ()
 
@@ -282,7 +285,7 @@ add_library (cgame MODULE
 	src/shared-anorms.c
 )
 
-target_include_directories (cgame PUBLIC
+target_include_directories (cgame PRIVATE
 	${CMAKE_CURRENT_SOURCE_DIR}
 	${GLIB2_INCLUDE_DIR}
 	${OBJ_SRC_DIR}
@@ -329,7 +332,7 @@ add_library (game MODULE
 	src/shared-anorms.c
 )
 
-target_include_directories (game PUBLIC
+target_include_directories (game PRIVATE
 	${CMAKE_CURRENT_SOURCE_DIR}
 	${GLIB2_INCLUDE_DIR}
 	src
@@ -461,7 +464,7 @@ add_executable (quetoo
 	src/main/quetoo-icon.rc
 )
 
-target_include_directories (quetoo PUBLIC
+target_include_directories (quetoo PRIVATE
 	${CMAKE_CURRENT_SOURCE_DIR}
 	${GLIB2_INCLUDE_DIR}
 	${NCURSES_INCLUDE_DIRS}
@@ -533,7 +536,7 @@ add_executable (quetoo-dedicated
 	src/main/quetoo-dedicated-icon.rc
 )
 
-target_include_directories (quetoo-dedicated PUBLIC
+target_include_directories (quetoo-dedicated PRIVATE
 	${CMAKE_CURRENT_SOURCE_DIR}
 	${GLIB2_INCLUDE_DIR}
 	${NCURSES_INCLUDE_DIRS}
@@ -611,7 +614,7 @@ add_executable (quemap
 	src/tools/quemap/quemap-icon.rc
 )
 
-target_include_directories (quemap PUBLIC
+target_include_directories (quemap PRIVATE
 	${CMAKE_CURRENT_SOURCE_DIR}
 	${GLIB2_INCLUDE_DIR}
 	${NCURSES_INCLUDE_DIRS}
@@ -654,7 +657,7 @@ add_executable (quetoo-update
 	src/tools/update/update-icon.rc
 )
 
-target_include_directories (quetoo-update PUBLIC
+target_include_directories (quetoo-update PRIVATE
 	${CMAKE_CURRENT_SOURCE_DIR}
 	${GLIB2_INCLUDE_DIR}
 	src
@@ -686,7 +689,7 @@ if (BUILD_TESTS)
 		src/shared-anorms.c
 	)
 
-	target_include_directories (libtests PUBLIC
+	target_include_directories (libtests PRIVATE
 		${CMAKE_CURRENT_SOURCE_DIR}
 		${GLIB2_INCLUDE_DIR}
 		src
@@ -712,7 +715,7 @@ if (BUILD_TESTS)
 		src/shared-anorms.c
 	)
 
-	target_include_directories (check_cmd PUBLIC
+	target_include_directories (check_cmd PRIVATE
 		${CMAKE_CURRENT_SOURCE_DIR}
 		${GLIB2_INCLUDE_DIR}
 		src
@@ -751,7 +754,7 @@ if (BUILD_TESTS)
 		src/shared-anorms.c
 	)
 
-	target_include_directories (check_cvar PUBLIC
+	target_include_directories (check_cvar PRIVATE
 		${CMAKE_CURRENT_SOURCE_DIR}
 		${GLIB2_INCLUDE_DIR}
 		src
@@ -787,7 +790,7 @@ if (BUILD_TESTS)
 		src/shared-anorms.c
 	)
 
-	target_include_directories (check_filesystem PUBLIC
+	target_include_directories (check_filesystem PRIVATE
 		${CMAKE_CURRENT_SOURCE_DIR}
 		${GLIB2_INCLUDE_DIR}
 		src
@@ -823,7 +826,7 @@ if (BUILD_TESTS)
 		src/shared-anorms.c
 	)
 
-	target_include_directories (check_master PUBLIC
+	target_include_directories (check_master PRIVATE
 		${CMAKE_CURRENT_SOURCE_DIR}
 		${GLIB2_INCLUDE_DIR}
 		src
@@ -853,7 +856,7 @@ if (BUILD_TESTS)
 		src/mem_buf.c
 	)
 
-	target_include_directories (check_mem PUBLIC
+	target_include_directories (check_mem PRIVATE
 		${CMAKE_CURRENT_SOURCE_DIR}
 		${GLIB2_INCLUDE_DIR}
 		src
@@ -882,7 +885,7 @@ if (BUILD_TESTS)
 		src/mem_buf.c
 	)
 
-	target_include_directories (check_r_media PUBLIC
+	target_include_directories (check_r_media PRIVATE
 		${CMAKE_CURRENT_SOURCE_DIR}
 		${GLIB2_INCLUDE_DIR}
 		src
@@ -912,7 +915,7 @@ if (BUILD_TESTS)
 		src/mem_buf.c
 	)
 
-	target_include_directories (check_thread PUBLIC
+	target_include_directories (check_thread PRIVATE
 		${CMAKE_CURRENT_SOURCE_DIR}
 		${GLIB2_INCLUDE_DIR}
 		src
