@@ -10,7 +10,7 @@ target_architecture (ARCH)
 
 set (CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/")
 set (CMAKE_MODULE_LINKER_FLAGS "${CMAKE_MODULE_LINKER_FLAGS} -fPIC")
-set (CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wl,-no-undefined,-allow-multiple-definition ")
+set (CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wl,-no-undefined,-allow-multiple-definition")
 set (COMMON_C_FLAGS "-std=c11 -pipe -fwrapv -fno-strict-aliasing -fomit-frame-pointer -Wall -Wno-unknown-pragmas -Wno-unused-parameter -Wno-unused-variable -Wno-unused-but-set-variable")
 set (OBJ_SRC_DIR "deps/Objectively/Sources")
 set (OBJMVC_SRC_DIR "deps/ObjectivelyMVC/Sources")
@@ -35,6 +35,10 @@ endif ()
 if (NOT CMAKE_BUILD_TYPE)
 	set (CMAKE_BUILD_TYPE RelWithDebInfo)
 endif()
+
+if (NOT BUILD_TESTS)
+	set (BUILD_TESTS "Off")
+endif ()
 
 # build target flags
 
@@ -111,6 +115,7 @@ message (STATUS "Binary Dir ........... ${QUETOO_BINDIR}")
 message (STATUS "Game Module Dir ...... ${QUETOO_LIBDIR}")
 message (STATUS "Game Data Dir ........ ${QUETOO_DATADIR}")
 message (STATUS "Build Type ........... ${CMAKE_BUILD_TYPE}")
+message (STATUS "Build Tests .......... ${BUILD_TESTS}")
 message (STATUS "CFLAGS ............... ${FINAL_C_FLAGS}")
 message (STATUS "--------------------------------------------------------------")
 message (STATUS "")
@@ -677,7 +682,7 @@ target_link_libraries (quetoo-update
 
 # tests
 
-if (BUILD_TESTS)
+if (BUILD_TESTS MATCHES "On")
 	##############
 	## libtests ##
 	##############
@@ -960,6 +965,15 @@ install (FILES
 	DESTINATION "${QUETOO_LIBDIR}/default/shaders"
 )
 
-if (BUILD_TESTS)
-
+if (BUILD_TESTS MATCHES ON)
+	install (TARGETS
+		check_cmd
+		check_cvar
+		check_filesystem
+		check_master
+		check_mem
+		check_r_media
+		check_thread
+		DESTINATION bin
+	)
 endif ()
