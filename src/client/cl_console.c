@@ -24,6 +24,8 @@
 console_t cl_console;
 console_t cl_chat_console;
 
+static cvar_t *cl_console_background_alpha;
+
 static cvar_t *cl_draw_chat;
 static cvar_t *cl_draw_notify;
 
@@ -36,17 +38,60 @@ static cvar_t *cl_notify_time;
 /**
  * @brief
  */
+static void Cl_DrawConsole_Background(void) {
+
+	const r_image_t *image = R_LoadImage("ui/background", IT_UI);
+	if (image->type != IT_NULL) {
+
+		const vec_t x_scale = r_context.window_width / (vec_t) image->width;
+		const vec_t y_scale = r_context.window_height / (vec_t) image->height;
+
+		const vec_t scale = MAX(x_scale, y_scale);
+
+		if (cls.state == CL_ACTIVE) {
+			R_Color((const vec4_t) { 1.0, 1.0, 1.0, cl_console_background_alpha->value });
+
+			R_DrawImage(0, -r_context.window_height * 0.333, scale, image);
+
+			R_Color(NULL);
+		} else {
+			R_DrawImage(0, 0, scale, image);
+		}
+	}
+
+	const r_image_t *logo = R_LoadImage("ui/logo", IT_UI);
+	if (logo->type != IT_NULL) {
+
+		const r_pixel_t width = MIN(logo->width, r_context.window_width * 0.15);
+		const vec_t scale = width / (vec_t) logo->width;
+
+		const r_pixel_t x = r_context.window_width - (logo->width * scale) - 24;
+		const r_pixel_t y = r_context.window_height - (logo->height * scale) - 24;
+
+		if (cls.state == CL_ACTIVE) {
+			R_Color((const vec4_t) { 1.0, 1.0, 1.0, cl_console_background_alpha->value });
+
+			R_DrawImage(x, -r_context.window_height * 0.333 + y, scale, logo);
+
+			R_Color(NULL);
+		} else {
+			R_DrawImage(x, y, scale, logo);
+		}
+	}
+}
+
+/**
+ * @brief
+ */
 static void Cl_DrawConsole_Buffer(void) {
 	r_pixel_t cw, ch, height;
 
 	R_BindFont("small", &cw, &ch);
 
 	if (cls.state == CL_ACTIVE) {
-		height = r_context.height * 0.5;
-		R_DrawFill(0, 0, r_context.width, height, 7, 0.3);
+		height = r_context.height * 0.666;
 	} else {
 		height = r_context.height;
-		R_DrawFill(0, 0, r_context.width, height, 0, 1.0);
 	}
 
 	cl_console.width = r_context.width / cw;
@@ -100,6 +145,8 @@ static void Cl_DrawConsole_Input(void) {
  * @brief
  */
 void Cl_DrawConsole(void) {
+
+	Cl_DrawConsole_Background();
 
 	Cl_DrawConsole_Buffer();
 
@@ -282,6 +329,8 @@ void Cl_InitConsole(void) {
 
 	memset(&cl_chat_console, 0, sizeof(cl_chat_console));
 	cl_chat_console.level = PRINT_CHAT | PRINT_TEAM_CHAT;
+
+	cl_console_background_alpha = Cvar_Get("cl_console_background_alpha", "0.9", CVAR_ARCHIVE, NULL);
 
 	cl_draw_chat = Cvar_Get("cl_draw_chat", "1", 0, "Draw recent chat messages");
 	cl_draw_notify = Cvar_Get("cl_draw_notify", "1", 0, "Draw recent console activity");
