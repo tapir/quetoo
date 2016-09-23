@@ -292,7 +292,7 @@ add_library (cgame MODULE
 
 target_include_directories (cgame PRIVATE
 	${CMAKE_CURRENT_SOURCE_DIR}
-	${GLIB2_INCLUDE_DIR}
+	${GLIB2_INCLUDE_DIRS}
 	${OBJ_SRC_DIR}
 	${OBJMVC_SRC_DIR}
 	src
@@ -300,7 +300,7 @@ target_include_directories (cgame PRIVATE
 )
 
 target_link_libraries (cgame
-	${GLIB2_LIBRARY}
+	${GLIB2_LIBRARIES}
 )
 
 set_target_properties (cgame PROPERTIES PREFIX "")
@@ -339,14 +339,14 @@ add_library (game MODULE
 
 target_include_directories (game PRIVATE
 	${CMAKE_CURRENT_SOURCE_DIR}
-	${GLIB2_INCLUDE_DIR}
+	${GLIB2_INCLUDE_DIRS}
 	src
 	src/cgame/default
 )
 
 target_link_libraries (game
 	${SOCKET_LIB}
-	${GLIB2_LIBRARY}
+	${GLIB2_LIBRARIES}
 )
 
 set_target_properties (game PROPERTIES PREFIX "")
@@ -471,7 +471,7 @@ add_executable (quetoo
 
 target_include_directories (quetoo PRIVATE
 	${CMAKE_CURRENT_SOURCE_DIR}
-	${GLIB2_INCLUDE_DIR}
+	${GLIB2_INCLUDE_DIRS}
 	${NCURSES_INCLUDE_DIRS}
 	${OBJ_SRC_DIR}
 	${OBJMVC_SRC_DIR}
@@ -492,7 +492,7 @@ target_link_libraries (quetoo
 	${SDL2_SDLMAIN_LIBRARY}
 	${SDL2_LIBRARY}
 	${SDLMIXER_LIBRARY}
-	${GLIB2_LIBRARY}
+	${GLIB2_LIBRARIES}
 	${JPEG_LIBRARY}
 	${PHYSFS_LIBRARY}
 	${NCURSES_LIBRARIES}
@@ -543,7 +543,7 @@ add_executable (quetoo-dedicated
 
 target_include_directories (quetoo-dedicated PRIVATE
 	${CMAKE_CURRENT_SOURCE_DIR}
-	${GLIB2_INCLUDE_DIR}
+	${GLIB2_INCLUDE_DIRS}
 	${NCURSES_INCLUDE_DIRS}
 	${OBJ_SRC_DIR}
 	${OBJMVC_SRC_DIR}
@@ -560,7 +560,7 @@ target_link_libraries (quetoo-dedicated
 	${SOCKET_LIB}
 	${SDL2_SDLMAIN_LIBRARY}
 	${SDL2_LIBRARY}
-	${GLIB2_LIBRARY}
+	${GLIB2_LIBRARIES}
 	${PHYSFS_LIBRARY}
 	${NCURSES_LIBRARIES}
 )
@@ -621,7 +621,7 @@ add_executable (quemap
 
 target_include_directories (quemap PRIVATE
 	${CMAKE_CURRENT_SOURCE_DIR}
-	${GLIB2_INCLUDE_DIR}
+	${GLIB2_INCLUDE_DIRS}
 	${NCURSES_INCLUDE_DIRS}
 	${LIBXML2_INCLUDE_DIR}
 	src
@@ -637,7 +637,7 @@ target_link_libraries (quemap
 	${SDL2_SDLMAIN_LIBRARY}
 	${SDL2_LIBRARY}
 	${SDL2_IMAGE_LIBRARY}
-	${GLIB2_LIBRARY}
+	${GLIB2_LIBRARIES}
 	${NCURSES_LIBRARIES}
 	${JPEG_LIBRARY}
 	${LIBXML2_LIBRARIES}
@@ -664,7 +664,7 @@ add_executable (quetoo-update
 
 target_include_directories (quetoo-update PRIVATE
 	${CMAKE_CURRENT_SOURCE_DIR}
-	${GLIB2_INCLUDE_DIR}
+	${GLIB2_INCLUDE_DIRS}
 	src
 	src/tools/update
 )
@@ -676,7 +676,7 @@ endif()
 target_link_libraries (quetoo-update
 	${SDL2_SDLMAIN_LIBRARY}
 	${SDL2_LIBRARY}
-	${GLIB2_LIBRARY}
+	${GLIB2_LIBRARIES}
 	${PHYSFS_LIBRARY}
 )
 
@@ -696,7 +696,7 @@ if (BUILD_TESTS MATCHES "On")
 
 	target_include_directories (libtests PRIVATE
 		${CMAKE_CURRENT_SOURCE_DIR}
-		${GLIB2_INCLUDE_DIR}
+		${GLIB2_INCLUDE_DIRS}
 		src
 		src/tests
 	)
@@ -722,7 +722,7 @@ if (BUILD_TESTS MATCHES "On")
 
 	target_include_directories (check_cmd PRIVATE
 		${CMAKE_CURRENT_SOURCE_DIR}
-		${GLIB2_INCLUDE_DIR}
+		${GLIB2_INCLUDE_DIRS}
 		src
 		src/tests
 	)
@@ -734,7 +734,7 @@ if (BUILD_TESTS MATCHES "On")
 	target_link_libraries (check_cmd
 		${SDL2_SDLMAIN_LIBRARY}
 		${SDL2_LIBRARY}
-		${GLIB2_LIBRARY}
+		${GLIB2_LIBRARIES}
 		${PHYSFS_LIBRARY}
 		${CHECK_LIBRARIES}
 		libtests
@@ -761,7 +761,7 @@ if (BUILD_TESTS MATCHES "On")
 
 	target_include_directories (check_cvar PRIVATE
 		${CMAKE_CURRENT_SOURCE_DIR}
-		${GLIB2_INCLUDE_DIR}
+		${GLIB2_INCLUDE_DIRS}
 		src
 		src/tests
 	)
@@ -773,7 +773,7 @@ if (BUILD_TESTS MATCHES "On")
 	target_link_libraries (check_cvar
 		${SDL2_SDLMAIN_LIBRARY}
 		${SDL2_LIBRARY}
-		${GLIB2_LIBRARY}
+		${GLIB2_LIBRARIES}
 		${PHYSFS_LIBRARY}
 		${CHECK_LIBRARIES}
 		libtests
@@ -797,7 +797,7 @@ if (BUILD_TESTS MATCHES "On")
 
 	target_include_directories (check_filesystem PRIVATE
 		${CMAKE_CURRENT_SOURCE_DIR}
-		${GLIB2_INCLUDE_DIR}
+		${GLIB2_INCLUDE_DIRS}
 		src
 		src/tests
 	)
@@ -809,7 +809,7 @@ if (BUILD_TESTS MATCHES "On")
 	target_link_libraries (check_filesystem
 		${SDL2_SDLMAIN_LIBRARY}
 		${SDL2_LIBRARY}
-		${GLIB2_LIBRARY}
+		${GLIB2_LIBRARIES}
 		${PHYSFS_LIBRARY}
 		${CHECK_LIBRARIES}
 		libtests
@@ -833,7 +833,7 @@ if (BUILD_TESTS MATCHES "On")
 
 	target_include_directories (check_master PRIVATE
 		${CMAKE_CURRENT_SOURCE_DIR}
-		${GLIB2_INCLUDE_DIR}
+		${GLIB2_INCLUDE_DIRS}
 		src
 		src/tests
 	)
@@ -845,7 +845,7 @@ if (BUILD_TESTS MATCHES "On")
 	target_link_libraries (check_master
 		${SDL2_SDLMAIN_LIBRARY}
 		${SDL2_LIBRARY}
-		${GLIB2_LIBRARY}
+		${GLIB2_LIBRARIES}
 		${PHYSFS_LIBRARY}
 		${CHECK_LIBRARIES}
 		libtests
@@ -863,7 +863,7 @@ if (BUILD_TESTS MATCHES "On")
 
 	target_include_directories (check_mem PRIVATE
 		${CMAKE_CURRENT_SOURCE_DIR}
-		${GLIB2_INCLUDE_DIR}
+		${GLIB2_INCLUDE_DIRS}
 		src
 		src/tests
 	)
@@ -875,7 +875,7 @@ if (BUILD_TESTS MATCHES "On")
 	target_link_libraries (check_mem
 		${SDL2_SDLMAIN_LIBRARY}
 		${SDL2_LIBRARY}
-		${GLIB2_LIBRARY}
+		${GLIB2_LIBRARIES}
 		${CHECK_LIBRARIES}
 		libtests
 	)
@@ -892,7 +892,7 @@ if (BUILD_TESTS MATCHES "On")
 
 	target_include_directories (check_r_media PRIVATE
 		${CMAKE_CURRENT_SOURCE_DIR}
-		${GLIB2_INCLUDE_DIR}
+		${GLIB2_INCLUDE_DIRS}
 		src
 		src/tests
 	)
@@ -904,7 +904,7 @@ if (BUILD_TESTS MATCHES "On")
 	target_link_libraries (check_r_media
 		${SDL2_SDLMAIN_LIBRARY}
 		${SDL2_LIBRARY}
-		${GLIB2_LIBRARY}
+		${GLIB2_LIBRARIES}
 		${CHECK_LIBRARIES}
 		libtests
 	)
@@ -922,7 +922,7 @@ if (BUILD_TESTS MATCHES "On")
 
 	target_include_directories (check_thread PRIVATE
 		${CMAKE_CURRENT_SOURCE_DIR}
-		${GLIB2_INCLUDE_DIR}
+		${GLIB2_INCLUDE_DIRS}
 		src
 		src/tests
 	)
@@ -934,7 +934,7 @@ if (BUILD_TESTS MATCHES "On")
 	target_link_libraries (check_thread
 		${SDL2_SDLMAIN_LIBRARY}
 		${SDL2_LIBRARY}
-		${GLIB2_LIBRARY}
+		${GLIB2_LIBRARIES}
 		${CHECK_LIBRARIES}
 		libtests
 	)
