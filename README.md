@@ -4,7 +4,7 @@
 
 # Quetoo BETA
 
-![Quetoo BETA](http://farm8.staticflickr.com/7052/6840396962_e01802d3f9_c.jpg)
+![Quetoo BETA](https://scontent-mia1-1.xx.fbcdn.net/t31.0-8/861008_617224188323107_1551552667_o.jpg)
 
 ## Overview
 
@@ -26,6 +26,17 @@ Preview releases of _Quetoo_ for all platforms are available for download on the
 
 Compilation of _Quetoo_ is only recommended for users running GNU/Linux or Mac OS X. Windows users should consider using our cross-compiled snapshots. For more information, see [Installation and Maintenance](http://quetoo.org/books/documentation/installation-and-maintenance).
 
+The following dependencies are required:
+
+ * [SDL2_image](https://www.libsdl.org/projects/SDL_image/)
+ * [SDL2_mixer](https://www.libsdl.org/projects/SDL_mixer/)
+ * [PhysicsFS](https://icculus.org/physfs/)
+ * [glib2](https://developer.gnome.org/glib/)
+ * [cURL](https://curl.haxx.se/libcurl/)
+ * [ncurses](https://www.gnu.org/software/ncurses/)
+ * [libxml2](http://xmlsoft.org/)
+ * [ObjectivelyMVC](https://github.com/jdolan/ObjectivelyMVC/)
+
 ### Build with autotools
 
 To build it, run the following:
@@ -37,7 +48,7 @@ To build it, run the following:
 ### Build with Cmake
 
 Options:
-	
+
 	-DCMAKE_BUILD_TYPE=[Release|Debug|RelWithDebInfo] (Default: RelWithDebInfo)
 	-DCMAKE_INSTALL_PREFIX=[INSTALL_PATH]
 	-DBUILD_TESTS=[On|Off] (Defeault: Off)
