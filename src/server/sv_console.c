@@ -189,7 +189,7 @@ static void Sv_DrawConsole_Buffer(void) {
 		const int32_t j = count - i - 1;
 		char *line = lines[j];
 		char *s = line;
-		
+
 		Sv_DrawConsole_Color(j ? StrrColor(lines[j - 1]) : CON_COLOR_DEFAULT);
 
 		size_t col = 1;
@@ -278,7 +278,7 @@ void Sv_InitConsole(void) {
 	if (!dedicated->value)
 		return;
 
-#if defined(_WIN32)
+#if defined(_WIN32)  || defined(__CYGWIN__)
 	if (AllocConsole()) {
 		freopen("CONIN$", "r", stdin);
 		freopen("CONOUT$", "w", stdout);
@@ -352,7 +352,7 @@ void Sv_ShutdownConsole(void) {
 		Com_Warn("Couldn't write history\n");
 	}
 
-#if defined(_WIN32)
+#if defined(_WIN32)  || defined(__CYGWIN__)
 	FreeConsole();
 #endif
 }

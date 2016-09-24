@@ -25,7 +25,7 @@
 #include <signal.h>
 #include <sys/time.h>
 
-#if defined(_WIN32)
+#if defined(_WIN32) || defined(__CYGWIN__)
 #include <shlobj.h>
 #define RTLD_NOW 0
 #define dlopen(file_name, mode) LoadLibrary(file_name)
@@ -65,7 +65,7 @@ const char *Sys_ExecutablePath(void) {
 		return path;
 	}
 
-#elif defined(_WIN32)
+#elif defined(_WIN32) || defined(__CYGWIN__)
 
 	if (GetModuleFileName(0, path, sizeof(path))) {
 		return path;
@@ -110,7 +110,7 @@ const char *Sys_UserDir(void) {
 void Sys_OpenLibrary(const char *name, void **handle) {
 	*handle = NULL;
 
-#if defined(_WIN32)
+#if defined(_WIN32) || defined(__CYGWIN__)
 	char *so_name = va("%s.dll", name);
 #else
 	char *so_name = va("%s.so", name);

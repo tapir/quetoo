@@ -623,7 +623,7 @@ void Fs_Init(_Bool auto_load_archives) {
 			strcpy(c + strlen("quetoo"), "/share/"DEFAULT_GAME);
 			Fs_AddToSearchPath(path);
 		}
-#elif defined(_WIN32)
+#elif defined(_WIN32) || defined(__CYGWIN__)
 		if ((c = strstr(path, "\\bin\\"))) {
 			*c = '\0';
 			g_strlcpy(fs_state.base_dir, path, sizeof(fs_state.base_dir));
