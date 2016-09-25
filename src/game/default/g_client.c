@@ -817,7 +817,8 @@ static void G_ClientRespawn_(g_entity_t *ent) {
 		ent->client->locals.persistent.ready = false;
 	}
 	else { // spawn an active client
-		vec_t health = ent->client->locals.persistent.handicap; // handicap
+		ent->client->locals.persistent.handicap = ent->client->locals.persistent.handicap_next;
+		vec_t health = ent->client->locals.persistent.handicap;
 		
 		ent->class_name = "client";
 
@@ -1052,9 +1053,9 @@ void G_ClientUserInfoChanged(g_entity_t *ent, const char *user_info) {
 	if (handicap == 0)
 		handicap = 100;
 
-	handicap = Clamp(handicap, 1, 100);
+	handicap = Clamp(handicap, 50, 100);
 
-	cl->locals.persistent.handicap = handicap;
+	cl->locals.persistent.handicap_next = handicap;
 
 	// save off the user_info in case we want to check something later
 	g_strlcpy(ent->client->locals.persistent.user_info, user_info,
